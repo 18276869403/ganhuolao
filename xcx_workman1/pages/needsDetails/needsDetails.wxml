@@ -1,0 +1,109 @@
+<view class="container">
+  <image src="../image/xuqiubg.png" class="top"></image>
+  <view class="content zongxiang">
+    <view class="content-list zongxiang">
+      <view class="content-list-item hengxiang">
+        <view class="content-list-jiaji">普通</view>
+        <view>
+          <image src="../image/shang.png" wx:if="{{yneed.wxState==0}}" class="gong-img"></image>
+        </view>
+        <view class="content-list-time hengxiang">
+          <view class="list-time-shalou">
+            <image src="../image/shalou.png" class="shalou-img"></image>
+          </view>
+          <view class="list-time-text">进行中</view>
+        </view>
+      </view>
+      <view class="content-list-title">收拾收拾收拾</view>
+      <view class="hengxiang content-list-type">
+        <view>
+          <image src="../image/jiancailei.png" class="leixing-img"></image>
+        </view>
+        <view>
+          工程需要 | 本地招工
+        </view>
+      </view>
+      <view class="hengxiang content-list-type">
+        <view>
+          <image src="../image/dizhi.png" class="leixing-img"></image>
+        </view>
+        <view>
+          万载县 | 县城南
+        </view>
+      </view>
+      <view class="hengxiang content-list-type">
+        <view>
+          <image src="../image/lianxiren.png" class="leixing-img"></image>
+        </view>
+        <view>
+          哈哈哈
+        </view>
+      </view>
+      <view class="hengxiang content-list-type">
+        <view>
+          <image src="../image/baoming2.png" class="leixing-img"></image>
+        </view>
+
+        <view>
+          26人浏览
+        </view>
+
+        <!-- 修改，删除，确认完成，用户为创建者 -->
+        <view class="content-chuangjian hengxiang">
+          <view class="update-button" bindtap="xiugaigunali">
+            修改
+          </view>
+          <view class="delete-button" bindtap="shancuoxuqiu">
+            删除
+          </view>
+          <view class="complete-button" bindtap="lianxita">
+            完成
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <view class="content-content zongxiang">
+      <view class="content-content-title">需求内容</view>
+      <view class="content-content-list">
+        需要自带开槽设备，管中午饭（因为现在饭店还没开业），工资面议，有意者请联系
+      </view>
+    </view>
+    <!-- 图片 -->
+    <view class="content-content zongxiang">
+      <view class="content-content-title">图片</view>
+      <view class="zhanshi" wx:if="{{tupianlist.length>0}}">
+        <view class="zhanshi-item" wx:for='{{tupianlist}}' data-id="{{item.id}}">
+          <image src="{{item.tupian}}" bindtap="fangda" class="zhanshitu"></image>
+        </view>
+      </view>
+      <view class="zhanshi" wx:if="{{tupianlist.length<=0}}">
+        <image src="../image/wutu.png" class="zhanshitu1"></image>
+      </view>
+    </view>
+    <!-- 接单报名人员 -->
+    <view class="content-content zongxiang">
+      <view class="content-content-title">报名接单人员</view>
+      <view class="content-jiedan zongxiang" wx:for="{{jiedanList}}" wx:for-index="index" wx:key="{{item.id}}">
+        <view class="jiedan-top hengxiang">
+          <view class="jiedan-top-left">
+            <image src="{{item.avator}}" class="avator-img"></image>
+          </view>
+          <view class="jiedan-top-content zongxiang">
+            <view class="jiedan-top-content-name">{{item.name}}</view>
+            <view class="jiedan-top-content-date">{{item.date}}</view>
+          </view>
+          <view class="jiedan-top-right">
+            <image src="../image/liuyan.png" class="img"></image>
+          </view>
+          <view class="jiedan-top-right1">
+            <image src="../image/dianhua.png" class="img"></image>
+          </view>
+        </view>
+        <view class="content-bottom">
+       {{item.details}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

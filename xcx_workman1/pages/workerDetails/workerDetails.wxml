@@ -1,0 +1,126 @@
+<!--pages/workerDetails/workerDetails.wxml-->
+<view class="container">
+  <view class="hengxian"></view>
+  <view class="content zongxiang">
+    <!-- 工人详情 -->
+    <view class="content-list zongxiang">
+      <view class="content-list-item hengxiang">
+        <view class="list-item-left">
+          <image src="../image/top.png" class="worker-img"></image>
+        </view>
+        <view class="list-item-right zongxiang">
+          <view class="right-name">
+            {{workerDetail.name}}
+          </view>
+          <view class="right-content hengxiang">
+
+            <view class="right-content-item hengxiang">
+              <view class="">
+                <image src="../image/dengji.png" class="dengji-img"></image>
+              </view>
+              <view>{{workerDetail.shopName}}</view>
+            </view>
+            <view class="right-content-item hengxiang">
+              <view class="">
+                <image src="../image/shiming.png" class="dengji-img"></image>
+              </view>
+              <view>实名认证</view>
+            </view>
+            <view class="right-content-item hengxiang">
+              <view class="">
+                <image src="../image/shengri.png" class="dengji-img"></image>
+              </view>
+              <view>{{workerDetail.dateBirth}}岁</view>
+            </view>
+          </view>
+          <view class="right-sort zongxiang">
+            <view class="right-sort-item hengxiang">
+              <view class="dot"></view>
+              <view>{{workerDetail.oneClassName}} </view>
+            </view>
+            <view class="right-sort-item hengxiang">
+              <view class="dot"></view>
+              <view>{{workerDetail.twoClassName}}</view>
+            </view>
+          </view>
+          <view class="right-bottom hengxiang">
+            <view class="right-bottom-left hengxiang">
+              <view class="guyong-button">雇佣TA</view>
+            </view>
+            <view class="right-bottom-right">
+              <view class="contact-button">在线联系</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <!-- 基本信息 -->
+    <view class="content-basic zongxiang">
+      <view class="content-basic-title">基本信息</view>
+      <view class="content-basic-list zongxiang">
+        <view class="basic-list-item hengxiang">
+          <view class="basicImg">
+            <image src="../image/jingyan.png" class="basic-img"></image>
+          </view>
+          <view class="basic-tips">经验：</view>
+          <view class="basic-text">{{workerDetail.employ}}</view>
+        </view>
+        <view class="basic-list-item hengxiang">
+          <view class="basicImg">
+            <image src="../image/diqu.png" class="basic-img"></image>
+          </view>
+          <view class="basic-tips">地区：</view>
+          <view class="basic-text">{{workerDetail.oneAreaName}} | {{workerDetail.twoAreaName}}</view>
+        </view>
+        <view class="basic-list-item hengxiang">
+          <view class="basicImg">
+            <image src="../image/phone.png" class="basic-img"></image>
+          </view>
+          <view class="basic-tips">电话：</view>
+          <view class="basic-text1">{{workerDetail.phone}}</view>
+          <view class="basic-look">
+            <view class="look-button">查看电话</view>
+          </view>
+        </view>
+        <view class="basic-list-item1 hengxiang">
+          <view class="basicImg">
+            <image src="../image/jieshao.png" class="basic-img"></image>
+          </view>
+          <view class="basic-tips">介绍：</view>
+          <view class="basic-text">{{workerDetail.content}}</view>
+        </view>
+      </view>
+    </view>
+    <!-- 晒晒 -->
+    <view class="content-basic zongxiang">
+      <view class="content-basic-title">晒晒</view>
+      <view class="content-show">
+        <view class="show-item zongxiang" wx:for="{{showList}}" wx:key="key" data-id="{{item.id}}">
+          <view class="show">
+            <view class="show-item-top">
+              <image src="../image/top.png" class="show-img"></image>
+            </view>
+            <view class="show-item-bottom hengxiang">
+              <view class="hengxiang">
+                <view>
+                  <image src="../image/liulan.png" class="liulan-img"></image>
+                </view>
+                <view>{{item.liulan}}</view>
+              </view>
+              <view class="hengxiang">
+                <view>
+                  <image src="../image/pinglun.png" class="pinglun-img"></image>
+                </view>
+                <view>{{item.pinglun}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+
+
+</view>

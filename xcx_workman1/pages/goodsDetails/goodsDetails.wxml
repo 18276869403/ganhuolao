@@ -1,0 +1,29 @@
+<!--pages/goodsDetails/goodsDetails.wxml-->
+<view class="container">
+  <view class="top zongxiang">
+    <view class="top-img">
+      <image src="{{splist.goodPic1}}" class="img"></image>
+    </view>
+    <view class="top-title">
+      {{splist.goodName}}
+    </view>
+    <view class="top-price hengxiang">
+      <view class="price-text">优惠价：</view>
+      <view class="price-money">{{splist.newPrice}}</view>
+      <view class="price-original">原价：{{splist.oldPrice}}</view>
+      <view class="price-enter">
+        <image src="../image/jindian.png" class="enter-img"></image>
+      </view>
+    </view>
+  </view>
+  <view class="content zongxiang">
+    <view class="content-img">
+      <image src="../image/details.png" class="xiangqing-img"></image>
+    </view>
+    <view class="content-text">{{splist.goodMemo}}</view>
+    <view class="content-details">
+      <image src="{{splist.goodPic1}}" class="details-img"></image>
+      <image src="{{splist.goodPic2}}" class="details-img"></image>
+    </view>
+  </view>
+</view>

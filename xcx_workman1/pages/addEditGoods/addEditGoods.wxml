@@ -1,0 +1,82 @@
+<!--pages/addEditGoods/addEditGoods.wxml-->
+<view class="container">
+  <view class="hengxian"></view>
+
+  <view class="content zongxiang">
+
+
+
+    <view class="content-item hengxiang">
+      <view class="content-title">商品名字</view>
+      <input type="text" placeholder="请输入商品名字" class="shurukuang" placeholder-class="placeholder" value='{{needsname}}' name="goodsname" bindinput='goodsnameinput'></input>
+    </view>
+    <view class="content-item hengxiang">
+      <view class="content-title">商品原价</view>
+      <input type="digit" placeholder="请输入商品原价" class="shurukuang" placeholder-class="placeholder" value='{{needsname}}' name="originalPrice" bindinput='originalPriceinput'></input>
+    </view>
+
+    <view class="content-item hengxiang">
+      <view class="content-title">优惠价</view>
+      <input type="digit" placeholder="请输入优惠价" class="shurukuang" placeholder-class="placeholder" value='{{needsname}}' name="salesPrice" bindinput='salesPriceinput'></input>
+    </view>
+
+    <view class="content-item-textarea">
+      <textarea class="textarea" placeholder="请输入商品描述" placeholder-class="placeholder1" maxlength='-1' value='{{detailscontent}}' name="detailscontent" bindinput='detailscontentinput' wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
+    </view>
+  </view>
+
+  <!-- 商品轮播图样式 -->
+  <view class="showImg hengxiang">
+    <view class="showImg-text">商品轮播图（二张）</view>
+    <view class="hengxiang"></view>
+    <view class="showImg-item">
+      <!-- 无数据 上传图片样式 -->
+      <image src="../image/shangchuan.png" class="show-img"></image>
+      <!-- 轮播图展示第一张 -->
+      <!-- <image src="../image/top.png" class="show-img"></image> -->
+      <!-- 有数据展示样式 -->
+      <!-- 删除图 -->
+      <!-- <image src="../image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
+    </view>
+    <view class="showImg-item">
+
+      <!-- 无数据 上传图片样式 -->
+      <image src="../image/shangchuan.png" class="show-img"></image>
+      <!-- 轮播图展示第二张 -->
+      <!-- <image src="../image/top.png" class="show-img"></image> -->
+      <!-- 有数据展示样式 -->
+      <!-- 删除图 -->
+      <!-- <image src="../image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
+    </view>
+  </view>
+
+  <!-- 详情展示图样式 -->
+  <view class="showImg hengxiang">
+    <view class="showImg-text">商品详情展示图（二张长版图）</view>
+    <view class="hengxiang"></view>
+    <view class="showImg-item">
+      <!-- 无数据 上传图片样式 -->
+      <image src="../image/shangchuan.png" class="show-img"></image>
+      <!-- 轮播图展示第一张 -->
+      <!-- <image src="../image/top.png" class="show-img"></image> -->
+      <!-- 有数据展示样式 -->
+      <!-- 删除图 -->
+      <!-- <image src="../image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
+    </view>
+    <view class="showImg-item">
+
+      <!-- 无数据 上传图片样式 -->
+      <image src="../image/shangchuan.png" class="show-img"></image>
+      <!-- 轮播图展示第二张 -->
+      <!-- <image src="../image/top.png" class="show-img"></image> -->
+      <!-- 有数据展示样式 -->
+      <!-- 删除图 -->
+      <!-- <image src="../image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
+    </view>
+  </view>
+
+
+  <view class="bottom hengxiang">
+    <view class="bottom-right" bindtap="lijifabu">保存</view>
+  </view>
+</view>

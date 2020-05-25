@@ -1,0 +1,22 @@
+<!--pages/myRecommend/myRecommend.wxml-->
+<view class="container">
+  <view class="hengxian"></view>
+  <view class="content zongxiang">
+    <view class="content-list hengxiang" wx:for="{{recommendList}}" wx:key="{{item.id}}">
+      <view class="content-list-left">
+        <image src="{{item.url}}" class="avator-img"></image>
+      </view>
+      <view class="content-list-content zongxiang">
+        <view class="content-name">{{item.name}}</view>
+        <view class="content-ruzhu">
+          <image src="../image/ruzhushangjia.png" class="ruzhu-img" wx:if="{{item.jointype==0}}"></image>
+          <image src="../image/ruzhugongren.png" class="ruzhu-img" wx:if="{{item.jointype==1}}"></image>
+        </view>
+      </view>
+      <view class="content-list-right ">
+        +{{item.score}}
+        <text class="jifen">积分</text>
+      </view>
+    </view>
+  </view>
+</view>

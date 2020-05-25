@@ -1,0 +1,59 @@
+<!--pages/myEmploy/myEmploy.wxml-->
+<view class="container">
+  <view class="hengxian"></view>
+  <view class="top hengxiang">
+    <view wx:for="{{needsTypeList}}" wx:key="key" bindtap="changeType" data-id="{{item.id}}" class="xuanzhong">
+      <view wx:if="{{needsTypeid==item.id}}" class="top-item-checked">
+        <text class="bian"> {{item.name}}</text>
+      </view>
+      <view wx:if="{{needsTypeid!=item.id}}" class="top-item-normal">
+        <text class="">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 我的留言列表 -->
+  <view class="content zongxiang">
+    <view class="content-list zongxiang" wx:for="{{messageList}}" wx:key="{{item.id}}">
+      <view class="content-list-top hengxiang">
+        <view class="list-top-img">
+          <image src="../image/top.png" class="avator-img"></image>
+        </view>
+        <view class="list-top-text zongxiang" wx:if="{{needsTypeid==1}}">
+          工人：{{item.workername}}
+        </view>
+        <view class="list-top-text zongxiang" wx:if="{{needsTypeid==2}}">
+          雇主：{{item.employeename}}
+        </view>
+        <view class="list-top-edit">
+          <image src="../image/edit.png" class="delete-img"></image>
+        </view>
+        <view class="list-top-delete">
+          <image src="../image/delete.png" class="delete-img"></image>
+        </view>
+      </view>
+      <view class="content-list-content zongxiang">
+        <view class="list-content-item hengxiang">
+          <view class="item-title">雇佣时间：</view>
+          <view class="item-type">{{item.date}}</view>
+        </view>
+        <view class="list-content-item hengxiang">
+          <view class="item-title">费用预计：</view>
+          <view class="item-type">{{item.cost}}元/天</view>
+        </view>
+        <view class="list-content-item hengxiang">
+          <view class="item-title">预计工期：</view>
+          <view class="item-type">{{item.day}}天</view>
+        </view>
+        <view class="list-content-item hengxiang">
+          <view class="item-title">雇佣事项：</view>
+          <view class="item-type">{{item.tips}}</view>
+        </view>
+      </view>
+      <view class="content-list-bottom hengxiang">
+        <view class="phone-button" bindtap="phonecall">电话联系</view>
+        <view class="online-button">在线联系</view>
+
+      </view>
+    </view>
+  </view>
+</view>

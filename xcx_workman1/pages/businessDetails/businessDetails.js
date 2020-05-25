@@ -1,0 +1,131 @@
+// pages/businessDetails/businessDetails.js
+//获取应用实例
+const app = getApp()
+
+const qingqiu = require('../../utils/request.js')
+const api = require('../../utils/config.js')
+
+Page({
+  data: {
+    goodsList:[],
+    viewUrl:api.viewUrl,
+    score: 3,
+    CheckItem: 0,
+    showList: [{
+        id: 1,
+        pinglun: '12',
+        liulan: '12',
+      },
+      {
+        id: 2,
+        pinglun: '12',
+        liulan: '12',
+      },
+      {
+        id: 3,
+        pinglun: '12',
+        liulan: '12',
+      },
+    ],
+    goodsdata1: [{
+        colName: "商品",
+        id: 0
+      },
+      {
+        colName: "晒晒",
+        id: 1
+      }
+    ],
+    goodslists: [{
+        id: 1,
+        name: '室内F-10木门（含五室内F-10木门（含五',
+        price: '12',
+      },
+      {
+        id: 2,
+        name: '室内F-10木门（含五室内F-10木门（含五',
+        price: '12',
+      },
+      {
+        id: 3,
+        name: '室内F-10木门（含五室内F-10木门（含五',
+        price: '12',
+      },
+    ],
+  },
+
+  onLoad: function(options) {
+    var obj = JSON.parse(options.obj)
+    this.setData({
+      goodsList:obj
+    })
+    this.getGoodsList(obj.id)
+  },
+  getGoodsdata:function(id,caseName){
+    var that = this
+    var data = {
+      id:id,
+      caseName:caseName
+    }
+    // qingqiu.get("casePage", data, function(re) {
+    //    if (re.success == true) {
+    //           if (re.result.records != null) {
+    //             that.goodsList = re.result.records
+    //             for(let obj of re.result.records){
+    //               obj.goodPic1 = that.data.viewUrl + obj.goodPic1.split(',')[0]
+    //               obj.goodPic2  = that.data.viewUrl + obj.goodPic2.split(',')[0]
+    //             }
+    //             console.log(re.result.records)
+    //             that.setData ({
+    //               goodslists: re.result.records
+    //             })
+      
+    //           } else {
+    //             qingqiu.tk('未查询到任何数据')
+    //           }
+    //         } 
+    // })
+  },
+  // 跳转商品详情
+  goGoodsDetails:function(e){
+    var obj = JSON.stringify(e.currentTarget.dataset.vals)
+    wx.navigateTo({
+      url: '../goodsDetails/goodsDetails?obj=' + obj
+    })
+  },
+
+  // 获取店家商品
+  getGoodsList:function(goodsid) {
+      var that = this
+      var data={
+        pages: 1,
+        size: 10,
+        userId:goodsid
+      }
+      qingqiu.get("tjsp", data, function(re) {
+        if (re.success == true) {
+          if (re.result.records != null) {
+            that.goodsList = re.result.records
+            for(let obj of re.result.records){
+              obj.goodPic1 = that.data.viewUrl + obj.goodPic1.split(',')[0]
+              obj.goodPic2  = that.data.viewUrl + obj.goodPic2.split(',')[0]
+            }
+            console.log(re.result.records)
+            that.setData ({
+              goodslists: re.result.records
+            })
+  
+          } else {
+            qingqiu.tk('未查询到任何数据')
+          }
+        } 
+      })
+    },
+  //最新最热样式变动
+  serviceSelection1: function(e) {
+    var navid = e.currentTarget.id;
+    this.setData({
+      CheckItem: navid
+    })
+  },
+})

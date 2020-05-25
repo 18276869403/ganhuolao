@@ -1,0 +1,22 @@
+<!--pages/myGoods/myGoods.wxml-->
+<view class="container">
+  <view class="goods zongxiang">
+    <view class="goods-list hengxiang" wx:for="{{goodsList}}"  wx:key="{{item.id}}">
+      <view class="goods-list-left">
+        <image src="{{item.img}}" class="goods-img"></image>
+      </view>
+      <view class="goods-list-right zongxiang">
+        <view class="goods-name">{{item.name}}</view>
+        <view class="goods-price">¥{{item.price}}</view>
+        <view class="hengxiang goods-button">
+          <view class="shanchu-button">删除</view>
+          <view class="xiugai-button" bindtap="addEditGoods">修改</view>
+          <view class="zhiding-button">置顶</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="goods-bottom">
+  <image src="../image/addgoods.png" class="add-img"></image>
+  </view>
+</view>

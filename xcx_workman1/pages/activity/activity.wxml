@@ -1,0 +1,12 @@
+<!--pages/activity/activity.wxml-->
+<view class="container">
+  <view class="bg">
+    <image src="../image/huodongbg.png" class="bg-img" style="height:{{height}}px">
+
+    </image>
+    <view class="erweima">
+      <image src="../image/erweima.png" class="erweima-img" ></image>
+    </view>
+
+  </view>
+</view>
