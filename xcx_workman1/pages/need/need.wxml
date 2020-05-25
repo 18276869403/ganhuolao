@@ -79,7 +79,7 @@
                       <image src="../image/dingwei.png" class="dingwei-img"></image>
                     </view>
                     <view class="bottom-dingwei">
-                      {{item.oneAreaId}}|{{item.twoAreaId}}
+                      {{item.oneAreaName}}|{{item.twoAreaName}}
                     </view>
                   </view>
                 </view>

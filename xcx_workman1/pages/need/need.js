@@ -51,7 +51,7 @@ Page({
       pages: 1,
       size: 10
     }
-    qingqiu.get("xqurl", data, function(re) {
+    qingqiu.get("zuixinxq", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
           that.needsList = re.result.records
