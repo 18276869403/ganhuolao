@@ -91,7 +91,7 @@
         <view class="need-title-right" bindtap="need">更多 > </view>
       </view>
       <view class="list zongxiang" wx:for="{{xuqiulist}}" wx:for-index="index" wx:key="index">
-        <view class="need-list hengxiang" bindtap="needsDetails">
+        <view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
           <view class="need-list-left">
             <image src="../image/top.png" class="need-content-img"></image>
           </view>

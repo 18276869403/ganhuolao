@@ -202,9 +202,11 @@ Page({
 
   },
   // 跳转到需求详情页面
-  needsDetails: function() {
+  needsDetails: function(e) {
+    var obj1 =e.currentTarget.dataset.vall;
+    var xqxq = JSON.stringify(obj1);
     wx.navigateTo({
-      url: '../needsDetails/needsDetails',
+      url: '../needsDetails/needsDetails?obj1=' + xqxq,
     })
   },
   // 跳转到推荐工人更多页面
