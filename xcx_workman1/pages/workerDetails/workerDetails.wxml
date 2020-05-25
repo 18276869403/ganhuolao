@@ -6,7 +6,7 @@
     <view class="content-list zongxiang">
       <view class="content-list-item hengxiang">
         <view class="list-item-left">
-          <image src="../image/top.png" class="worker-img"></image>
+          <image src="{{workerDetail.picIurl}}" class="worker-img"></image>
         </view>
         <view class="list-item-right zongxiang">
           <view class="right-name">
@@ -99,7 +99,7 @@
         <view class="show-item zongxiang" wx:for="{{showList}}" wx:key="key" data-id="{{item.id}}">
           <view class="show">
             <view class="show-item-top">
-              <image src="../image/top.png" class="show-img"></image>
+              <image src="{{item.picOne}}" class="show-img"></image>
             </view>
             <view class="show-item-bottom hengxiang">
               <view class="hengxiang">
