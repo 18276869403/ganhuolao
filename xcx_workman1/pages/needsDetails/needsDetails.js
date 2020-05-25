@@ -41,11 +41,17 @@ Page({
         date: '05:00',
         details: '我可以做的，找我吧，我在哪哪哪哪',
         avator: '../image/top.png'
-      }]
+      }],
+    xqxqlist:[]
   },
 
   onLoad: function (options) {
-
+    debugger
+    var xqxqlist = JSON.parse(options.obj1)
+    console.log(xqxqlist);
+    this.setData({
+      xqxqlist: xqxqlist
+    })
   }
 
 })
