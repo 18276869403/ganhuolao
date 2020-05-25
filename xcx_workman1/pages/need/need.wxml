@@ -45,7 +45,7 @@
     <!-- 最新需求模块 -->
     <view class="content-need">
       <view class="list zongxiang" wx:for="{{needsList}}" wx:for-index="index" wx:key="index" >
-        <view class="need-list hengxiang" bindtap="needsDetails">
+        <view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
           <view class="need-list-left">
             <image src="../image/top.png" class="need-content-img"></image>
           </view>
@@ -79,7 +79,7 @@
                       <image src="../image/dingwei.png" class="dingwei-img"></image>
                     </view>
                     <view class="bottom-dingwei">
-                      {{item.oneAreaName}}|{{item.twoAreaName}}
+                      {{item.oneAreaId}}|{{item.twoAreaId}}
                     </view>
                   </view>
                 </view>
