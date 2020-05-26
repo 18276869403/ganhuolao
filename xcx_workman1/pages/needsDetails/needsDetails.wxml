@@ -12,7 +12,8 @@
           <view class="list-time-shalou">
             <image src="../image/shalou.png" class="shalou-img"></image>
           </view>
-          <view class="list-time-text">进行中</view>
+          <view class="list-time-text" wx:if="{{xqxqlist.needState==0}}">进行中</view>
+          <view class="list-time-text" wx:if="{{xqxqlist.needState==1}}">已完成</view>
         </view>
       </view>
       <view class="content-list-title">{{xqxqlist.needTitle}}</view>
@@ -86,11 +87,11 @@
       <view class="content-jiedan zongxiang" wx:for="{{jiedanList}}" wx:for-index="index" wx:key="{{item.id}}">
         <view class="jiedan-top hengxiang">
           <view class="jiedan-top-left">
-            <image src="{{item.avator}}" class="avator-img"></image>
+            <image src="{{item.picTwo}}" class="avator-img"></image>
           </view>
           <view class="jiedan-top-content zongxiang">
-            <view class="jiedan-top-content-name">{{item.name}}</view>
-            <view class="jiedan-top-content-date">{{item.date}}</view>
+            <view class="jiedan-top-content-name">{{item.caseName}}</view>
+            <view class="jiedan-top-content-date">{{item.addTime}}</view>
           </view>
           <view class="jiedan-top-right">
             <image src="../image/liuyan.png" class="img"></image>
