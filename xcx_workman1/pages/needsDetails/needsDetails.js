@@ -53,6 +53,7 @@ Page({
     var xqxqlist = JSON.parse(options.obj1)
     this.id = xqxqlist.id
     console.log(xqxqlist);
+    debugger
     this.setData({
       xqxqlist: xqxqlist
     })
