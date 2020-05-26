@@ -93,7 +93,7 @@
       <view class="list zongxiang" wx:for="{{xuqiulist}}" wx:for-index="index" wx:key="index">
         <view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
           <view class="need-list-left">
-            <image src="../image/top.png" class="need-content-img"></image>
+            <image src="{{item.backup1}}" class="need-content-img"></image>
           </view>
           <view class="need-list-right zongxiang">
             <view class="content-list zongxiang">
@@ -103,13 +103,14 @@
                   <view class="content-list-type" style="background:#339966" wx:if="{{item.needType==1}}">普通</view>
                 </view>
                 <view class="content-list-title">
-                  ¥{{item.backup3}}
+                  {{item.needPrice}}
                 </view>
                 <view class="hengxiang content-status">
                   <view class="content-status-img">
                     <image src="../image/shalou.png" class="shalou-img"></image>
                   </view>
-                  <view class="content-status-text">{{item.needState}}</view>
+                  <view class="content-status-text" wx:if="{{item.needState==0}}">进行中</view>
+                  <view class="content-status-text" wx:if="{{item.needState==1}}">已完成</view>
                 </view>
               </view>
               <view class="content-neirong">

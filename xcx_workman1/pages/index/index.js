@@ -42,6 +42,7 @@ Page({
           that.xuqiulist = re.result.records
           for(var i= 0 ; i < that.xuqiulist.length; i++){
             that.xuqiulist[i].publishTime = re.result.records[i].publishTime.split(" ")[0]
+            that.xuqiulist[i].backup1 = api.viewUrl+re.result.records[i].backup1.split(',')[0]
           }    
           that.setData ({
             xuqiulist : re.result.records
@@ -49,9 +50,7 @@ Page({
         } else {
           qingqiu.tk('未查询到任何数据')
         }
-      } else {
-        qingqiu.tk('请求出错啦')
-      }
+      } 
     })
   },
   // 推荐工人
