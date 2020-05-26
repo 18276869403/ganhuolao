@@ -2,37 +2,63 @@
 //获取应用实例
 const app = getApp()
 
+const qingqiu = require('../../utils/request.js')
+const api = require('../../utils/config.js')
+
 Page({
   data: {
-    showList: [{
-      id: 1,
-      pinglun: '120000',
-      liulan: '1200000',
-      url:'../image/top.png'
-    },
-    {
-      id: 2,
-      pinglun: '12',
-      liulan: '12',
-      url: '../image/chuang.png'
-    },
-    {
-      id: 3,
-      pinglun: '12',
-      liulan: '12',
-      url: '../image/chuang.png'
-    },
-      {
-        id: 4,
-        pinglun: '12',
-        liulan: '12',
-        url: '../image/top.png'
-      },
-    ],
+    // showList: [{
+    //   id: 1,
+    //   pinglun: '120000',
+    //   liulan: '1200000',
+    //   url:'../image/top.png'
+    // },
+    // {
+    //   id: 2,
+    //   pinglun: '12',
+    //   liulan: '12',
+    //   url: '../image/chuang.png'
+    // },
+    // {
+    //   id: 3,
+    //   pinglun: '12',
+    //   liulan: '12',
+    //   url: '../image/chuang.png'
+    // },
+    //   {
+    //     id: 4,
+    //     pinglun: '12',
+    //     liulan: '12',
+    //     url: '../image/top.png'
+    //   },
+    // ],
+    showList:[]
   },
 
   onLoad: function () {
-
+    this.SelectshowList()
+  },
+  // 获取晒晒
+  SelectshowList() {
+    var that = this
+    var data={
+      pages: 1,
+      size: 10
+    }
+    qingqiu.get("CasePage", data, function(re) {
+      if (re.success == true) {
+        if (re.result != null) {
+          debugger
+          that.showList=re.result.records
+          for(var i= 0 ; i < that.showList.length; i++){
+            that.showList[i].picOne = api.viewUrl+re.result.records[i].picOne.split(',')[0]
+          }   
+          that.setData({
+            showList:re.result.records
+          })
+        } 
+      } 
+    })
   },
   // 发布弹窗显示
   showModal1: function () {
@@ -79,5 +105,5 @@ Page({
         showModalStatus1: false
       })
     }.bind(this), 200)
-  },
+  }
 })

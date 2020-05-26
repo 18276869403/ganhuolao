@@ -77,20 +77,21 @@
       <block wx:for-items="{{showList}}" wx:key="{{item.id}}">
         <view class="show" wx:if="{{index%2 == 0}}">
           <view class="show-item-top">
-            <image src="{{item.url}}" class="show-img" mode="widthFix"></image>
+            <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}"></image>
+            <video src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}"></video>
           </view>
           <view class="show-item-bottom hengxiang">
             <view class="hengxiang">
               <view>
                 <image src="../image/liulan.png" class="liulan-img"></image>
               </view>
-              <view>{{item.liulan}}</view>
+              <view>{{item.giveGood}}</view>
             </view>
             <view class="hengxiang">
               <view>
                 <image src="../image/pinglun.png" class="pinglun-img"></image>
               </view>
-              <view>{{item.pinglun}}</view>
+              <view>{{item.messageSum}}</view>
             </view>
           </view>
         </view>
@@ -101,20 +102,21 @@
       <block wx:for-items="{{showList}}" wx:key="{{item.id}}">
         <view class="show" wx:if="{{index%2 != 0}}">
           <view class="show-item-top">
-            <image src="{{item.url}}" class="show-img" mode="widthFix"></image>
+            <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}"></image>
+            <video src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}"></video>
           </view>
           <view class="show-item-bottom hengxiang">
             <view class="hengxiang">
               <view>
                 <image src="../image/liulan.png" class="liulan-img"></image>
               </view>
-              <view>{{item.liulan}}</view>
+              <view>{{item.giveGood}}</view>
             </view>
             <view class="hengxiang">
               <view>
                 <image src="../image/pinglun.png" class="pinglun-img"></image>
               </view>
-              <view>{{item.pinglun}}</view>
+              <view>{{item.messageSum}}</view>
             </view>
           </view>
         </view>
