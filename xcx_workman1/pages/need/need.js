@@ -3,7 +3,7 @@
 const app = getApp()
 //调用接口js
 const qingqiu = require('../../utils/request.js')
-const configurl = require('../../utils/config.js')
+const api = require('../../utils/config.js')
 
 Page({
   data: {
@@ -55,9 +55,9 @@ Page({
       if (re.success == true) {
         if (re.result != null) {
           that.needsList = re.result.records
-          debugger
           for(var i= 0 ; i < that.needsList.length; i++){
             re.result.records[i].publishTime = re.result.records[i].publishTime.split(' ')[0]
+            re.result.records[i].backup1 = api.viewUrl+re.result.records[i].backup1.split(',')[0]
           }
           that.setData ({
             needsList : re.result.records

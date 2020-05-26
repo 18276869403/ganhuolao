@@ -47,7 +47,7 @@
       <view class="list zongxiang" wx:for="{{needsList}}" wx:for-index="index" wx:key="index" >
         <view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
           <view class="need-list-left">
-            <image src="../image/top.png" class="need-content-img"></image>
+            <image src="{{item.backup1}}" class="need-content-img"></image>
           </view>
           <view class="need-list-right zongxiang">
             <view class="content-list zongxiang">
@@ -59,7 +59,7 @@
                 <view class="content-list-title">
                   <!-- <image src="../image/shang.png" class="gong-img" wx:if="{{item.wxState==0}}"></image>
                 <image src="../image/gong.png" class="gong-img" wx:if="{{item.wxState==1}}"></image> -->
-                  ¥{{item.backup3}}
+                  {{item.needPrice}}
                 </view>
                 <view class="hengxiang content-status">
                   <view class="content-status-img">
