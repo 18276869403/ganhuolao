@@ -26,12 +26,12 @@
     <view class="content-top hengxiang">
       <view class="content-top-left zongxiang">
         <view class="hengxiang top-left-details">
-          <view class="top-left-name">陈俊明</view>
+          <view class="top-left-name" style="font-weight:350;">{{wxUser.title}}</view>
           <view class="hengxiang top-left-sort">
             <view>
               <image src="../image/gongjiang.png" class="sort-img"></image>
             </view>
-            <view>二级工匠</view>
+            <view>{{wxUser.starClass}}</view>
           </view>
           <view class="hengxiang top-left-sort">
             <view>
@@ -42,17 +42,15 @@
         </view>
         <view class="top-left-type hengxiang">
           <view class="dot"></view>
-          <view class="top-left-type-text">水电工 | 泥瓦工 | 水暖</view>
+          <view class="top-left-type-text">{{wxUser.oneClassName}}</view>
         </view>
          <view class="top-left-type hengxiang">
           <view class="dot"></view>
-          <view class="top-left-type-text">水电工 | 泥瓦工 | 水暖</view>
+          <view class="top-left-type-text">{{wxUser.twoClassName}}</view>
         </view>
       </view>
       <view class="content-top-right">
-       
           <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
-  
       </view>
     </view>
     <view class="content-list-worker zongxiang">
@@ -62,14 +60,14 @@
             <image src="../image/tuijianruzhu.png" class="worker-img"></image>
           </view>
           <view>推荐入驻</view>
-          <view class="ziti">123</view>
+          <view class="ziti">{{wxUser.userPoint}}</view>
         </view>
         <view class="content-worker-right hengxiang">
           <view>
             <image src="../image/jifen.png" class="worker-img"></image>
           </view>
           <view>推荐入驻</view>
-          <view class="ziti">123</view>
+          <view class="ziti">{{wxUser.backup2}}</view>
         </view>
       </view>
     </view>

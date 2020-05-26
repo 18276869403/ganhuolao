@@ -2,8 +2,10 @@
 //index.js
 //获取应用实例
 const app = getApp()
-// var qingqiu = require('../../config/request.js')
-// var api = require('../../config/config.js')
+var qingqiu = require('../../utils/request.js')
+var api = require('../../utils/config.js')
+const util = require('../../utils/util.js')
+
 Page({
 
   /**
@@ -11,10 +13,13 @@ Page({
    */
   data: {
     // 0 普通用户，1工人，2商家
+    viewUrl:api.viewUrl,
     userType: 1,
     star: 4,
     chushihua: '1',
-    wxState: 2
+    wxState: 2,
+    openid:'',
+    wxUser:[]
   },
 
   /**
@@ -25,16 +30,54 @@ Page({
   //   this.setData({
   //     wxState: app.globalData.wxState
   //   })
+  //   this.getWxUser()
   // },
+  getWxUser:function(openid){
+    var that = this
+    var data = {
+      wxId:openid
+    }
+    that.setData({
+      openId:openid
+    })
+    qingqiu.get("queryWxUser",data,function(re){
+      if(re.success){
+        if(re.result != null){
+          console.log(re.result)
+            if(re.result.starClass == 0){
+              re.result.starClass = ""
+            }else if(re.result.starClass == 1){
+              re.result.starClass = "一级工匠"
+            }else if(re.result.starClass == 2){
+              re.result.starClass = "二级工匠"
+            }else if(re.result.starClass == 3){
+              re.result.starClass = "三级工匠"
+            }else if(re.result.starClass == 4){
+              re.result.starClass = "四级工匠"
+            }if(re.result.starClass == 5){
+              re.result.starClass = "五级工匠"
+            }
+            re.result.title = util.subName(re.result.name)
+            re.result.picIurl = that.data.viewUrl + re.result.picIurl
+            re.result.oneClassName = re.result.oneClassName.replace(/,/, " | ")
+            re.result.twoClassName = re.result.twoClassName.replace(/,/, " | ")
+          that.setData({
+            wxUser:re.result
+          })
+        }
+      }
+      console.log(re)
+    })
+  },
   onShow() {
     this.chushishouquan()
     this.setData({
       wxState: app.globalData.wxState
     })
-
     if (app.globalData.wxid == null || app.globalData.wxid == '') {
       this.onUser()
     }
+    
   },
 
   onUser: function() {
@@ -44,12 +87,16 @@ Page({
         qingqiu.get("getKeyInfo", {
           code: res.code
         }, function(re) {
-          app.globalData.wxid = re.data.result.wxUser.id
-          if (re.data.result.wxUser.picUrl != null && re.data.result.wxUser.picUrl.length > 0) {
+          app.globalData.wxid = re.result.wxUser.id
+          if (re.result.wxUser.picUrl != null && re.result.wxUser.picUrl.length > 0) {
             app.globalData.sqgl = 1
           }
-          app.globalData.openid = re.data.result.openId
-          app.globalData.wxState = re.data.result.wxUser.wxState
+          app.globalData.openid = re.result.openId
+          app.globalData.wxState = re.result.wxUser.wxState
+          that.getWxUser("tttt453454d3f")
+          that.setData({
+            openid:re.result.openId
+          })
         }, "POST")
       }
     })
@@ -67,7 +114,7 @@ Page({
               const userInfo = res.userInfo
               var data = {
                 id: app.globalData.wxid,
-                openId: app.globalData.wxid,
+                openId: app.globalData.openid,
                 picUrl: userInfo.avatarUrl,
                 sex: userInfo.gender,
                 wxNc: userInfo.nickName
@@ -188,8 +235,9 @@ Page({
   },
   // 跳转到我的资料页面
   myInfo: function () {
+    var obj = JSON.stringify(this.data.wxUser)
     wx.navigateTo({
-      url: '../myInfo/myInfo',
+      url: '../myInfo/myInfo?obj=' + obj,
     })
   },
   // 跳转到我的需求页面
