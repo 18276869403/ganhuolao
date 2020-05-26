@@ -5,7 +5,7 @@
       <view class='list hengxiang'>
         <view class='list-left'>姓名：</view>
         <view class='list-right'>
-          <input type='text' placeholder='输入名字' class='shurukuang' placeholder-class='placeholder' value='{{name}}' name="name" bindinput='nameinput'></input>
+          <input type='text' placeholder='输入名字' class='shurukuang' placeholder-class='placeholder' value='{{wxUser.name}}' name="name" bindinput='nameinput'></input>
         </view>
       </view>
     </view>
@@ -13,7 +13,7 @@
       <view class='list hengxiang' bindtap='sexChoose'>
         <view class='list-left'>性别：</view>
         <view class='list-right'>
-          {{itemList[sex]}}
+          {{itemList[wxUser.sex]}}
         </view>
       </view>
     </view>
@@ -33,7 +33,7 @@
       <view class='list hengxiang'>
         <view class='list-left'>手机号码：</view>
         <view class='list-right'>
-          <input type='number' placeholder='输入手机号' class='shurukuang' placeholder-class='placeholder' value='{{phone}}' name="phone" bindinput='phoneinput'></input>
+          <input type='number' placeholder='输入手机号' class='shurukuang' placeholder-class='placeholder' value='{{wxUser.phone}}' name="phone" bindinput='phoneinput'></input>
         </view>
       </view>
     </view>

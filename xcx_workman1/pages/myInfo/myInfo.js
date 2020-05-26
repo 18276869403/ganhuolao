@@ -12,14 +12,18 @@ Page({
     itemList: ['男', '女'],
     date: '1990-01-01',
     name: '',
-    phone: ''
+    phone: '',
+    wxUser:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
- 
+    var obj = JSON.parse(options.obj)
+    this.setData({
+      wxUser:obj
+    })
   },
 
   //性别选择
