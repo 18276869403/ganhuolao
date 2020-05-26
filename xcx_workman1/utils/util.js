@@ -15,7 +15,7 @@ const formatNumber = n => {
 }
 
 const Ages = function(str){
-  str = str.split(' ')[0]
+    str = str.split(' ')[0]
     var r = str.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);    
     if(r==null)return false;    
       var d= new Date(r[1],   r[3]-1,   r[4]);    
@@ -27,7 +27,27 @@ const Ages = function(str){
     return("输入的日期格式错误！");  
 }
 
+const FormatName = function (str) {
+  if (str.length>2)
+  {
+    var temp = "";
+    for (var i=0; i<str.length; i++)
+    {
+      if (i==0)
+      {
+        temp = temp + str.substring(i,i+1);
+      }
+      else
+      {
+        temp = temp + "*";
+      }
+    }
+    return temp;
+  }
+}
+
 module.exports = {
   formatTime: formatTime,
-  ages:Ages
+  ages:Ages,
+  formatName:FormatName
 }
