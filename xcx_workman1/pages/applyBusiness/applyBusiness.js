@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imgUrl: '',
+    viewUrl:api.viewUrl,
     id: 0,
     needsTypeid: 1,
     select: 'circle',
@@ -175,30 +175,32 @@ Page({
         id: options.id
       })
       this.data.id = options.id
-      this.getshuju()
+      // this.getshuju()
     } else {
-      this.typefenleiyj()
-      this.cityyiji()
+      // this.typefenleiyj()
+      // this.cityyiji()
     }
   },
   onUser: function() {
     var that = this
     wx.login({
       success: function(res) {
-        debugger
         qingqiu.get("getKeyInfo", {
           code: res.code
         }, function(re) {
-          app.globalData.wxid = re.data.result.wxUser.id
-          if (re.data.result.wxUser.picUrl != null && re.data.result.wxUser.picUrl.length > 0) {
+          console.log(re)
+          app.globalData.wxid = re.result.wxUser.id
+          if (re.result.wxUser.picUrl != null && re.result.wxUser.picUrl.length > 0) {
             app.globalData.sqgl = 1
           }
-          app.globalData.openid = re.data.result.openId
-          app.globalData.wxState = re.data.result.wxUser.wxState
+          app.globalData.openid = re.result.openId
+          app.globalData.wxState = re.result.wxUser.wxState
         }, "POST")
       }
     })
   },
+  // 获取分类
+
   getshuju() {
     var data = {
       id: this.data.id
@@ -391,19 +393,18 @@ Page({
 
   },
   // 右侧多选点击
-  // itemSelected: function (e) {
-  //   var index = e.currentTarget.dataset.index;
-  //   var item = this.data.navRightItems[index];
-  //   item.isSelected = !item.isSelected;
-  //   this.setData({
-  //     navRightItems: this.data.navRightItems,
-  //   });
-  // },
+  itemSelected: function (e) {
+    var index = e.currentTarget.dataset.index;
+    var item = this.data.navRightItems[index];
+    item.isSelected = !item.isSelected;
+    this.setData({
+      navRightItems: this.data.navRightItems,
+    });
+  },
 
   tijiaoshenqing: function() {
     var that = this
     var data = {}
-    debugger
     if (that.data.select != 'success') {
       wx.showToast({
         title: '未勾选注册协议',
@@ -510,6 +511,8 @@ Page({
       }
     }, 'post')
   },
+
+  // 图片上传（对接完成）
   upimg: function(e) {
     var type = e.currentTarget.dataset.type
     var that = this
@@ -518,7 +521,7 @@ Page({
       success(res) {
         const tempFilePaths = res.tempFilePaths
         wx.uploadFile({
-          url: api['addimgUrl'], //仅为示例，非真实的接口地址
+          url: api.uploadurl, // 接口地址
           filePath: tempFilePaths[0],
           header: {
             "Content-Type": "multipart/form-data"
@@ -528,10 +531,11 @@ Page({
           },
           name: 'file',
           success(res) {
+            console.log(res)
             // var sj = "files/20191220/微信图片_201912191116351_1576820870302.png"
             var r = res.data
             var jj = JSON.parse(r);
-            var sj = jj.message
+            var sj = that.data.viewUrl + jj.message
             // res.data.data = ""
             if (type == '1') {
               that.setData({
@@ -611,23 +615,45 @@ Page({
     })
   },
   typefenleiyj: function() {
-    var that = this
-    qingqiu.get("oneClassService", {}, function(re) {
-      for (var i = 0; i < re.data.result.length; i++) {
-        if (re.data.result[i].backup1 == that.data.litype) {
 
-          that.setData({
-            typeyj: re.data.result[i].id,
-            yijiname1: re.data.result[i].className
-          })
-          break
-        }
-      }
-      that.setData({
-        typeyjlist: re.data.result
-      })
-      that.typefenleiej()
+    var that = this 
+    type = that.data.needsTypeid
+    console.log(type)
+    var data = {
+      oneClassId:type
+    }
+    qingqiu.get("oneClassList", data, function(re) {
+      if (re.success == true) {
+        if (re.result != null) {
+          console.log(re)
+        //   for(let obj of re.result.records){
+        //     obj.picIurl = that.data.viewUrl + obj.picIurl
+        //     obj.oneClassName = obj.oneClassName.replace(/,/, "|")
+        //     obj.twoClassName = obj.twoClassName.replace(/,/, "|")
+        //   }
+        //   that.setData({
+        //     storeList:re.result.records
+        //   })
+        } 
+      } 
     })
+  // }
+    // qingqiu.get("oneClassService", {}, function(re) {
+    //   for (var i = 0; i < re.data.result.length; i++) {
+    //     if (re.data.result[i].backup1 == that.data.litype) {
+
+    //       that.setData({
+    //         typeyj: re.data.result[i].id,
+    //         yijiname1: re.data.result[i].className
+    //       })
+    //       break
+    //     }
+    //   }
+    //   that.setData({
+    //     typeyjlist: re.data.result
+    //   })
+    //   that.typefenleiej()
+    // })
   },
   typefenleiej: function() {
     var data = {
@@ -830,6 +856,61 @@ Page({
     }.bind(this), 200)
   },
 
+  // // 选择业务弹出
+  // showTypeModal2: function() {
+  //   this.setData({
+  //     hasMask: true
+  //   })
+  //   var animation = wx.createAnimation({
+  //     duration: 300,
+  //     timingFunction: "linear",
+  //     delay: 0
+  //   })
+  //   this.animation = animation
+
+  //   animation.opacity(0).rotateX(-100).step();
+  //   this.setData({
+  //     animationData: animation.export(),
+  //     showTypeModalStatus2: true
+  //   })
+  //   setTimeout(function() {
+  //     animation.opacity(1).rotateX(0).step();
+  //     this.setData({
+  //       animationData: animation.export()
+  //     })
+  //   }.bind(this), 200)
+  // },
+  // //选择业务页面关闭
+  // hideTypeModal2: function() {
+  //   var animation = wx.createAnimation({
+  //     duration: 200,
+  //     timingFunction: "linear",
+  //     delay: 0
+  //   })
+  //   // flag = 0;
+  //   this.animation = animation
+  //   animation.translateY(300).step()
+  //   this.setData({
+  //     animationData: animation.export(),
+  //     hasMask: false
+  //   })
+  //   setTimeout(function() {
+  //     animation.translateY(0).step()
+  //     this.setData({
+  //       animationData: animation.export(),
+  //       showTypeModalStatus2: false
+  //     })
+  //   }.bind(this), 200)
+  // },
+  // // 改变二级分类
+  // changeTypetwoclass: function (e) {
+  //   var that = this;
+  //   var id = e.currentTarget.dataset.id
+  //   that.setData({
+  //     twoclassid: id,
+  //   })
+  // },
+
   // 选择工种弹出
   showModal2: function() {
     this.setData({
@@ -841,7 +922,6 @@ Page({
       delay: 0
     })
     this.animation = animation
-
     animation.opacity(0).rotateX(-100).step();
     this.setData({
       animationData: animation.export(),
@@ -884,4 +964,29 @@ Page({
       twoclassid: id,
     })
   },
+
+  // 获取一级分类
+  getClassOne:function(){
+    var that = this 
+    type = that.data.needsTypeid
+    console.log(type)
+    var data = {
+      oneClassId:type
+    }
+    qingqiu.get("oneClassList", data, function(re) {
+      if (re.success == true) {
+        if (re.result != null) {
+          console.log(re)
+        //   for(let obj of re.result.records){
+        //     obj.picIurl = that.data.viewUrl + obj.picIurl
+        //     obj.oneClassName = obj.oneClassName.replace(/,/, "|")
+        //     obj.twoClassName = obj.twoClassName.replace(/,/, "|")
+        //   }
+        //   that.setData({
+        //     storeList:re.result.records
+        //   })
+        } 
+      } 
+    })
+  }
 })

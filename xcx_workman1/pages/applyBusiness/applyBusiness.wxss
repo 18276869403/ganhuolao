@@ -512,7 +512,7 @@ page {
 .fabu1-img {
   width: 334rpx;
   height: 228rpx;
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   left: 0;
 }
