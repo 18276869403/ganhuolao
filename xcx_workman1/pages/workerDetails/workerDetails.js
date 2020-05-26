@@ -2,6 +2,8 @@
 const app = getApp()
 
 const qingqiu = require('../../utils/request.js')
+const api = require('../../utils/config.js')
+
 Page({
   data: {
     workerDetail:[],
@@ -48,11 +50,18 @@ Page({
         if (re.result != null) {
           debugger
           that.showList=re.result.records
+          for(var i= 0 ; i < that.showList.length; i++){
+            that.showList[i].picOne = api.viewUrl+re.result.records[i].picOne.split(',')[0]
+          }  
           that.setData({
             showList:re.result.records
           })
         } 
       } 
     })
+  },
+  // 雇佣
+  guyongta(){
+    debugger
   }
 })

@@ -45,7 +45,7 @@
           </view>
           <view class="right-bottom hengxiang">
             <view class="right-bottom-left hengxiang">
-              <view class="guyong-button">雇佣TA</view>
+              <view class="guyong-button" bindtap="guyongta">雇佣TA</view>
             </view>
             <view class="right-bottom-right">
               <view class="contact-button">在线联系</view>
@@ -96,23 +96,24 @@
     <view class="content-basic zongxiang">
       <view class="content-basic-title">晒晒</view>
       <view class="content-show">
-        <view class="show-item zongxiang" wx:for="{{showList}}" wx:key="key" data-id="{{item.id}}">
+        <view class="show-item zongxiang" wx:for="{{showList}}" wx:key="key">
           <view class="show">
             <view class="show-item-top">
-              <image src="{{item.picOne}}" class="show-img"></image>
+              <image src="{{item.picOne}}" class="show-img" wx:if="{{item.backup3=='0'}}"></image>
+              <video src="{{item.picOne}}" class="show-img" wx:if="{{item.backup3=='1'}}"></video>
             </view>
             <view class="show-item-bottom hengxiang">
               <view class="hengxiang">
                 <view>
                   <image src="../image/liulan.png" class="liulan-img"></image>
                 </view>
-                <view>{{item.liulan}}</view>
+                <view>{{item.giveGood}}</view>
               </view>
               <view class="hengxiang">
                 <view>
                   <image src="../image/pinglun.png" class="pinglun-img"></image>
                 </view>
-                <view>{{item.pinglun}}</view>
+                <view>{{item.messageSum}}</view>
               </view>
             </view>
           </view>
