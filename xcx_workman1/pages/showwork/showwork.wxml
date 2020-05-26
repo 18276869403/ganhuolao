@@ -77,7 +77,8 @@
       <block wx:for-items="{{showList}}" wx:key="{{item.id}}">
         <view class="show" wx:if="{{index%2 == 0}}">
           <view class="show-item-top">
-            <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}"></image>
+            <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}">
+            </image>
             <video src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}"></video>
           </view>
           <view class="show-item-bottom hengxiang">

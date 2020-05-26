@@ -48,7 +48,6 @@ Page({
     qingqiu.get("CasePage", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
-          debugger
           that.showList=re.result.records
           for(var i= 0 ; i < that.showList.length; i++){
             that.showList[i].picOne = api.viewUrl+re.result.records[i].picOne.split(',')[0]
