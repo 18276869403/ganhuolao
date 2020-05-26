@@ -40,6 +40,18 @@ const Get = function(url, data, huidiao, method = 'GET') {
 	}, 1000)
 }
 
+const yanzheng = function(str){
+	var strlist = str.split('|')
+	for(let obj of strlist){
+		var list = obj.split(',')
+		if(list[0] == ""||list[0]==0||list[0]==undefined){
+			return list[1]
+		}
+	}
+	return 0
+}
+
 module.exports = {
-	get: Get
+	get: Get,
+	yanzheng:yanzheng
 }

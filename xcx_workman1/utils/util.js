@@ -27,6 +27,16 @@ const Ages = function(str){
     return("输入的日期格式错误！");  
 }
 
+const SubName = function(str){
+  var temp = "";
+  if(str.length>=2){
+    temp = temp + str.substring(0,3) + "...";
+  }else{
+    temp = str
+  }
+  return temp;
+}
+
 const FormatName = function (str) {
   if (str.length>2)
   {
@@ -49,5 +59,6 @@ const FormatName = function (str) {
 module.exports = {
   formatTime: formatTime,
   ages:Ages,
-  formatName:FormatName
+  formatName:FormatName,
+  subName:SubName
 }
