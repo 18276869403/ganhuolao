@@ -109,7 +109,8 @@
                   <view class="content-status-img">
                     <image src="../image/shalou.png" class="shalou-img"></image>
                   </view>
-                  <view class="content-status-text">{{item.needState}}</view>
+                  <view class="content-status-text" wx:if="{{item.needState==0}}">进行中</view>
+                  <view class="content-status-text" wx:if="{{item.needState==1}}">已完成</view>
                 </view>
               </view>
               <view class="content-neirong">
@@ -132,7 +133,7 @@
                       <image src="../image/renyuan.png" class="baoming-img"></image>
                     </view>
                     <view>
-                      <text style="color:#333333">{{item.backup2}}</text>人
+                      <text style="color:#333333">{{item.backup2}}</text>人浏览
                     </view>
                   </view>
                 </view>
