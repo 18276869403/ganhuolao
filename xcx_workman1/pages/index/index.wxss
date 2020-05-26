@@ -473,6 +473,9 @@ page {
 
 .worker-item-top-left {
   width: 50%;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 
 .rank-img {

@@ -24,7 +24,7 @@ Page({
   onLoad: function() {
     this.firstbanner() //banner
     this.pointList() //通知
-    this.xqneedlist()
+    this.xqneedlist() //需求
     this.grneedlist() //工人
     this.sjneedlist()  //商家
     this.spneedlist() //商品
@@ -160,6 +160,7 @@ Page({
       if(re.success == true){
         if(re.result != null){
           for(let obj of re.result.records){
+            obj.name = util.formatName(obj.name)
             obj.name = "恭喜" + obj.name + "成功入驻";
           }
           that.setData({
@@ -169,19 +170,7 @@ Page({
       }
     })
   },
-
-  firstactivity:function(){
-
-  },
-  firstneeds:function(){
-
-  },
-
-  advertisement:function(){
-    var that = this
-  },
  
-
   // 跳转到工人入驻页面
   applyBusiness: function() {
     wx.navigateTo({
@@ -199,7 +188,6 @@ Page({
     wx.switchTab({
       url: '../need/need',
     })
-
   },
   // 跳转到需求详情页面
   needsDetails: function(e) {

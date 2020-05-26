@@ -132,7 +132,7 @@
                       <image src="../image/renyuan.png" class="baoming-img"></image>
                     </view>
                     <view>
-                      <text style="color:#333333">{{item.backup2}}</text>人浏览
+                      <text style="color:#333333">{{item.backup2}}</text>人
                     </view>
                   </view>
                 </view>
@@ -169,12 +169,12 @@
                 <view class="worker-item-top-left">
                   {{item.name}}
                 </view>
-                <view class="hengxiang worker-rank">
-                  <view>
-                    <image class="rank-img" src="../image/rank.png"></image>
+                 <view class="hengxiang worker-rank">
+                    <view>
+                      <image class="rank-img" src="../image/rank.png"></image>
+                    </view>
+                    <view>{{item.shopName}}</view>
                   </view>
-                  <view>{{item.shopName}}</view>
-                </view>
               </view>
               <view class="worker-item-bottom hengxiang">
                 <view class="dot"></view>
