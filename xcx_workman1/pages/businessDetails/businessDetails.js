@@ -60,31 +60,31 @@ Page({
       goodsList:obj
     })
     this.getGoodsList(obj.id)
+    debugger
+    this.getGoodsdata(obj.id)
   },
-  getGoodsdata:function(id,caseName){
+  getGoodsdata:function(id){
     var that = this
-    var data = {
-      id:id,
-      caseName:caseName
+    var data = {
+       wxUserId:id
     }
-    // qingqiu.get("casePage", data, function(re) {
-    //    if (re.success == true) {
-    //           if (re.result.records != null) {
-    //             that.goodsList = re.result.records
-    //             for(let obj of re.result.records){
-    //               obj.goodPic1 = that.data.viewUrl + obj.goodPic1.split(',')[0]
-    //               obj.goodPic2  = that.data.viewUrl + obj.goodPic2.split(',')[0]
-    //             }
-    //             console.log(re.result.records)
-    //             that.setData ({
-    //               goodslists: re.result.records
-    //             })
-      
-    //           } else {
-    //             qingqiu.tk('未查询到任何数据')
-    //           }
-    //         } 
-    // })
+    console.log(data)
+    qingqiu.get("casePage", data, function(re) {
+    if (re.success == true) {
+      if (re.result.records != null) {
+        console.log(re.result)
+         that.goodsList = re.result.records
+         for(let obj of re.result.records){
+           obj.picOne= that.data.viewUrl + obj.picOne.split(',')[0]
+           obj.picTwo= that.data.viewUrl + obj.picTwo.split(',')[0]
+           }
+        //   console.log(re.result.records)
+        //  that.setData ({
+        //   goodslists: re.result.records
+        //   })
+        }
+      } 
+    })
   },
   // 跳转商品详情
   goGoodsDetails:function(e){

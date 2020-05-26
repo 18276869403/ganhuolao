@@ -8,7 +8,7 @@
     </view>
     <!-- 商家详情 -->
     <view class="content-list zongxiang">
-      <view class="content-list-name">商家名称：{{goodsList.shopName}}</view>
+      <view class="content-list-name">{{goodsList.shopName}}</view>
       <view class="hengxiang content-lianxi">
         <view class="hengxiang">
           <image src='{{score>index?"../image/starhuang.png":"../image/starhui.png"}}' class='star-img' wx:for="{{goodsList.starClass}}"></image>
@@ -93,7 +93,7 @@
       </view>
       <!-- 晒晒样式 CheckItem==1-->
       <view class="content-show" wx:if="{{CheckItem==1}}">
-        <view class="show-item zongxiang" wx:for="{{showList}}" wx:key="key" data-id="{{item.id}}">
+        <view class="show-item zongxiang" wx:for="{{goodslists}}" wx:key="key" data-id="{{item.id}}">
           <view class="show">
             <view class="show-item-top">
               <image src="../image/top.png" class="show-img"></image>
@@ -103,7 +103,7 @@
                 <view>
                   <image src="../image/liulan.png" class="liulan-img"></image>
                 </view>
-                <view>{{item.liulan}}</view>
+                <view>{{item.giveGood}}</view>
               </view>
               <view class="hengxiang">
                 <view>
