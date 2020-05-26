@@ -403,8 +403,28 @@ page {
   border-radius: 8rpx;
 }
 
+.content-worker1 {
+  padding: 2%;
+  width: 96%;
+  background: rgba(255, 255, 255, 1);
+  margin-bottom: 32rpx;
+  height: 606rpx;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(111, 119, 140, 0.18);
+  border-radius: 8rpx;
+}
+
 .worker-list {
   width: 100%;
+}
+
+.worker-item1 {
+  width: 264rpx;
+  height: 482rpx;
+  margin-right: 20rpx;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 8rpx;
+  border: 1rpx solid rgba(227, 227, 227, 1);
 }
 
 .worker-item {
@@ -416,6 +436,12 @@ page {
 }
 
 .worker-item-img {
+}
+
+.worker-img1 {
+  width: 100%;
+  height: 318rpx;
+  border-radius: 8rpx 8rpx 0rpx 0rpx;
 }
 
 .worker-img {

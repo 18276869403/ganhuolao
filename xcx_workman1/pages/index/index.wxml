@@ -109,8 +109,7 @@
                   <view class="content-status-img">
                     <image src="../image/shalou.png" class="shalou-img"></image>
                   </view>
-                  <view class="content-status-text" wx:if="{{item.needState==0}}">进行中</view>
-                  <view class="content-status-text" wx:if="{{item.needState==1}}">已完成</view>
+                  <view class="content-status-text">{{item.needState}}</view>
                 </view>
               </view>
               <view class="content-neirong">
@@ -133,7 +132,7 @@
                       <image src="../image/renyuan.png" class="baoming-img"></image>
                     </view>
                     <view>
-                      <text style="color:#333333">{{item.backup2}}</text>人浏览
+                      <text style="color:#333333">{{item.backup2}}</text>人
                     </view>
                   </view>
                 </view>
@@ -154,7 +153,7 @@
       </view>
     </view>
     <!-- 推荐工人 -->
-    <view class="content-worker">
+    <view class="content-worker1">
       <view class="need-title hengxiang">
         <view class="need-title-left">推荐工人</view>
         <view class="need-title-right" bindtap="services">更多 > </view>
@@ -162,9 +161,9 @@
       <scroll-view class="worker-list" scroll-x="true" style='width:100%'>
         <view class="hengxiang">
           <view class="" wx:for="{{workerList}}" wx:for-index="index" wx:key="id">
-            <view class="worker-item zongxiang" bindtap="workerDetails" data-vals="{{item}}">
+            <view class="worker-item1 zongxiang" bindtap="workerDetails" data-vals="{{item}}">
               <view class="worker-item-img">
-                <image src="{{item.picIurl}}" class="worker-img"></image>
+                <image src="{{item.picIurl}}" class="worker-img1"></image>
               </view>
               <view class="worker-item-top hengxiang">
                 <view class="worker-item-top-left">
