@@ -83,9 +83,10 @@ Page({
     }
   },
   // 跳转到商家详情页面
-  businessDetails: function () {
+  businessDetails: function (e) {
+    var obj = JSON.stringify(e.currentTarget.dataset.vals)
     wx.navigateTo({
-      url: '../businessDetails/businessDetails',
+      url: '../businessDetails/businessDetails?obj=' + obj,
     })
   },
   // 推荐工人
@@ -152,9 +153,10 @@ Page({
     })
   },
   // 跳转到工人详情页面
-  workerDetails: function () {
+  workerDetails: function (e) {
+    var obj = JSON.stringify(e.currentTarget.dataset.vals)
     wx.navigateTo({
-      url: '../workerDetails/workerDetails',
+      url: '../workerDetails/workerDetails?obj=' + obj,
     })
   },
 })

@@ -72,9 +72,9 @@
     </view>
     <!-- 找工人 -->
     <view class="content-list zongxiang" wx:for="{{workerlist}}" wx:key="key" data-id="{{item.id}}" wx:if="{{chooseworker==1}}">
-      <view class="content-list-item hengxiang" bindtap="workerDetails">
+      <view class="content-list-item hengxiang" bindtap="workerDetails" data-vals="{{item}}">
         <view class="list-item-left">
-          <image src="../image/top.png" class="worker-img"></image>
+          <image src="{{item.picIurl}}" class="worker-img"></image>
         </view>
         <view class="list-item-right zongxiang">
           <view class="right-name">
@@ -132,7 +132,7 @@
     <!-- 找商家 -->
 
     <view class="content-business zongxiang" wx:for="{{businesslist}}" wx:key="key" data-id="{{item.id}}" wx:if="{{chooseworker==0}}">
-      <view class="content-business-list zongxiang" bindtap="businessDetails">
+      <view class="content-business-list zongxiang" bindtap="businessDetails" data-vals="{{item}}">
         <view class="content-business-img">
           <image src="{{item.picIurl}}" class="business-img"></image>
         </view>
@@ -142,9 +142,7 @@
             <view class="enter-button">进店看看</view>
           </view>
         </view>
-
       </view>
-
     </view>
   </view>
 
