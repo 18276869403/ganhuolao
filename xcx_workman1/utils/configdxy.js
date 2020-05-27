@@ -21,6 +21,8 @@ const TwoClassList = baseUrl + "pc/hall/twoClassList"
 const CasePage = baseUrl + "pc/hall/casePage"
 // 加载个人信息
 const QueryWxUser = baseUrl + "pc/user/queryWxUser"
+// 我的雇佣
+const UserWorkPage = baseUrl + "pc/user/userWorkPage"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -32,5 +34,6 @@ module.exports = {
   oneClassList:OneClassList,
   casePage:CasePage ,
   twoClassList:TwoClassList,
-  queryWxUser:QueryWxUser
+  queryWxUser:QueryWxUser,
+  userWorkPage:UserWorkPage
 };
