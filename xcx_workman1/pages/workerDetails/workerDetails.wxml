@@ -64,7 +64,7 @@
             <image src="../image/jingyan.png" class="basic-img"></image>
           </view>
           <view class="basic-tips">经验：</view>
-          <view class="basic-text">{{workerDetail.employ}}</view>
+          <view class="basic-text">{{workerDetail.employ}}年</view>
         </view>
         <view class="basic-list-item hengxiang">
           <view class="basicImg">
