@@ -48,7 +48,7 @@
               <view class="guyong-button" bindtap="guyongta">雇佣TA</view>
             </view>
             <view class="right-bottom-right">
-              <view class="contact-button">在线联系</view>
+              <view class="contact-button" bindtap="phonecall" data-phone="{{workerDetail.phone}}">在线联系</view>
             </view>
           </view>
         </view>
@@ -78,9 +78,10 @@
             <image src="../image/phone.png" class="basic-img"></image>
           </view>
           <view class="basic-tips">电话：</view>
-          <view class="basic-text1">{{workerDetail.phone}}</view>
+          <view class="basic-text1" wx:if="{{istrue==1}}">{{workerDetail.phone}}</view>
+          <view class="basic-text1" wx:if="{{istrue==0}}">{{phone}}</view>
           <view class="basic-look">
-            <view class="look-button">查看电话</view>
+            <view class="look-button" bindtap="phoneshow">查看电话</view>
           </view>
         </view>
         <view class="basic-list-item1 hengxiang">

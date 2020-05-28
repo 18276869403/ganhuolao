@@ -29,7 +29,7 @@ Page({
   },
   phoneshow:function(){
     if(this.data.istrue == 0){
-      this.setData({
+      this.setData({ 
         istrue:1
       })
     }else{
