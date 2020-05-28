@@ -1,6 +1,6 @@
 var api = require('./config.js')
 //const baseUrl = "http://192.168.1.242:8081/work-boot/"
-const baseUrl = "http://192.168.1.230:3000/work-boot/"
+const baseUrl = "http://192.168.1.254:3000/work-boot/"
 // 需求列表
 // const xqurl = baseUrl + "work/yneed/list"
 // 大厅最新需求
