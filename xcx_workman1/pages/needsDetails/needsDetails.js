@@ -10,19 +10,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tupianlist: [{
-      id: 1,
-      tupian: '../image/top.png'
-    },
-    {
-      id: 2,
-      tupian: '../image/top.png'
-    },
-    {
-      id: 3,
-      tupian: '../image/top.png'
-    }
-    ],
+    // tupianlist: [{
+    //   id: 1,
+    //   tupian: '../image/top.png'
+    // },
+    // {
+    //   id: 2,
+    //   tupian: '../image/top.png'
+    // },
+    // {
+    //   id: 3,
+    //   tupian: '../image/top.png'
+    // }
+    // ],
     // jiedanList:[{
     //   id:1,
     //   name:'东鹏瓷砖万载总代',
@@ -46,41 +46,63 @@ Page({
     //   }],
     xqxqlist:[],
     jiedanList:[],
+    tupianlist:[],
     id:''
   },
 
   onLoad: function (options) {
     var xqxqlist = JSON.parse(options.obj1)
     this.id = xqxqlist.id
-    console.log(xqxqlist);
-    debugger
     this.setData({
       xqxqlist: xqxqlist
     })
     this.SelectjiedanList()
+    this.SelecttupianList()
   },
-  // 需求列表
+  // 接单人员
   SelectjiedanList() {
     var that = this
     var data={
-      id: that.id,
+      needId: that.id,
       pages: 1,
       size: 10
     }
     qingqiu.get("needSignPage", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
-          debugger
           that.jiedanList = re.result.records
           for(let obj of re.result.records){
-            obj.picTwo = api.viewUrl + obj.picTwo
-          }
+            obj.picIurl = api.viewUrl + obj.picIurl
+          } 
+          console.log(re.result.records)
           that.setData ({
             jiedanList : re.result.records
           })
         } else {
           qingqiu.tk('未查询到任何数据')
         }
+      } 
+    })
+  },
+  // 图片
+  SelecttupianList() {
+    var that = this
+    var data={
+      id: that.id,
+      pages: 1,
+      size: 10
+    }
+    qingqiu.get("zuixinxq", data, function(re) {
+      if (re.success == true) {
+        if (re.result != null) {
+          that.tupianlist = re.result.records
+          for(let obj of re.result.records){
+            obj.backup1 = api.viewUrl + obj.backup1
+          }
+          that.setData ({
+            //tupianlist : re.result.records
+          })
+        } 
       } 
     })
   },

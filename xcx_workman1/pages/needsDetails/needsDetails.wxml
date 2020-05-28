@@ -74,7 +74,7 @@
       <view class="content-content-title">图片</view>
       <view class="zhanshi" wx:if="{{tupianlist.length>0}}">
         <view class="zhanshi-item" wx:for='{{tupianlist}}' data-id="{{item.id}}">
-          <image src="{{item.tupian}}" bindtap="fangda" class="zhanshitu"></image>
+          <image src="{{item.backup1}}" bindtap="fangda" class="zhanshitu"></image>
         </view>
       </view>
       <view class="zhanshi" wx:if="{{tupianlist.length<=0}}">
@@ -87,11 +87,11 @@
       <view class="content-jiedan zongxiang" wx:for="{{jiedanList}}" wx:for-index="index" wx:key="{{item.id}}">
         <view class="jiedan-top hengxiang">
           <view class="jiedan-top-left">
-            <image src="{{item.picTwo}}" class="avator-img"></image>
+            <image src="{{item.picIurl}}" class="avator-img"></image>
           </view>
           <view class="jiedan-top-content zongxiang">
-            <view class="jiedan-top-content-name">{{item.caseName}}</view>
-            <view class="jiedan-top-content-date">{{item.addTime}}</view>
+            <view class="jiedan-top-content-name">{{item.name}}</view>
+            <view class="jiedan-top-content-date">{{item.signTime}}</view>
           </view>
           <view class="jiedan-top-right">
             <image src="../image/liuyan.png" class="img"></image>
@@ -101,7 +101,7 @@
           </view>
         </view>
         <view class="content-bottom">
-       {{item.details}}
+       {{item.moneyMemo}}
         </view>
       </view>
     </view>
