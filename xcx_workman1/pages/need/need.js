@@ -7,6 +7,7 @@ const api = require('../../utils/config.js')
 
 Page({
   data: {
+    viewUrl:api.viewUrl,
     // needsList: [{
     //     id: 1,
     //     needType: 0,
@@ -57,7 +58,7 @@ Page({
           that.needsList = re.result.records
           for(var i= 0 ; i < that.needsList.length; i++){
             re.result.records[i].publishTime = re.result.records[i].publishTime.split(' ')[0]
-            re.result.records[i].backup1 = api.viewUrl+re.result.records[i].backup1.split(',')[0]
+            re.result.records[i].backup1 = re.result.records[i].backup1.split(',')
           }
           that.setData ({
             needsList : re.result.records
