@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    viewUrl:api.viewUrl,
     // tupianlist: [{
     //   id: 1,
     //   tupian: '../image/top.png'
@@ -102,7 +103,6 @@ Page({
           that.setData ({
             tupianlist : re.result.records
           })
-          debugger
         } 
       } 
     })

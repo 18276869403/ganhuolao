@@ -72,9 +72,9 @@
     <!-- 图片 -->
     <view class="content-content zongxiang">
       <view class="content-content-title">图片</view>
-      <view class="zhanshi" wx:if="{{tupianlist.length>0}}">
-        <view class="zhanshi-item" wx:for='{{tupianlist}}' data-id="{{item.id}}">
-          <image src="{{item.backup1}}" bindtap="fangda" class="zhanshitu"></image>
+      <view class="zhanshi" wx:if="{{xqxqlist.backup1.length>0}}">
+        <view class="zhanshi-item" wx:for='{{xqxqlist.backup1}}' data-id="{{item.id}}">
+          <image src="{{viewUrl}}{{item}}" bindtap="fangda" class="zhanshitu"></image>
         </view>
       </view>
       <view class="zhanshi" wx:if="{{tupianlist.length<=0}}">
