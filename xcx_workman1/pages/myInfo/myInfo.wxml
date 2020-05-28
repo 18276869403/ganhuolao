@@ -21,9 +21,9 @@
       <view class='list hengxiang'>
         <view class='list-left'>生日：</view>
         <view class='list-right'>
-          <picker mode="date" value="{{date}}" start="1900-01-01" bindchange="bindDateChange">
+          <picker mode="date" value="{{wxUser.dateBirth}}" start="1900-01-01" bindchange="bindDateChange">
             <view class="picker">
-              {{date}}
+              {{wxUser.dateBirth}}
             </view>
           </picker>
         </view>
