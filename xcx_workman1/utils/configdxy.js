@@ -23,6 +23,8 @@ const CasePage = baseUrl + "pc/hall/casePage"
 const QueryWxUser = baseUrl + "pc/user/queryWxUser"
 // 我的雇佣
 const UserWorkPage = baseUrl + "pc/user/userWorkPage"
+// 个人资料保存
+const EditWxUser = baseUrl + "pc/user/editWxUser"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -35,5 +37,6 @@ module.exports = {
   casePage:CasePage ,
   twoClassList:TwoClassList,
   queryWxUser:QueryWxUser,
-  userWorkPage:UserWorkPage
+  userWorkPage:UserWorkPage,
+  editWxUser:EditWxUser
 };
