@@ -56,11 +56,11 @@ Page({
 
   onLoad: function(options) {
     var obj = JSON.parse(options.obj)
+    console.log(obj)
     this.setData({
       goodsList:obj
     })
     this.getGoodsList(obj.id)
-    debugger
     this.getGoodsdata(obj.id)
   },
   getGoodsdata:function(id){
@@ -68,11 +68,9 @@ Page({
     var data = {
        wxUserId:id
     }
-    console.log(data)
     qingqiu.get("casePage", data, function(re) {
     if (re.success == true) {
       if (re.result.records != null) {
-        console.log(re.result)
          that.goodsList = re.result.records
          for(let obj of re.result.records){
            obj.picOne= that.data.viewUrl + obj.picOne.split(',')[0]
@@ -110,7 +108,6 @@ Page({
               obj.goodPic1 = that.data.viewUrl + obj.goodPic1.split(',')[0]
               obj.goodPic2  = that.data.viewUrl + obj.goodPic2.split(',')[0]
             }
-            console.log(re.result.records)
             that.setData ({
               goodslists: re.result.records
             })
