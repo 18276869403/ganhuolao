@@ -95,13 +95,14 @@ Page({
     qingqiu.get("zuixinxq", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
-          that.tupianlist = re.result.records
+          // that.tupianlist = re.result.records
           for(let obj of re.result.records){
-            obj.backup1 = api.viewUrl + obj.backup1
+            obj.backup1 = api.viewUrl + obj.backup1.split(',')[0]
           }
           that.setData ({
-            //tupianlist : re.result.records
+            tupianlist : re.result.records
           })
+          debugger
         } 
       } 
     })
