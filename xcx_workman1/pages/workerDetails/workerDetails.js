@@ -3,39 +3,40 @@ const app = getApp()
 
 const qingqiu = require('../../utils/request.js')
 const api = require('../../utils/config.js')
+const util = require('../../utils/util.js')
 
 Page({
   data: {
     workerDetail:[],
-    // showList: [{
-    //   id: 1,
-    //   pinglun: '12',
-    //   liulan: '12',
-    // },
-    //   {
-    //     id: 2,
-    //     pinglun: '12',
-    //     liulan: '12',
-    //   },
-    //   {
-    //     id: 3,
-    //     pinglun: '12',
-    //     liulan: '12',
-    //   },
-    // ],
     showList:[],
     id:'',
-    wxUserId:''
+    wxUserId:'',
+    istrue:0
   },
 
   onLoad: function (options) {
     var workerDetail = JSON.parse(options.obj)
     console.log(workerDetail)
-    this.id = workerDetail.id
+    var id = workerDetail.id
+    var phone = workerDetail.phone
+    phone = util.formatPhone(phone)
     this.setData({
-      workerDetail :workerDetail 
+      id:id,
+      workerDetail :workerDetail,
+      phone:phone
     })
     this.grshowList()
+  },
+  phoneshow:function(){
+    if(this.data.istrue == 0){
+      this.setData({
+        istrue:1
+      })
+    }else{
+      this.setData({
+        istrue:0
+      })
+    }
   },
   // 获取工人晒晒
   grshowList() {
@@ -61,5 +62,12 @@ Page({
   },
   // 雇佣
   guyongta(){
+  },
+  phonecall:function(e){
+    var phone = e.currentTarget.dataset.phone
+    console.log(phone)
+    wx.makePhoneCall({
+      phoneNumber: phone,
+    })
   }
 })
