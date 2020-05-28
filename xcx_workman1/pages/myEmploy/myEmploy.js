@@ -1,10 +1,15 @@
 // pages/myEmploy/myEmploy.js
+const qingqiu = require("../../utils/request.js")
+const api = require("../../utils/config.js")
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    viewUrl:api.viewUrl,
+    id:'',
     needsTypeid: 1,
     needsTypeList: [{
         id: 1,
@@ -49,7 +54,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.getmyEmploy(options.id)
+    this.setData({
+      id:options.id
+    })
   },
   changeType: function(e) {
     var that = this;
@@ -57,11 +65,45 @@ Page({
     that.setData({
       needsTypeid: id
     })
+    this.getmyEmploy(that.data.id)
   },
-  phonecall: function() {
+  phonecall: function(e) {
+    var phone = e.currentTarget.dataset.phone
     wx.makePhoneCall({
-      phoneNumber: '17656453456' //仅为示例，并非真实的电话号码
+      phoneNumber: phone 
+    })
+  },
+  
+  // 获取我的雇佣
+  getmyEmploy:function(id){
+    var that = this
+    var data = ""
+    console.log(that.data.needsTypeid)
+    if(that.data.needsTypeid == 1){
+      data = {
+        wxCaseId:id
+      }
+    }else{
+      data = {
+        wxCaseId2:id
+      }
+    }
+    qingqiu.get("userWorkPage",data,function(re){
+      if (re.success == true) {
+        if (re.result != null) {
+          console.log(re.result)
+          for(let obj of re.result.records){
+            obj.picIurl = api.viewUrl + obj.picIurl
+            obj.hiringTime = obj.hiringTime.split(' ')[0]
+          }
+          that.setData({
+            messageList:re.result.records
+          })
+          console.log(that.data.messageList)
+        } else {
+          qingqiu.tk('未查询到任何数据')
+        }
+      } 
     })
   }
-
 })

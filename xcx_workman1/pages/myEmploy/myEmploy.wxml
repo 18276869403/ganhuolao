@@ -16,13 +16,13 @@
     <view class="content-list zongxiang" wx:for="{{messageList}}" wx:key="{{item.id}}">
       <view class="content-list-top hengxiang">
         <view class="list-top-img">
-          <image src="../image/top.png" class="avator-img"></image>
+          <image src="{{item.picIurl}}" mode="aspectFill" class="avator-img"></image>
         </view>
         <view class="list-top-text zongxiang" wx:if="{{needsTypeid==1}}">
-          工人：{{item.workername}}
+          工人：{{item.name}}
         </view>
         <view class="list-top-text zongxiang" wx:if="{{needsTypeid==2}}">
-          雇主：{{item.employeename}}
+          雇主：{{item.name}}
         </view>
         <view class="list-top-edit">
           <image src="../image/edit.png" class="delete-img"></image>
@@ -34,25 +34,24 @@
       <view class="content-list-content zongxiang">
         <view class="list-content-item hengxiang">
           <view class="item-title">雇佣时间：</view>
-          <view class="item-type">{{item.date}}</view>
+          <view class="item-type">{{item.hiringTime}}</view>
         </view>
         <view class="list-content-item hengxiang">
           <view class="item-title">费用预计：</view>
-          <view class="item-type">{{item.cost}}元/天</view>
+          <view class="item-type">{{item.estimatedCost}}元/天</view>
         </view>
         <view class="list-content-item hengxiang">
           <view class="item-title">预计工期：</view>
-          <view class="item-type">{{item.day}}天</view>
+          <view class="item-type">{{item.predict}}天</view>
         </view>
         <view class="list-content-item hengxiang">
           <view class="item-title">雇佣事项：</view>
-          <view class="item-type">{{item.tips}}</view>
+          <view class="item-type">{{item.employmentMatters}}</view>
         </view>
       </view>
       <view class="content-list-bottom hengxiang">
-        <view class="phone-button" bindtap="phonecall">电话联系</view>
+        <view class="phone-button" bindtap="phonecall" data-phone="{{item.phone}}">电话联系</view>
         <view class="online-button">在线联系</view>
-
       </view>
     </view>
   </view>
