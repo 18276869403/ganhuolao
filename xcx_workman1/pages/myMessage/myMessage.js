@@ -1,4 +1,8 @@
 // pages/myMessage/myMessage.js
+
+// const app = getApp()
+const qingqiu = require('../../utils/request.js')
+// var api = require('../../config/config.js')
 Page({
 
   /**
@@ -15,52 +19,57 @@ Page({
         name: '给我的留言'
       }
     ],
-    messageList: [{
-      id: 1,
-      name: '万载梦天木门专卖店',
-      date: '2019-10-26 10-23',
-      sort1: '水电工',
-      sort11: '泥瓦工',
-      sort111: '水暖',
-      sort2: '水电工',
-      sort22: '泥瓦工',
-      sort222: '水暖',
-      area:'万载',
-      street:'双桥镇'
-    },
-      {
-        id: 2,
-        name: '万载梦天木门专卖店',
-        date: '2019-10-26 10-23',
-        sort1: '水电工',
-        sort11: '泥瓦工',
-        sort111: '水暖',
-        sort2: '水电工',
-        sort22: '泥瓦工',
-        sort222: '水暖',
-        area: '万载',
-        street: '双桥镇'
-      },
-      {
-        id: 3,
-        name: '万载梦天木门专卖店',
-        date: '2019-10-26 10-23',
-        sort1: '水电工',
-        sort11: '泥瓦工',
-        sort111: '水暖',
-        sort2: '水电工',
-        sort22: '泥瓦工',
-        sort222: '水暖',
-        area: '万载',
-        street: '双桥镇'
-      }]
+    // messageList: [{
+    //   id: 1,
+    //   name: '万载梦天木门专卖店',
+    //   date: '2019-10-26 10-23',
+    //   sort1: '水电工',
+    //   sort11: '泥瓦工',
+    //   sort111: '水暖',
+    //   sort2: '水电工',
+    //   sort22: '泥瓦工',
+    //   sort222: '水暖',
+    //   area:'万载',
+    //   street:'双桥镇'
+    // },
+    //   {
+    //     id: 2,
+    //     name: '万载梦天木门专卖店',
+    //     date: '2019-10-26 10-23',
+    //     sort1: '水电工',
+    //     sort11: '泥瓦工',
+    //     sort111: '水暖',
+    //     sort2: '水电工',
+    //     sort22: '泥瓦工',
+    //     sort222: '水暖',
+    //     area: '万载',
+    //     street: '双桥镇'
+    //   },
+    //   {
+    //     id: 3,
+    //     name: '万载梦天木门专卖店',
+    //     date: '2019-10-26 10-23',
+    //     sort1: '水电工',
+    //     sort11: '泥瓦工',
+    //     sort111: '水暖',
+    //     sort2: '水电工',
+    //     sort22: '泥瓦工',
+    //     sort222: '水暖',
+    //     area: '万载',
+    //     street: '双桥镇'
+    //   }],
+    messageList:[],
+    formymessageList:[],
+    Lyid:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.Lyid = JSON.parse(options.obj)
+    this.mymessageList()
+    this.givemymessageList()
   },
   changeType: function(e) {
     var that = this;
@@ -69,5 +78,44 @@ Page({
       needsTypeid: id
     })
   },
-
+  // 我发起的留言
+  mymessageList() {
+    var that = this
+    var data={
+      wxCaseId:that.Lyid
+    }
+    qingqiu.get("pcQueryMessagePageByUserID", data, function(re) {
+      console.log(re)
+    if (re.success == true) {
+      if (re.result != null) {
+        that.messageList = re.result.records
+        that.setData ({
+          messageList : re.result.records
+        })
+      } else {
+        qingqiu.tk('未查询到任何数据')
+      }
+    } 
+  })
+},
+// 给我的留言
+givemymessageList() {
+  var that = this
+  var data={
+    wxCaseId2:that.Lyid
+  }
+  qingqiu.get("pcQueryMessagePageByUserID", data, function(re) {
+    console.log(re)
+  if (re.success == true) {
+    if (re.result != null) {
+      that.formymessageList = re.result.records
+      that.setData ({
+        formymessageList : re.result.records
+      })
+    } else {
+      qingqiu.tk('未查询到任何数据')
+    }
+  } 
+})
+}
 })

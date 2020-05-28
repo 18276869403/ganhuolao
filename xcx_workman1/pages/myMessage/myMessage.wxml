@@ -13,14 +13,15 @@
   </view>
   <!-- 我的留言列表 -->
   <view class="content zongxiang">
-    <view class="content-list zongxiang" wx:for="{{messageList}}" wx:key="{{item.id}}">
+    <view class="content-list zongxiang" wx:for="{{messageList}}" wx:key="{{item.id}}" wx:if="{{needsTypeid==1}}">
+    <!-- <view class="content-list zongxiang" wx:for="{{formymessageList}}" wx:key="{{item.id}}" wx:if="{{needsTypeid==2}}"> -->
       <view class="content-list-top hengxiang">
         <view class="list-top-img">
           <image src="../image/top.png" class="avator-img"></image>
         </view>
         <view class="list-top-text zongxiang">
           <view>{{item.name}}</view>
-          <view class="date">{{item.date}}</view>
+          <view class="date">{{item.messageDate}}</view>
         </view>
         <view class="list-top-delete">
           <image src="../image/delete.png" class="delete-img"></image>
@@ -29,19 +30,54 @@
       <view class="content-list-content zongxiang">
         <view class="list-content-item hengxiang">
           <view class="dot"></view>
-          <view class="item-type">{{item.sort1}}| {{item.sort11}} | {{item.sort111}}</view>
+          <view class="item-type">{{item.oneClassName}}| {{item.twoClassName}}</view>
         </view>
-        <view class="list-content-item hengxiang">
+        <!-- <view class="list-content-item hengxiang">
           <view class="dot"></view>
           <view class="item-type">{{item.sort2}}| {{item.sort22}} | {{item.sort222}}</view>
-        </view>
+        </view> -->
       </view>
       <view class="content-list-bottom hengxiang">
         <view class="content-list-bottom-left hengxiang">
           <view class="left-dingwei">
             <image src="../image/dingwei.png" class="dingwei-img"></image>
           </view>
-          <view class="left-text">{{item.area}} | {{item.street}}</view>
+          <view class="left-text">{{item.oneAreaName}} | {{item.twoAreaName}}</view>
+        </view>
+        <view class="content-list-bottom-right">
+          <view class="look-button">查看留言</view>
+        </view>
+      </view>
+    </view>
+    <view class="content-list zongxiang" wx:for="{{formymessageList}}" wx:key="{{item.id}}" wx:if="{{needsTypeid==2}}">
+      <view class="content-list-top hengxiang">
+        <view class="list-top-img">
+          <image src="../image/top.png" class="avator-img"></image>
+        </view>
+        <view class="list-top-text zongxiang">
+          <view>{{item.name}}</view>
+          <view class="date">{{item.messageDate}}</view>
+        </view>
+        <view class="list-top-delete">
+          <image src="../image/delete.png" class="delete-img"></image>
+        </view>
+      </view>
+      <view class="content-list-content zongxiang">
+        <view class="list-content-item hengxiang">
+          <view class="dot"></view>
+          <view class="item-type">{{item.oneClassName}}| {{item.twoClassName}}</view>
+        </view>
+        <!-- <view class="list-content-item hengxiang">
+          <view class="dot"></view>
+          <view class="item-type">{{item.sort2}}| {{item.sort22}} | {{item.sort222}}</view>
+        </view> -->
+      </view>
+      <view class="content-list-bottom hengxiang">
+        <view class="content-list-bottom-left hengxiang">
+          <view class="left-dingwei">
+            <image src="../image/dingwei.png" class="dingwei-img"></image>
+          </view>
+          <view class="left-text">{{item.oneAreaName}} | {{item.twoAreaName}}</view>
         </view>
         <view class="content-list-bottom-right">
           <view class="look-button">查看留言</view>
@@ -49,4 +85,5 @@
       </view>
     </view>
   </view>
+  
 </view>
