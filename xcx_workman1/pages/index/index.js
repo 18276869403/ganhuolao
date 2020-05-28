@@ -17,8 +17,8 @@ Page({
     goodsList: [],
     xuqiulist:[],
     grlist:[],
-    sjlist:[]
-
+    sjlist:[],
+    tupian:[]
   },
 
   onLoad: function() {
@@ -42,8 +42,9 @@ Page({
           that.xuqiulist = re.result.records
           for(var i= 0 ; i < that.xuqiulist.length; i++){
             that.xuqiulist[i].publishTime = re.result.records[i].publishTime.split(" ")[0]
-            that.xuqiulist[i].backup1 = api.viewUrl+re.result.records[i].backup1.split(',')[0]
-          }    
+            that.xuqiulist[i].backup1 = re.result.records[i].backup1.split(',')
+          }  
+          console.log( re.result.records)
           that.setData ({
             xuqiulist : re.result.records
           })

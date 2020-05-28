@@ -248,9 +248,10 @@ Page({
     })
   },
   // 跳转到我留言页面
-  myMessage: function () {
+  myMessage: function (e) {
+    var Lyid = JSON.stringify(this.data.wxUser.id)
     wx.navigateTo({
-      url: '../myMessage/myMessage',
+      url: '../myMessage/myMessage?obj='+Lyid,
     })
   },
   // 跳转到我的商品页面

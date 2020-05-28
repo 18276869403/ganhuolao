@@ -24,7 +24,7 @@
           <view class="date">{{item.messageDate}}</view>
         </view>
         <view class="list-top-delete">
-          <image src="../image/delete.png" class="delete-img"></image>
+          <image src="../image/delete.png" class="delete-img" bindtap="deletemyLY" data-lyid="{{item.id}}"></image>
         </view>
       </view>
       <view class="content-list-content zongxiang">
@@ -59,7 +59,7 @@
           <view class="date">{{item.messageDate}}</view>
         </view>
         <view class="list-top-delete">
-          <image src="../image/delete.png" class="delete-img"></image>
+          <image src="../image/delete.png" class="delete-img" bindtap="deletemyLY" data-lyid="{{item.id}}"></image>
         </view>
       </view>
       <view class="content-list-content zongxiang">

@@ -82,7 +82,7 @@ Page({
   mymessageList() {
     var that = this
     var data={
-      wxCaseId:that.Lyid
+      wxCaseId2:that.Lyid
     }
     qingqiu.get("pcQueryMessagePageByUserID", data, function(re) {
       console.log(re)
@@ -102,10 +102,9 @@ Page({
 givemymessageList() {
   var that = this
   var data={
-    wxCaseId2:that.Lyid
+    wxCaseId:that.Lyid
   }
   qingqiu.get("pcQueryMessagePageByUserID", data, function(re) {
-    console.log(re)
   if (re.success == true) {
     if (re.result != null) {
       that.formymessageList = re.result.records
@@ -117,5 +116,22 @@ givemymessageList() {
     }
   } 
 })
+},
+// 删除我的留言
+deletemyLY: function(e) {
+  var mylyid =e.currentTarget.dataset.Lyid;
+  var data={
+    wxCaseId:mylyid
+  }
+  qingqiu.get("deleteMessage", data, function(re) {
+    debugger
+    if (re.success == true) {
+      if (re.result ==1) {
+        qingqiu.tk('删除成功！')
+      } else {
+        qingqiu.tk('删除失败！')
+      }
+    } 
+  })
 }
 })
