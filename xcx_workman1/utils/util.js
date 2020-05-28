@@ -56,9 +56,26 @@ const FormatName = function (str) {
   }
 }
 
+const FormatPhone = function (str) {
+    var temp = "";
+    for (var i=0; i<str.length; i++)
+    {
+      if (i<3||i>8)
+      {
+        temp = temp + str.substring(i,i+1);
+      }
+      else
+      {
+        temp = temp + "*";
+      }
+    }
+    return temp;
+}
+
 module.exports = {
   formatTime: formatTime,
   ages:Ages,
   formatName:FormatName,
-  subName:SubName
+  subName:SubName,
+  formatPhone:FormatPhone
 }
