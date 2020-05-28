@@ -43,7 +43,6 @@ Page({
     qingqiu.get("queryWxUser",data,function(re){
       if(re.success){
         if(re.result != null){
-          console.log(re.result)
             if(re.result.starClass == 0){
               re.result.starClass = ""
             }else if(re.result.starClass == 1){
@@ -66,7 +65,6 @@ Page({
           })
         }
       }
-      console.log(re)
     })
   },
   onShow() {
@@ -138,7 +136,6 @@ Page({
   //用户授权
   bindGetUserInfo(e) {
     var that = this
-    console.log(e.detail.userInfo)
     if (e.detail.errMsg == "getUserInfo:fail auth deny") {
       wx.showToast({
         title: '未授权',
@@ -166,8 +163,6 @@ Page({
               })
             }
           }, 'post')
-          console.log(res.userInfo)
-
         }
       })
     }
@@ -223,7 +218,7 @@ Page({
   // 跳转到我的雇佣页面
   myEmploy: function() {
     wx.navigateTo({
-      url: '../myEmploy/myEmploy',
+      url: '../myEmploy/myEmploy?id=' + this.data.wxUser.id,
     })
   },
 
