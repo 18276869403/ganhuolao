@@ -91,7 +91,7 @@
     <view class="content-item-text hengxiang">
       <view class="content-item-text-block" bindtap="myEmploy">我的雇佣</view>
       <view class="content-item-text-block" bindtap="myNeeds">我的需求</view>
-      <view class="content-item-text-block" bindtap="showwork">我的晒晒</view>
+      <view class="content-item-text-block">我的晒晒</view>
       <view class="content-item-text-block" bindtap="myMessage" data-Lyid="{{wxUser}}">我的留言</view>
     </view>
   </view>
@@ -108,7 +108,7 @@
         <image src="../image/enter.png" class="enter-img"></image>
       </view>
     </view>
-    <view class="bottom-list hengxiang" bindtap="myGoods">
+    <view class="bottom-list hengxiang" bindtap="myGoods" data-spid="{{wxUser}}">
       <view class="bottom-list-left">
         <image src="../image/wodeshangpin.png" class="ziliao-img"></image>
       </view>
@@ -119,7 +119,7 @@
         <image src="../image/enter.png" class="enter-img"></image>
       </view>
     </view>
-    <view class="bottom-list hengxiang" bindtap="myRecommend">
+    <view class="bottom-list hengxiang" bindtap="myRecommend" data-spid="{{wxUser}}">
       <view class="bottom-list-left">
         <image src="../image/wodetuijian.png" class="ziliao-img"></image>
       </view>

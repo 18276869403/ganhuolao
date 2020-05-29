@@ -237,13 +237,13 @@ Page({
   },
   // 跳转到我的需求页面
   myNeeds: function() {
-    wx.navigateTo({
-      url: '../myNeeds/myNeeds',
+    wx.switchTab({
+      url: '../need/need',
     })
   },
   // 跳转到我的晒活页面
   showwork: function() {
-    wx.navigateTo({
+    wx.switchTab({
       url: '../showwork/showwork',
     })
   },
@@ -255,15 +255,17 @@ Page({
     })
   },
   // 跳转到我的商品页面
-  myGoods: function () {
+  myGoods: function (e) {
+    var spid = JSON.stringify(this.data.wxUser.id)
     wx.navigateTo({
-      url: '../myGoods/myGoods',
+      url: '../myGoods/myGoods?obj='+spid,
     })
   },
   // 跳转到我的推荐页面
-  myRecommend: function () {
+  myRecommend: function (e) {
+    var myid = JSON.stringify(this.data.wxUser.id)
     wx.navigateTo({
-      url: '../myRecommend/myRecommend',
+      url: '../myRecommend/myRecommend?obj='+myid,
     })
   },
   phonecall: function () {
