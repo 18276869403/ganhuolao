@@ -29,19 +29,21 @@
   <view class="showImg hengxiang">
     <view class="showImg-text">商品轮播图（二张）</view>
     <view class="hengxiang"></view>
-    <view class="showImg-item">
+    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="1">
       <!-- 无数据 上传图片样式 -->
-      <image src="../image/shangchuan.png" class="show-img"></image>
+      <image src="../image/shangchuan.png" class="show-img" wx:if="{{picIurl==''}}"></image>
+      <image src="{{picIurl}}" class="show-img" wx:if="{{picIurl!=''}}"></image>
       <!-- 轮播图展示第一张 -->
       <!-- <image src="../image/top.png" class="show-img"></image> -->
       <!-- 有数据展示样式 -->
       <!-- 删除图 -->
       <!-- <image src="../image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
     </view>
-    <view class="showImg-item">
+    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="2">
 
       <!-- 无数据 上传图片样式 -->
-      <image src="../image/shangchuan.png" class="show-img"></image>
+      <image src="../image/shangchuan.png" class="show-img" wx:if="{{picIurltwo==''}}"></image>
+      <image src="{{picIurltwo}}" class="show-img" wx:if="{{picIurltwo!=''}}"></image>
       <!-- 轮播图展示第二张 -->
       <!-- <image src="../image/top.png" class="show-img"></image> -->
       <!-- 有数据展示样式 -->
@@ -54,19 +56,21 @@
   <view class="showImg hengxiang">
     <view class="showImg-text">商品详情展示图（二张长版图）</view>
     <view class="hengxiang"></view>
-    <view class="showImg-item">
+    <view class="showImg-item"  bindtap='upimg' data-number="0" data-type="3">
       <!-- 无数据 上传图片样式 -->
-      <image src="../image/shangchuan.png" class="show-img"></image>
+      <image src="../image/shangchuan.png" class="show-img" wx:if="{{picDetail==''}}"></image>
+      <image src="{{picDetail}}" class="show-img" wx:if="{{picDetail!=''}}"></image>
       <!-- 轮播图展示第一张 -->
       <!-- <image src="../image/top.png" class="show-img"></image> -->
       <!-- 有数据展示样式 -->
       <!-- 删除图 -->
       <!-- <image src="../image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
     </view>
-    <view class="showImg-item">
+    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="4">
 
       <!-- 无数据 上传图片样式 -->
-      <image src="../image/shangchuan.png" class="show-img"></image>
+      <image src="../image/shangchuan.png" class="show-img" wx:if="{{picDetailtwo==''}}"></image>
+      <image src="{{picDetailtwo}}" class="show-img" wx:if="{{picDetailtwo!=''}}"></image>
       <!-- 轮播图展示第二张 -->
       <!-- <image src="../image/top.png" class="show-img"></image> -->
       <!-- 有数据展示样式 -->
@@ -80,3 +84,5 @@
     <view class="bottom-right" bindtap="lijifabu">保存</view>
   </view>
 </view>
+
+<canvas canvas-id="firstCanvas" style="width: {{cw}}px; height: {{ch}}px;position:fixed;left:100%;"></canvas>
