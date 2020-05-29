@@ -93,7 +93,7 @@
       <view class="list zongxiang" wx:for="{{xuqiulist}}" wx:for-index="index" wx:key="index">
         <view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
           <view class="need-list-left">
-            <image src="{{item.backup1}}" class="need-content-img"></image>
+            <image src="{{viewUrl}}{{item.backup1[0]}}" class="need-content-img"></image>
           </view>
           <view class="need-list-right zongxiang">
             <view class="content-list zongxiang">
