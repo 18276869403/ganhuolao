@@ -11,7 +11,12 @@ Page({
     showList:[],
     id:'',
     wxUserId:'',
-    istrue:0
+    istrue:0,
+    flag: true,
+    index: 0,
+    day: 0,
+    array: ['天/元', '月/元', '季/元', '年/元'],
+    tian: ['天', '月', '季', '年']
   },
 
   onLoad: function (options) {
@@ -60,8 +65,33 @@ Page({
       } 
     })
   },
-  // 雇佣
-  guyongta(){
+  bindPickerChange: function(e) {
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
+  },
+  bindPickerDay: function(e) {
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      day: e.detail.value
+    })
+  },
+  bintapDetails: function() {
+    // console.log(1)
+    this.setData({
+      flag: false
+    })
+  },
+  bindClose: function() {
+    this.setData({
+      flag: true
+    })
+  },
+  bindCon: function() {
+    this.setData({
+      flag: true
+    })
   },
   phonecall:function(e){
     var phone = e.currentTarget.dataset.phone
