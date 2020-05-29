@@ -221,7 +221,6 @@ Page({
       url: '../myEmploy/myEmploy?id=' + this.data.wxUser.id,
     })
   },
-
   // 申请成为工人或者商家
   applyBusiness: function() {
     wx.navigateTo({

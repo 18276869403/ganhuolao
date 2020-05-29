@@ -154,7 +154,6 @@
     </view>
   </view>
 </view>
-
 <!-- 遮罩层显示 （授权） -->
 <view>
   <view class="commodity_screen1" wx:if="{{showModalStatus1}}"></view>
