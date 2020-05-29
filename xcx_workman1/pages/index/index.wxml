@@ -52,10 +52,10 @@
     <!-- 四大板块 -->
     <view class="sort zongxiang">
       <view class="sort-top hengxiang">
-        <view class="sortImg" bindtap="applyBusiness">
+        <view class="sortImg" bindtap="applyBusiness" data-typeid="2">
           <image src="../image/gongrenruzhu.png" class="sort-img"></image>
         </view>
-        <view class="sortImg" bindtap="applyBusiness">
+        <view class="sortImg" bindtap="applyBusiness" data-typeid="1">
           <image src="../image/shangjiaruzhu.png" class="sort-img"></image>
         </view>
         <view class="sortImg" bindtap="activity">
@@ -66,13 +66,13 @@
         </view>
       </view>
       <view class="sort-bottom hengxiang">
-        <view class="sort-text" bindtap="applyBusiness">
+        <view class="sort-text">
           工人入驻
         </view>
-        <view class="sort-text" bindtap="applyBusiness">
+        <view class="sort-text">
           商家入驻
         </view>
-        <view class="sort-text" bindtap="activity">
+        <view class="sort-text">
           推荐有礼
         </view>
         <view class="sort-text">
@@ -93,7 +93,7 @@
       <view class="list zongxiang" wx:for="{{xuqiulist}}" wx:for-index="index" wx:key="index">
         <view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
           <view class="need-list-left">
-            <image src="{{viewUrl}}{{item.backup1[0]}}" class="need-content-img"></image>
+            <image src="{{item.backup1}}" class="need-content-img"></image>
           </view>
           <view class="need-list-right zongxiang">
             <view class="content-list zongxiang">

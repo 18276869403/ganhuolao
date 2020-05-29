@@ -9,6 +9,8 @@ const util = require('../../utils/util.js')
 Page({
   data: {
     viewUrl:api.viewUrl,
+    gongren:'2',
+    shangjia:'1',
     msgList: [],
     bannerImg: [],
     needsList: [],
@@ -40,9 +42,12 @@ Page({
       if (re.success == true) {
         if (re.result != null) {
           that.xuqiulist = re.result.records
+          console.log(re.result.records)
           for(var i= 0 ; i < that.xuqiulist.length; i++){
             that.xuqiulist[i].publishTime = re.result.records[i].publishTime.split(" ")[0]
-            that.xuqiulist[i].backup1 = re.result.records[i].backup1.split(',')
+            if(that.xuqiulist[i].backup1 != null&& that.xuqiulist[i].backup1.length > 0){
+              that.xuqiulist[i].backup1 = re.result.records[i].backup1.split(',')
+            }
           }  
           console.log( re.result.records)
           that.setData ({
@@ -84,6 +89,7 @@ Page({
             obj.oneClassName = obj.oneClassName.replace(/,/, "|")
             obj.twoClassName = obj.twoClassName.replace(/,/, "|")
           }
+          console.log(re.result.records)
           that.setData({
             workerList:re.result.records
           })
@@ -172,9 +178,10 @@ Page({
   },
  
   // 跳转到工人入驻页面
-  applyBusiness: function() {
+  applyBusiness: function(e) {
+    var obj = e.currentTarget.dataset.typeid
     wx.navigateTo({
-      url: '../applyBusiness/applyBusiness',
+      url: '../applyBusiness/applyBusiness?typeid=' + obj,
     })
   },
   // 跳转到推荐有礼页面
@@ -231,7 +238,8 @@ Page({
     var that = this
     var data={
       pages: 1,
-      size: 10
+      size: 10,
+      backup1:1
     }
     qingqiu.get("tjsp", data, function(re) {
       if (re.success == true) {
