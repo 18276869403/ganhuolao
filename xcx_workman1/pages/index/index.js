@@ -211,6 +211,13 @@ Page({
     })
 
   },
+  // 跳转到推荐商品更多页面
+  goodList: function() {
+    wx.navigateTo({
+      url: '../goodsList/goodsList',
+    })
+
+  },
   // 跳转到工人详情页面
   workerDetails: function(e) {
     var obj =e.currentTarget.dataset.vals;
