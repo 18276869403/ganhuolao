@@ -58,7 +58,9 @@ Page({
           that.needsList = re.result.records
           for(var i= 0 ; i < that.needsList.length; i++){
             re.result.records[i].publishTime = re.result.records[i].publishTime.split(' ')[0]
-            re.result.records[i].backup1 = re.result.records[i].backup1.split(',')
+            if(re.result.records[i].backup1!= null&&re.result.records[i].backup1.length>0){
+              re.result.records[i].backup1 = re.result.records[i].backup1.split(',')
+            }
           }
           that.setData ({
             needsList : re.result.records
