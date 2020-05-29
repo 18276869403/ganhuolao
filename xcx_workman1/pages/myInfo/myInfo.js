@@ -39,11 +39,9 @@ Page({
     }
     qingqiu.get("editWxUser",data,function(re){
       if (re.success == true) {
-        if (re.result != null) {
-          wx.navigateTo({
-            url: '../mine/mine'
-          })
-        }
+        wx.navigateTo({
+          url: '../mine/mine'
+        })
       } 
     },'put')
   },

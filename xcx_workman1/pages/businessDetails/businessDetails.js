@@ -63,6 +63,13 @@ Page({
     this.getGoodsList(obj.id)
     this.getGoodsdata(obj.id)
   },
+  phonecall:function(e){
+    var phone = e.currentTarget.dataset.phone
+    wx.makePhoneCall({
+      phoneNumber: phone,
+    })
+  },
+  // 获取店家晒晒
   getGoodsdata:function(id){
     var that = this
     var data = {
@@ -98,7 +105,8 @@ Page({
       var data={
         pages: 1,
         size: 10,
-        userId:goodsid
+        userId:goodsid,
+        backup1:1
       }
       qingqiu.get("tjsp", data, function(re) {
         if (re.success == true) {

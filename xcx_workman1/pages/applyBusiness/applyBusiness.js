@@ -11,10 +11,13 @@ Page({
    */
   data: {
     viewUrl:api.viewUrl,
+    fenleitype1:{yjid:'',erjiid:'',typestate:false},
+    fenleitype2:{yjid:'',erjiid:'',typestate:false},
     id: 0,
     needsTypeid: 1,
     select: 'circle',
     hasMask: false,
+    hasMask1:false,
     pirIurl1:'',
     picZz1:'',
     picPerson3:'',
@@ -39,7 +42,9 @@ Page({
     show: false,
     oneclassid:'',
     twoclassid:'',
-    fenClass:'请选择业务分类',
+    fenClass1:'请选择业务分类',
+    fenClass2:'',
+    tempClass:'',
     gongzhong: [{
       id: 1,
       oneclass: '',
@@ -71,6 +76,9 @@ Page({
         value: '女'
       },
     ],
+    cw:'',    // 图片压缩
+    ch:'',
+    uploadpic:[],  // 图片容器
     litype: "2",
     navLeftItems: [],
     navRightItems: [],
@@ -185,6 +193,12 @@ Page({
     } else {
       // this.typefenleiyj()
       // this.cityyiji()
+    }
+    if(options.typeid != ""){
+      this.onloadchangeType(options.typeid)
+      this.setData({
+        needsTypeid:options.typeid
+      })
     }
   },
   onUser: function() {
@@ -355,6 +369,28 @@ Page({
       workerskill: e.detail.value
     })
   },
+  // 默认加载获取分类
+  onloadchangeType: function(e) {
+    var that = this;
+    var id = e
+    var litype = 0
+    if (id == 1) {
+      litype = 2;
+    } else {
+      litype = 1;
+    }
+    that.setData({
+      needsTypeid: id,
+      litype: litype,
+      yijiname: '',
+      secondId: 0,
+      erjiworkname: '',
+      typeyj: 0
+    })
+    this.typefenleiyj()
+  },
+
+  // 选项卡点击事件获取分类
   changeType: function(e) {
     var that = this;
     var id = e.currentTarget.dataset.id
@@ -432,8 +468,8 @@ Page({
         })
         return
       }
-      
-      var s = qingqiu.yanzheng(that.data.areaId + ",请选择商铺区域|" + that.data.secondId + ",请现在业务分类|" + that.data.needsname + ",请输入商品名称|" + that.data.linkman + ",请输入联系人|" + that.data.phone + ",请输入联系电话|" + that.data.workaddress + ",请输入商铺详细地址|" + that.data.needscontent + ",请输入商铺介绍|" + that.data.picIurl + ",请上传门头照")
+      // that.data.areaId + ",请选择商铺区域|" + 
+      var s = qingqiu.yanzheng(that.data.secondId + ",请现在业务分类|" + that.data.needsname + ",请输入商品名称|" + that.data.linkman + ",请输入联系人|" + that.data.phone + ",请输入联系电话|" + that.data.workaddress + ",请输入商铺详细地址|" + that.data.needscontent + ",请输入商铺介绍|" + that.data.picIurl + ",请上传门头照")
       // + that.data.picZz + ",请上传营业执照"
       if (s != 0) {
         wx.showToast({
@@ -445,8 +481,8 @@ Page({
       }
       data = {
         id: app.globalData.wxid,
-        oneClassId: that.data.typeyj,
-        twoClassId: that.data.secondId,
+        oneClassName: that.data.typeyj,
+        twoClassName: that.data.secondId,
         oneAreaId: that.data.typeid,
         twoAreaId: that.data.areaId,
         shopName: that.data.needsname,
@@ -468,7 +504,8 @@ Page({
         })
         return
       }
-      var s = qingqiu.yanzheng(that.data.areaId + ",请选择区域|" + that.data.twoClassId + ",请选择工种分类|" + that.data.workername + ",请输入工人姓名|" + that.data.date + ",请选择出生年月日|" + that.data.worktime + ",请输入从业时长|" + that.data.workerphone + ",请输入联系电话|" + that.data.workerskill + ",请输入技能介绍|" + that.data.picPerson1 + ",请上传身份证正面照|" + that.data.picPerson1 + ",请上传身份证反面照")
+      // that.data.areaId + ",请选择区域|"
+      var s = qingqiu.yanzheng(that.data.twoClassId + ",请选择工种分类|" + that.data.workername + ",请输入工人姓名|" + that.data.date + ",请选择出生年月日|" + that.data.worktime + ",请输入从业时长|" + that.data.workerphone + ",请输入联系电话|" + that.data.workerskill + ",请输入技能介绍|" + that.data.picPerson1 + ",请上传身份证正面照|" + that.data.picPerson1 + ",请上传身份证反面照")
       // + that.data.workeraddress + ",请输入详细地址|" + that.data.picPerson1 + ",请上传身份证正面|" + that.data.picPerson2 + ",请上传身份证反面"
       if (s != 0) {
         wx.showToast({
@@ -478,10 +515,9 @@ Page({
         })
         return
       }
-      debugger
       data = {
         id: app.globalData.wxid,
-        oneClassName: that.data.oneclassid,
+        oneClassName: that.data.fenleitype1.yjid + "," + that.data.fenleitype2.yjid,
         twoClassName: that.data.twoclassid,
         oneAreaId: that.data.typeid,
         twoAreaId: that.data.areaId,
@@ -498,24 +534,22 @@ Page({
         wxState: 1
       }
     }
-    console.log(data)
     qingqiu.get("wxUserAdd", data, function(re) {
-      debugger
       if (re.data.success == true) {
-        // wx.login({
-        //   success: function(res) {
-        //     qingqiu.get("getKeyInfo", {
-        //       code: res.code
-        //     }, function(re) {
-        //       app.globalData.wxid = re.data.result.wxUser.id
-        //       app.globalData.openid = re.data.result.openId
-        //       app.globalData.wxState = re.data.result.wxUser.wxState
-        //       wx.switchTab({
-        //         url: '../mine/mine',
-        //       })
-        //     }, "POST")
-        //   }
-        // })
+        wx.login({
+          success: function(res) {
+            qingqiu.get("getKeyInfo", {
+              code: res.code
+            }, function(re) {
+              app.globalData.wxid = re.data.result.wxUser.id
+              app.globalData.openid = re.data.result.openId
+              app.globalData.wxState = re.data.result.wxUser.wxState
+              wx.switchTab({
+                url: '../mine/mine',
+              })
+            }, "POST")
+          }
+        })
       } else {
         wx.showToast({
           title: re.data.message,
@@ -534,44 +568,107 @@ Page({
       sourceType: ['album', 'camera'],
       success(res) {
         const tempFilePaths = res.tempFilePaths
-        wx.uploadFile({
-          url: api.uploadurl, // 接口地址
-          filePath: tempFilePaths[0],
-          header: {
-            "Content-Type": "multipart/form-data"
-          },
-          formData: {
-            method: 'POST' //请求方式
-          },
-          name: 'file',
-          success(res) {
-            console.log(res)
-            // var sj = "files/20191220/微信图片_201912191116351_1576820870302.png"
-            var r = res.data
-            var jj = JSON.parse(r);
-            var sj = that.data.viewUrl + jj.message
-            // res.data.data = ""
-            if (type == '1') {
-              that.setData({
-                picIurl: sj,
-                pirIurl1:jj.message
-              })
-            } else if (type == '2') {
-              that.setData({
-                picZz: sj,
-                picZz1:jj.message
-              })
-            } else if (type == '3') {
-              that.setData({
-                picPerson1: sj,
-                picPerson3:jj.message
-              })
-            } else if (type == '4') {
-              that.setData({
-                picPerson2: sj,
-                picPerson4:jj.message
-              })
+        wx.getImageInfo({
+          src: res.tempFilePaths[0],
+          success(res){
+            // console.log('获得原始图片大小',res.width)
+            //console.log(res.height)
+            var originHeight = res.height
+            var originWidth = res.width
+            console.log(originWidth)     
+            //压缩比例
+            // 最大尺寸限制
+            var maxWidth = 1200
+            var maxHeight = 600
+            // 目标尺寸
+            var targetWidth = originWidth
+            var targetHeight = originHeight
+            //等比例压缩，如果宽度大于高度，则宽度优先，否则高度优先
+            if (originWidth > maxWidth || originHeight > maxHeight) {
+              if (originWidth / originHeight > maxWidth / maxHeight) {
+                // 要求宽度*(原生图片比例)=新图片尺寸
+                targetWidth = maxWidth;
+                targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+              } else {
+                targetHeight = maxHeight;
+                targetWidth = Math.round(maxHeight * (originWidth / originHeight));
+              }
             }
+              //尝试压缩文件，创建 canvas 
+            var ctx = wx.createCanvasContext('firstCanvas');
+            ctx.clearRect(0, 0, targetWidth, targetHeight);
+            ctx.drawImage(tempFilePaths[0], 0, 0, targetWidth, targetHeight);
+            ctx.draw();
+            //更新canvas大小
+            that.setData({
+              cw: targetWidth,
+              ch: targetHeight
+            })
+            //保存图片
+            setTimeout(function() {
+              wx.canvasToTempFilePath({
+                canvasId: 'firstCanvas',
+                success: (res) => {
+                  //写入图片数组
+                  var uploadpic = "uploadPic[" + index + "]";
+                  //
+                  that.setData({
+                    [uploadpic]: res.tempFilePath
+                  });
+                  uploadFile = res.tempFilePath;
+                  //保存到相册
+                  // wx.saveImageToPhotosAlbum({
+                  //   filePath: res.tempFilePath,
+                  //   success: (res) => {
+                  //     console.log(res)
+                  //   },
+                  //   fail: (err) => {
+                  //     console.error(err)
+                  //   }
+                  // })
+                  wx.uploadFile({
+                    url: api.uploadurl, // 接口地址
+                    filePath: uploadFile,
+                    header: {
+                      "Content-Type": "multipart/form-data"
+                    },
+                    formData: {
+                      method: 'POST' //请求方式
+                    },
+                    name: 'file',
+                    success(res) {
+                      console.log(res)
+                      // var sj = "files/20191220/微信图片_201912191116351_1576820870302.png"
+                      var r = res.data
+                      var jj = JSON.parse(r);
+                      var sj = that.data.viewUrl + jj.message
+                      // res.data.data = ""
+                      if (type == '1') {
+                        that.setData({
+                          picIurl: sj,
+                          pirIurl1:jj.message
+                        })
+                      } else if (type == '2') {
+                        that.setData({
+                          picZz: sj,
+                          picZz1:jj.message
+                        })
+                      } else if (type == '3') {
+                        that.setData({
+                          picPerson1: sj,
+                          picPerson3:jj.message
+                        })
+                      } else if (type == '4') {
+                        that.setData({
+                          picPerson2: sj,
+                          picPerson4:jj.message
+                        })
+                      }
+                    }
+                  })
+                }
+              })
+            })
           }
         })
       }
@@ -662,35 +759,9 @@ Page({
               }
             })
           }
-          console.log(that.data.gongzhong)
-        //   for(let obj of re.result.records){
-        //     obj.picIurl = that.data.viewUrl + obj.picIurl
-        //     obj.oneClassName = obj.oneClassName.replace(/,/, "|")
-        //     obj.twoClassName = obj.twoClassName.replace(/,/, "|")
-        //   }
-        //   that.setData({
-        //     storeList:re.result.records
-        //   })
         } 
       } 
     })
-  // }
-    // qingqiu.get("oneClassService", {}, function(re) {
-    //   for (var i = 0; i < re.data.result.length; i++) {
-    //     if (re.data.result[i].backup1 == that.data.litype) {
-
-    //       that.setData({
-    //         typeyj: re.data.result[i].id,
-    //         yijiname1: re.data.result[i].className
-    //       })
-    //       break
-    //     }
-    //   }
-    //   that.setData({
-    //     typeyjlist: re.data.result
-    //   })
-    //   that.typefenleiej()
-    // })
   },
   typefenleiej: function() {
     var data = {
@@ -961,18 +1032,20 @@ Page({
     this.animation = animation
     animation.opacity(0).rotateX(-100).step();
     this.setData({
-      animationData: animation.export(),
+      animationData3: animation.export(),
       showModalStatus2: true
     })
     setTimeout(function() {
       animation.opacity(1).rotateX(0).step();
       this.setData({
-        animationData: animation.export()
+        animationData3: animation.export()
       })
     }.bind(this), 200)
   },
   //选择工种页面关闭
-  hideModal2: function() {
+  hideModal2: function(e) {
+    var flag = e.currentTarget.dataset.return
+    this.writeclass(flag)
     var animation = wx.createAnimation({
       duration: 200,
       timingFunction: "linear",
@@ -993,17 +1066,172 @@ Page({
       })
     }.bind(this), 200)
   },
+
+  // 业务分类
+  showModallist: function() {
+    this.setData({
+      hasMask: true
+    })
+    var animation = wx.createAnimation({
+      duration: 300,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.opacity(0).rotateX(-100).step();
+    this.setData({
+      animationData: animation.export(),
+      showModalStatuslist: true
+    })
+    setTimeout(function() {
+      animation.opacity(1).rotateX(0).step();
+      this.setData({
+        animationData: animation.export()
+      })
+    }.bind(this), 200)
+  },
+  //选择业务页面关闭
+  hideModallist: function(e) {
+    var flag = e.currentTarget.dataset.return
+    this.writeclass(flag)
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    // flag = 0;
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData2: animation.export(),
+      hasMask: false
+    })
+    setTimeout(function() {
+      animation.translateY(0).step()
+      this.setData({
+        animationData2: animation.export(),
+        showModalStatuslist: false
+      })
+    }.bind(this), 200)
+  },
   // 改变二级分类
   changetwoclass: function (e) {
     var that = this;
-    var id = e.currentTarget.dataset.id
-    var yjid = e.currentTarget.dataset.yjid
-    var yijiname = e.currentTarget.dataset.yijiname
-    var erjiname = e.currentTarget.dataset.erjiname
-    that.setData({
-      twoclassid: id,
-      oneclassid: yjid,
-      fenClass: yijiname + ' | '+ erjiname
-    })
+    var typeid = "fenleitype1.yjid"
+    var typeerji = "fenleitype1.erjiid"
+    var typestate = "fenleitype1.typestate"
+    var typeid1 = "fenleitype2.yjid"
+    var typeerji1 = "fenleitype2.erjiid"
+    var typestate1 = "fenleitype2.typestate"
+    if(that.data.needsTypeid == 1){
+      var id = e.currentTarget.dataset.id
+      var yjid = e.currentTarget.dataset.yjid
+      var yijiname = e.currentTarget.dataset.yijiname
+      var erjiname = e.currentTarget.dataset.erjiname
+      if(that.data.fenleitype1.typestate == true && that.data.fenleitype1.erjiid == id && that.data.fenleitype1.yjid == yjid){
+        that.setData({
+          [typeid]:'',
+          [typeerji]:'',
+          [typestate]:false
+        })
+        return
+      }else if(that.data.fenleitype2.typestate == true && that.data.fenleitype2.erjiid == id && that.data.fenleitype2.yjid == yjid){
+        that.setData({
+          [typeid1]:'',
+          [typeerji1]:'',
+          [typestate1]:false
+        })
+        return
+      }
+      if(that.data.fenleitype1.typestate == false){
+        that.setData({
+          [typeid]:yjid,
+          [typeerji]:id,
+          [typestate]:true,
+          yijiname:yijiname,
+          fenClass1: yijiname + ' | '+ erjiname
+        })
+      }else if(that.data.fenleitype2.typestate == false){
+        var typeid = "fenleitype2.yjid"
+        var typeerji = "fenleitype2.erjiid"
+        var typestate = "fenleitype2.typestate"
+        that.setData({
+          [typeid1]:yjid,
+          [typeerji1]:id,
+          [typestate1]:true,
+          yijiname:yijiname,
+          fenClass2: yijiname + ' | '+ erjiname
+        })
+      }else{
+        wx.showToast({
+          title: '只能同时选择两种',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }
+    }else{
+      var id = e.currentTarget.dataset.id
+      var yjid = e.currentTarget.dataset.yjid
+      var yijiname = e.currentTarget.dataset.yijiname
+      var erjiname = e.currentTarget.dataset.erjiname
+      if(that.data.fenleitype1.typestate == true && that.data.fenleitype1.erjiid == id && that.data.fenleitype1.yjid == yjid){
+        that.setData({
+          [typeid]:'',
+          [typeerji]:'',
+          [typestate]:false
+        })
+        return
+      }else if(that.data.fenleitype2.typestate == true && that.data.fenleitype2.erjiid == id && that.data.fenleitype2.yjid == yjid){
+        that.setData({
+          [typeid1]:'',
+          [typeerji1]:'',
+          [typestate1]:false
+        })
+        return
+      }
+      if(that.data.fenleitype1.typestate == false){
+        var typeid = "fenleitype1.yjid"
+        var typeerji = "fenleitype1.erjiid"
+        var typestate = "fenleitype1.typestate"
+        that.setData({
+          [typeid]:yjid,
+          [typeerji]:id,
+          [typestate]:true,
+          yijiname:yijiname,
+          fenClass1: yijiname + ' | '+ erjiname
+        })
+      }else if(that.data.fenleitype2.typestate == false){
+        var typeid = "fenleitype2.yjid"
+        var typeerji = "fenleitype2.erjiid"
+        var typestate = "fenleitype2.typestate"
+        that.setData({
+          [typeid]:yjid,
+          [typeerji]:id,
+          [typestate]:true,
+          yijiname:yijiname,
+          fenClass2:yijiname + ' | '+ erjiname
+        })
+        console.log(that.data.fenClass2)
+      }else{
+        wx.showToast({
+          title: '只能同时选择两种',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }
+    }
   },
+  writeclass:function(type){
+    if(type == "false"){
+      this.setData({
+        yijiname:''
+      })
+    }else{
+      this.setData({
+        tempClass:this.data.fenClass1 + this.data.fenClass2
+      })
+    }
+  }
 })

@@ -12,21 +12,21 @@
   </view>
 
   <view class="content zongxiang" wx:if="{{needsTypeid==1}}">
-    <view class="content-item hengxiang" bindtap="showTypeModal2" wx:if="{{id!=0}}">
+    <view class="content-item hengxiang" bindtap="showModallist" wx:if="{{id==0}}">
       <view class="content-title">业务分类</view>
       <view class="content-text" wx:if="{{yijiname==''}}">请选择业务分类</view>
-      <view class='content-text2' wx:if="{{yijiname!=''}}">{{yijiname}} - {{erjiworkname}}</view>
-      <view class="enter">
+      <view class='content-text2' wx:if="{{yijiname!=''}}">{{tempClass}}</view>
+      <!-- <view class="enter">
         <image src="../image/enter.png" class="enter-img"></image>
-      </view>
+      </view> -->
     </view>
-    <view class="content-item hengxiang" wx:if="{{id==0}}">
+    <view class="content-item hengxiang" wx:if="{{id!=0}}">
       <view class="content-title">业务分类</view>
       <view class="content-text" wx:if="{{yijiname==''}}">请选择业务分类</view>
-      <view class='content-text2' wx:if="{{yijiname!=''}}">{{yijiname}} - {{erjiworkname}}</view>
-      <view class="enter">
+      <view class='content-text2' wx:if="{{yijiname!=''}}">{{tempClass}}</view>
+      <!-- <view class="enter">
         <image src="../image/enter.png" class="enter-img"></image>
-      </view>
+      </view> -->
     </view>
     <view class="content-item hengxiang">
       <view class="content-title">商铺名称</view>
@@ -81,16 +81,16 @@
   <view class="content zongxiang" wx:if="{{needsTypeid==2}}">
     <view class="content-item hengxiang" bindtap="showModal2" wx:if="{{id==0}}">
       <view class="content-title-gongzhong">工种分类(可选2个)</view>
-      <view class="content-text-gongzhong" wx:if="{{yijiname==''}}">{{fenClass}}</view>
-      <view class='content-text1' wx:if="{{yijiname!=''}}">{{yijiname}} - {{erjiworkname}}</view>
+      <view class="content-text-gongzhong" wx:if="{{yijiname==''}}">请选择工种</view>
+      <view class='content-text1' wx:if="{{yijiname!=''}}">{{tempClass}}</view>
       <!-- <view class="enter">
         <image src="../image/enter.png" class="enter-img"></image>
       </view> -->
     </view>
     <view class="content-item hengxiang" wx:if="{{id!=0}}">
       <view class="content-title-gongzhong">工种分类(可选2个)</view>
-      <view class="content-text-gongzhong" wx:if="{{yijiname==''}}">{{fenClass}}</view>
-      <view class='content-text1' wx:if="{{yijiname!=''}}">{{yijiname}} - {{erjiworkname}}</view>
+      <view class="content-text-gongzhong" wx:if="{{yijiname==''}}">请选择工种</view>
+      <view class='content-text1' wx:if="{{yijiname!=''}}">{{tempClass}}</view>
       <!-- <view class="enter">
         <image src="../image/enter.png" class="enter-img"></image>
       </view> -->
@@ -117,7 +117,7 @@
     </view>
     <view class="content-item hengxiang">
       <view class="content-title">经验</view>
-      <input type="text" placeholder="请输入从业时长(多少年)" class="shurukuang" placeholder-class="placeholder" value='{{worktime}}' name="worktime" bindinput='worktimeinput'></input>
+      <input type="number" placeholder="请输入从业时长(多少年)" class="shurukuang" placeholder-class="placeholder" value='{{worktime}}' name="worktime" bindinput='worktimeinput'></input>
     </view>
     <view class="content-item hengxiang" bindtap="showModal">
       <view class="content-title">所在区域</view>
@@ -131,13 +131,13 @@
       <input type="text" placeholder="请输入详细地址" class="shurukuang" placeholder-class="placeholder" value='{{workeraddress}}' name="workeraddress" bindinput='workeraddressinput'></input>
     </view> -->
     <view class="content-item hengxiang">
-      <view class="content-title">联系电话</view>
-      <input type="number" placeholder="请输入联系电话" class="shurukuang" placeholder-class="placeholder" value='{{workerphone}}' name="workerphone" bindinput='workerphoneinput'></input>
+      <view class="content-title">手机号码</view>
+      <input type="number" placeholder="请输入手机号码" class="shurukuang" placeholder-class="placeholder" value='{{workerphone}}' name="workerphone" bindinput='workerphoneinput'></input>
     </view>
 
 
     <view class="content-item-textarea" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}">
-      <textarea class="textarea" placeholder="请输入你的技能介绍（例如你会做什么）" placeholder-class="placeholder" maxlength='-1' value='{{workerskill}}' name="workerskill" bindinput='workerskillinput'></textarea>
+      <textarea class="textarea" placeholder-class="placeholder" maxlength='-1' value='{{workerskill}}' name="workerskill" bindinput='workerskillinput'></textarea>
     </view>
 
     <view class="hengxiang fabu-list1">
@@ -190,7 +190,7 @@
 </view>
 
 <!-- 遮罩层显示 商家业务分类 -->
-<view>
+<!-- <view>
   <view class="commodity_screen6" wx:if="{{showModalStatus6}}" bindtap='hideModal6'></view>
   <view animation="{{animationData1}}" class="commodity_attr_box6" wx:if="{{showModalStatus6}}">
     <view class='alert hengxiang'>
@@ -213,7 +213,7 @@
       </view>
     </view>
   </view>
-</view>
+</view> -->
 
 <!-- 遮罩层显示 工作区域 -->
 <view>
@@ -269,12 +269,12 @@
 
 <!--  -->
 <view class="commodity_screen2" wx:if="{{showModalStatus2}}"></view>
-<view animation="{{animationData2}}" class="commodity_attr_box2" wx:if="{{showModalStatus2}}">
+<view animation="{{animationData}}" class="commodity_attr_box2" wx:if="{{showModalStatus2}}">
   <view class='tanchuang2 zongxiang'>
     <view class='tankuang-top2 hengxiang'>
-      <view class="tankuang-top2-left" bindtap="hideModal2">取消</view>
+      <view class="tankuang-top2-left" bindtap="hideModal2" data-return="false">取消</view>
       <view class="tankuang-top2-content">选择工种（最多2种）</view>
-      <view class="tankuang-top2-right" bindtap="hideModal2">确认</view>
+      <view class="tankuang-top2-right" bindtap="hideModal2" data-return="true">确认</view> 
     </view>
     <scroll-view scroll-y style="height: 310px;" class='tankuang-content2 zongxiang'>
       <view class="content2-list zongxiang" wx:for="{{gongzhong}}" wx:key="key" wx:for-index="keys" wx:for-item="itemaa">
@@ -284,28 +284,29 @@
         <view class="content-list-two zongxiang" wx:for="{{itemaa.twoclasslist}}" wx:key="key" wx:for-index="keys" wx:for-item="item">
           <view class="list-two-item hengxiang" bindtap="changetwoclass" data-id="{{item.id}}" data-yjid="{{itemaa.id}}" data-yijiname="{{itemaa.oneclass}}" data-erjiname="{{item.className}}">
             <view class="list-two-item-left">{{item.className}}</view>
-            <view class="list-two-item-right" wx:if="{{twoclassid==item.id}}">
+            <view class="list-two-item-right" wx:if="{{fenleitype1.typestate==true&&fenleitype1.erjiid==item.id}}">
+              <image src="../image/duihao.png" class="duihao-img"></image>
+            </view>
+            <view class="list-two-item-right" wx:if="{{fenleitype2.typestate==true&&fenleitype2.erjiid==item.id}}">
               <image src="../image/duihao.png" class="duihao-img"></image>
             </view>
           </view>
         </view>
       </view>
-
     </scroll-view>
-
   </view>
-  
 </view>
 
-<!-- <view class="commodity_screen2" wx:if="{{showTypeModalStatus2}}"></view>
-<view animation="{{animationData2}}" class="commodity_attr_box2" wx:if="{{showTypeModalStatus2}}">
+<!-- 遮罩 -->
+<view class="commodity_screen2" wx:if="{{showModalStatuslist}}"></view>
+<view animation="{{animationData2}}" class="commodity_attr_box2" wx:if="{{showModalStatuslist}}">
   <view class="tanchuang2 zongxiang">
     <view class="tankuang-top2 hengxiang">
-      <view class="tankuang-top2-left" bindtap="hideTypeModal2">取消</view>
+      <view class="tankuang-top2-left" bindtap="hideModallist" data-return="false">取消</view>
       <view class="tankuang-top2-content">选择业务类型（最多两种）</view>
-      <view class="tankuang-top2-right" bindtap="hideTypeModal2">确认</view>
+      <view class="tankuang-top2-right" bindtap="hidemodallist" data-return="ture">确认</view>
     </view>
-    <scroll-view scroll-y style="height: 310px;" class="tankuang-content2 zongxiang">
+    <scroll-view scroll-y style="height:310px;" class="tankuang-content2 zongxiang">
       <view class="content2-list zongxiang" wx:for="gongzhong" wx:key="key">
         <view class="conten-list-one">
           {{item.oneclass}}
@@ -321,4 +322,4 @@
       </view>
     </scroll-view>
   </view>
-</view> -->
+</view>
