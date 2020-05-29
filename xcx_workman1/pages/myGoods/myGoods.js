@@ -60,8 +60,7 @@ Page({
   mygoodsList() {
     var that = this
     var data={
-      // userId:that.spmyid
-      userId:256
+      userId:that.spmyid
   }
   qingqiu.get("tjsp", data, function(re) {
     console.log(re)
