@@ -1,0 +1,75 @@
+<!--pages/showDetails/showDetails.wxml-->
+<view class="container">
+  <view class='banner'>
+    <swiper indicator-dots="true" indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff" autoplay="true" class="swiper">
+      <block wx:for="{{bannerImg}}" wx:for-index="index" wx:key="{{item.id}}">
+        <swiper-item>
+          <image src="{{item.bannerimg}}" bindtap="fangda" data-img="{{item}}" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!-- 产品名 -->
+  <view class="top-text">
+    室内F-10木门（含五金件）室内F-10木门（含五金件）室内F-10木门（含五金件）
+  </view>
+  <!-- 顶部详情 -->
+  <view class="top hengxiang">
+    <view class="top-left">
+      <image src="../image/top.png" class="avator-img"></image>
+    </view>
+    <view class="top-content zongxiang">
+      <view class="top-content-top">王先生</view>
+      <view class="top-content-bottom hengxiang">
+        <view class="top-content-bottom-item hengxiang">
+          <image src="../image/dingwei.png" class="dingwei-img"></image>
+          <view class="top-dingwei"> 万载 | 双桥镇</view>
+        </view>
+        <view class="hengxiang top-content-bottom-item1">
+          <view>
+            <image src="../image/shijian.png" class="time-img"></image>
+          </view>
+          <view class="top-time">
+            2019.11.15 12:00
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="top-button" bindtap="lianxita">
+      联系TA
+    </view>
+  </view>
+  <!-- 评论 -->
+  <view class="content zongxiang">
+    <view class="content-title hengxiang">
+      <view class="content-text">
+        评论
+      </view>
+      <view class="content-button" bindtap="comment">
+        +我来评论
+      </view>
+    </view>
+  </view>
+  <!-- 评论内容 -->
+  <view class="bottom zongxiang">
+    <view class="bottom-list zongxiang" wx:for='{{caseMsgList}}'>
+      <view class="hengxiang">
+        <view class="top-left">
+          <image src="{{item.picUrl}}" class="avator-img1"></image>
+        </view>
+        <view class="top-content-top1">{{item.wxNc}}</view>
+        <view class="hengxiang bottom-time">
+          <view>
+            <image src="../image/shijian.png" class="time-img1"></image>
+          </view>
+          <view class="bottom-time-text">
+            {{item.createTime}}
+          </view>
+        </view>
+      </view>
+      <view class="bottom-details">
+        {{item.content}}
+      </view>
+    </view>
+  </view>
+</view>
