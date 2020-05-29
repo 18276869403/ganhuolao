@@ -32,7 +32,12 @@ Page({
     //     url: '../image/top.png'
     //   },
     // ],
-    showList:[]
+    showList:[],
+    imgList: [
+      // "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
+      // "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
+      // "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg"
+    ]
   },
 
   onLoad: function () {
@@ -51,12 +56,21 @@ Page({
           that.showList=re.result.records
           for(var i= 0 ; i < that.showList.length; i++){
             that.showList[i].picOne = api.viewUrl+re.result.records[i].picOne.split(',')[0]
-          }   
+            that.data.imgList[i] = that.showList[i].picOne
+          } 
           that.setData({
             showList:re.result.records
           })
         } 
       } 
+    })
+  },
+  // 晒晒点击事件
+  imgYu:function(event){
+    var src = event.currentTarget.dataset.src;
+    wx.previewImage({
+      current: src,
+      urls: this.data.imgList
     })
   },
   // 发布弹窗显示
