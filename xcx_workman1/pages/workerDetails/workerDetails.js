@@ -42,7 +42,7 @@ Page({
   grshowList() {
     var that = this
     var data={
-      wxUserId:that.id,
+      wxUserId:this.data.id,
       pages: 1,
       size: 10
     }
