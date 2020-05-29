@@ -77,7 +77,7 @@
           <image src="{{viewUrl}}{{item}}" bindtap="fangda" class="zhanshitu"></image>
         </view>
       </view>
-      <view class="zhanshi" wx:if="{{xqxqlist.backup1.length<=0}}">
+      <view class="zhanshi" wx:if="{{xqxqlist.backup1 == null}}">
         <image src="../image/wutu.png" class="zhanshitu1"></image>
       </view>
     </view>

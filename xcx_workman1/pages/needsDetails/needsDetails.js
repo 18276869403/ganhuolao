@@ -86,27 +86,28 @@ Page({
     })
   },
   // 图片
-  SelecttupianList() {
-    var that = this
-    var data={
-      id: that.id,
-      pages: 1,
-      size: 10
-    }
-    qingqiu.get("zuixinxq", data, function(re) {
-      if (re.success == true) {
-        if (re.result != null) {
-          // that.tupianlist = re.result.records
-          for(let obj of re.result.records){
-            obj.backup1 = api.viewUrl + obj.backup1.split(',')[0]
-          }
-          that.setData ({
-            tupianlist : re.result.records
-          })
-        } 
-      } 
-    })
-  },
+  // SelecttupianList() {
+  //   var that = this
+  //   var data={
+  //     id: that.id,
+  //     pages: 1,
+  //     size: 10
+  //   }
+  //   qingqiu.get("zuixinxq", data, function(re) {
+  //     if (re.success == true) {
+  //       if (re.result != null) {
+  //         // that.tupianlist = re.result.records
+  //         for(let obj of re.result.records){
+  //           obj.backup1 = api.viewUrl + obj.backup1.split(',')[0]
+  //         }
+  //         that.setData ({
+  //           tupianlist : re.result.records
+  //         })
+  //         debugger
+  //       } 
+  //     } 
+  //   })
+  // },
   // 需求删除
   shancuoxuqiu() {
     var that = this
