@@ -81,7 +81,7 @@ page {
   color: #333;
   font-size: 28rpx;
   line-height: 72rpx;
-  width: 74%;
+  width: 80%;
   margin-right: 3%;
 }
  
@@ -93,7 +93,7 @@ page {
 }
  
 .content-title-gongzhong {
-  width: 40%;
+  width: 20%;
   text-align: left;
   margin-left: 3%;
   height: 80rpx;
@@ -107,7 +107,7 @@ page {
   color: #333;
   font-size: 28rpx;
   line-height: 72rpx;
-  width: 57%;
+  width: 80%;
   margin-right: 3%;
 }
 
