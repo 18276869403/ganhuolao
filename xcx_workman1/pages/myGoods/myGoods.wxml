@@ -11,12 +11,12 @@
         <view class="hengxiang goods-button">
           <view class="shanchu-button" bindtap="DeletemyGood" data-myspid="{{item.id}}">删除</view>
           <view class="xiugai-button" bindtap="addEditGoods">修改</view>
-          <view class="zhiding-button">置顶</view>
+          <view class="zhiding-bu tton">置顶</view>
         </view>
       </view>
     </view>
   </view>
-  <view class="goods-bottom">
+  <view class="goods-bottom" bindtap="addEditGoods" data-addspid="{{item.id}}">
   <image src="../image/addgoods.png" class="add-img"></image>
   </view>
 </view>

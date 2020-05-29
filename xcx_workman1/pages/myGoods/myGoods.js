@@ -83,9 +83,9 @@ Page({
 })
 },
   // 添加编辑商品
-  addEditGoods:function(){
+  addEditGoods:function(e){
     wx.navigateTo({
-      url: '../addEditGoods/addEditGoods',
+      url: '../addEditGoods/addEditGoods?obj='+this.spmyid,
     })
   },
   //删除我的商品
