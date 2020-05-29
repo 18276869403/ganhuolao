@@ -84,14 +84,14 @@ page {
   width: 74%;
   margin-right: 3%;
 }
-
+ 
 .content-text2 {
   color: #333;
   font-size: 28rpx;
   line-height: 72rpx;
   width: 70%;
 }
-
+ 
 .content-title-gongzhong {
   width: 40%;
   text-align: left;

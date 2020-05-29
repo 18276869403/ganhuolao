@@ -594,7 +594,7 @@ Page({
                 targetWidth = Math.round(maxHeight * (originWidth / originHeight));
               }
             }
-              //尝试压缩文件，创建 canvas
+              //尝试压缩文件，创建 canvas 
             var ctx = wx.createCanvasContext('firstCanvas');
             ctx.clearRect(0, 0, targetWidth, targetHeight);
             ctx.drawImage(tempFilePaths[0], 0, 0, targetWidth, targetHeight);

@@ -274,7 +274,7 @@
     <view class='tankuang-top2 hengxiang'>
       <view class="tankuang-top2-left" bindtap="hideModal2" data-return="false">取消</view>
       <view class="tankuang-top2-content">选择工种（最多2种）</view>
-      <view class="tankuang-top2-right" bindtap="hideModal2" data-return="true">确认</view>
+      <view class="tankuang-top2-right" bindtap="hideModal2" data-return="true">确认</view> 
     </view>
     <scroll-view scroll-y style="height: 310px;" class='tankuang-content2 zongxiang'>
       <view class="content2-list zongxiang" wx:for="{{gongzhong}}" wx:key="key" wx:for-index="keys" wx:for-item="itemaa">
