@@ -118,5 +118,17 @@ Page({
         showModalStatus1: false
       })
     }.bind(this), 200)
+  },
+  // 跳转到晒晒详情页面
+  showDetails: function() {
+    wx.navigateTo({
+      url: '../showDetails/showDetails',
+    })
+  },
+  // 发布晒晒页面
+  submitShow: function() {
+    wx.navigateTo({
+      url: '../submitShow/submitShow',
+    })
   }
 })

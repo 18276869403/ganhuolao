@@ -81,7 +81,7 @@
             </image>
             <video src="{{item.picOne}}" class="show-img" mode="widthFix" bindtap="imgYu" data-src="{{item.picOne}}" wx:if="{{item.backup3=='1'}}"></video>
           </view>
-          <view class="show-item-bottom hengxiang">
+          <view class="show-item-bottom hengxiang" bindtap="showDetails">
             <view class="hengxiang">
               <view>
                 <image src="../image/liulan.png" class="liulan-img"></image>
@@ -106,7 +106,7 @@
             <image src="{{item.picOne}}" class="show-img" mode="widthFix" bindtap="imgYu" data-src="{{item.picOne}}" wx:if="{{item.backup3=='0'}}"></image>
             <video src="{{item.picOne}}" class="show-img" mode="widthFix" bindtap="imgYu" data-src="{{item.picOne}}" wx:if="{{item.backup3=='1'}}"></video>
           </view>
-          <view class="show-item-bottom hengxiang">
+          <view class="show-item-bottom hengxiang" bindtap="showDetails">
             <view class="hengxiang">
               <view>
                 <image src="../image/liulan.png" class="liulan-img"></image>
@@ -140,7 +140,7 @@
       <view class="hengxiang tanchuang-item">
         <view class="tanchuang-item-left zongxiang">
           <view>
-            <image src="../image/tupian.png" class="tupian-img"></image>
+            <image src="../image/tupian.png" class="tupian-img" bindtap="submitShow"></image>
           </view>
           <view>照片</view>
         </view>
