@@ -75,14 +75,14 @@ Page({
     var that =this
     var data={
       wxUserId : 257,
+      backup3:0,
       caseName : that.data.needscontent,
       picOne:that.data.picIurl1
     }
-    qingqiu.get("insterCase", data, function(re) {
-      debugger
+    qingqiu.get("insertCase", data, function(re) {
     console.log(re)
     if (re.success == true) {
-          wx.navigateTo({
+          wx.switchTab({
             url: '../showwork/showwork',
           })
     } 
