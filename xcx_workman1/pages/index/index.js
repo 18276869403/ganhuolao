@@ -24,6 +24,24 @@ Page({
   },
 
   onLoad: function() {
+    var that = this
+    wx.login({
+      success: function(res) {
+        qingqiu.get("getKeyInfo", {
+          code: res.code
+        }, function(re) {
+          app.globalData.wxid = re.result.wxUser.id
+          if (re.result.wxUser.picUrl != null && re.result.wxUser.picUrl.length > 0) {
+            app.globalData.sqgl = 1
+          }
+          app.globalData.openid = re.result.openId
+          app.globalData.wxState = re.result.wxUser.wxState
+          that.setData({
+            openid:re.result.openId
+          })
+        }, "POST")
+      }
+    })
     this.firstbanner() //banner
     this.pointList() //通知
     this.xqneedlist() //需求
