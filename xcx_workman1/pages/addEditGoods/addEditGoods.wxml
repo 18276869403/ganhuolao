@@ -8,20 +8,20 @@
 
     <view class="content-item hengxiang">
       <view class="content-title">商品名字</view>
-      <input type="text" placeholder="请输入商品名字" class="shurukuang" placeholder-class="placeholder" value='{{needsname}}' name="goodsname" bindinput='goodsnameinput'></input>
+      <input type="text" placeholder="请输入商品名字" class="shurukuang" placeholder-class="placeholder" value='{{spxglist.goodName}}' name="goodsname" bindinput='goodsnameinput'>{{spxglist.goodName}}</input>
     </view>
     <view class="content-item hengxiang">
       <view class="content-title">商品原价</view>
-      <input type="digit" placeholder="请输入商品原价" class="shurukuang" placeholder-class="placeholder" value='{{needsname}}' name="originalPrice" bindinput='originalPriceinput'></input>
+      <input type="digit" placeholder="请输入商品原价" class="shurukuang" placeholder-class="placeholder" value='{{spxglist.oldPrice}}' name="originalPrice" bindinput='originalPriceinput'>{{spxglist.oldPrice}}</input>
     </view>
 
     <view class="content-item hengxiang">
       <view class="content-title">优惠价</view>
-      <input type="digit" placeholder="请输入优惠价" class="shurukuang" placeholder-class="placeholder" value='{{needsname}}' name="salesPrice" bindinput='salesPriceinput'></input>
+      <input type="digit" placeholder="请输入优惠价" class="shurukuang" placeholder-class="placeholder" value='{{spxglist.newPrice}}' name="salesPrice" bindinput='salesPriceinput'>{{spxglist.newPrice}}</input>
     </view>
 
     <view class="content-item-textarea">
-      <textarea class="textarea" placeholder="请输入商品描述" placeholder-class="placeholder1" maxlength='-1' value='{{detailscontent}}' name="detailscontent" bindinput='detailscontentinput' wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
+      <textarea class="textarea" placeholder="请输入商品描述" placeholder-class="placeholder1" maxlength='-1' value='{{spxglist.goodMemo}}' name="detailscontent" bindinput='detailscontentinput' wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
     </view>
   </view>
 
@@ -29,7 +29,10 @@
   <view class="showImg hengxiang">
     <view class="showImg-text">商品轮播图（二张）</view>
     <view class="hengxiang"></view>
-    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="1">
+    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="1" wx:if="{{spxglist.goodPic1.length>1}}">
+      <image src="{{viewUrl}}{{spxglist.goodPic1[0]}}" class="show-img"></image>
+    </view>
+    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="1" wx:if="{{spxglist.goodPic1.length==1}}">
       <!-- 无数据 上传图片样式 -->
       <image src="../image/shangchuan.png" class="show-img" wx:if="{{picIurl==''}}"></image>
       <image src="{{picIurl}}" class="show-img" wx:if="{{picIurl!=''}}"></image>
@@ -39,7 +42,10 @@
       <!-- 删除图 -->
       <!-- <image src="../image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
     </view>
-    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="2">
+    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="2" wx:if="{{spxglist.goodPic1.length>1}}">
+      <image src="{{viewUrl}}{{spxglist.goodPic1[1]}}" class="show-img"></image>
+    </view>
+    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="2"  wx:if="{{spxglist.goodPic1.length==1}}">
 
       <!-- 无数据 上传图片样式 -->
       <image src="../image/shangchuan.png" class="show-img" wx:if="{{picIurltwo==''}}"></image>
@@ -56,7 +62,10 @@
   <view class="showImg hengxiang">
     <view class="showImg-text">商品详情展示图（二张长版图）</view>
     <view class="hengxiang"></view>
-    <view class="showImg-item"  bindtap='upimg' data-number="0" data-type="3">
+    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="3" wx:if="{{spxglist.goodPic2.length>1}}">
+      <image src="{{viewUrl}}{{spxglist.goodPic2[0]}}" class="show-img"></image>
+    </view>
+    <view class="showImg-item"  bindtap='upimg' data-number="0" data-type="3" wx:if="{{spxglist.goodPic2.length==1}}">
       <!-- 无数据 上传图片样式 -->
       <image src="../image/shangchuan.png" class="show-img" wx:if="{{picDetail==''}}"></image>
       <image src="{{picDetail}}" class="show-img" wx:if="{{picDetail!=''}}"></image>
@@ -66,7 +75,10 @@
       <!-- 删除图 -->
       <!-- <image src="../image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
     </view>
-    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="4">
+    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="4" wx:if="{{spxglist.goodPic2.length>1}}">
+      <image src="{{viewUrl}}{{spxglist.goodPic2[1]}}" class="show-img"></image>
+    </view>
+    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="4" wx:if="{{spxglist.goodPic2.length==1}}">
 
       <!-- 无数据 上传图片样式 -->
       <image src="../image/shangchuan.png" class="show-img" wx:if="{{picDetailtwo==''}}"></image>
@@ -81,7 +93,8 @@
 
 
   <view class="bottom hengxiang">
-    <view class="bottom-right" bindtap="lijifabu">保存</view>
+    <view class="bottom-right" bindtap="xugaispxx" wx:if="{{spxglist.goodName != null}}">保存</view>
+    <view class="bottom-right" bindtap="lijifabu" wx:if="{{spxglist.goodName == null}}">保存</view>
   </view>
 </view>
 

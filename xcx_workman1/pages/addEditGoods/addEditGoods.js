@@ -11,13 +11,18 @@ Page({
     viewUrl: api.viewUrl,
     imgUrl: '',
     needsname: '',
+    goodsname:'',
     needscontent: '',
     workaddress: '',
     linkman: '',
     phone: '',
     addspid:'',
+    addspid:[],
     imglunbo:'',
     imgDetail:'',
+    spxglist:[],
+    yhid:'',
+    spid:'',
 
     picIurl:'',
     picIurl1:'',
@@ -34,6 +39,12 @@ Page({
    */
   onLoad: function(options) {
     this.addspid = JSON.parse(options.obj)
+    var spxglist = JSON.parse(options.obj)
+    this.spid = spxglist.id
+    this.setData({
+      spxglist: spxglist
+    })
+    console.log(spxglist)
   },
 
 
@@ -62,13 +73,38 @@ Page({
       detailscontent: e.detail.value
     })
   },
+  // 修改商品
+  xugaispxx(){
+    var that =this
+    that.imglunbo=that.data.picIurl1+','+that.data.picIurltwo1
+    that.imgDetail=that.data.picDetail1+','+that.data.picDetailtwo1
+    var data={
+      id:that.spid,
+      userId:that.addspid.userId,
+      goodName: that.data.goodsname,
+      oldPrice :that.data.originalPrice,
+      newPrice:that.data.salesPrice,
+      goodMemo:that.data.detailscontent,
+      goodPic1:that.imglunbo,
+      goodPic2:that.imgDetail
+    }
+    debugger
+    qingqiu.get("editUserGood", data, function(re) {
+    if (re.success == true) {
+      var userid = JSON.stringify(that.addspid.userId)
+          wx.navigateTo({
+            url: '../myGoods/myGoods?obj='+userid,
+          })
+    } 
+  },'put')
+  },
   // 添加商品
   lijifabu(){
     var that =this
     that.imglunbo=that.data.picIurl1+','+that.data.picIurltwo1
     that.imgDetail=that.data.picDetail1+','+that.data.picDetailtwo1
     var data={
-      userId : that.addspid,
+      userId : that.yhid,
       goodName : that.data.goodsname,
       oldPrice :that.data.originalPrice,
       newPrice:that.data.salesPrice,
@@ -76,19 +112,21 @@ Page({
       goodPic1:that.imglunbo,
       goodPic2:that.imgDetail
     }
-    qingqiu.post("addUserGood", data, function(re) {
+    qingqiu.get("addUserGood", data, function(re) {
     console.log(re)
+    debugger
     if (re.success == true) {
-      if (re.result ==1) {
-        qingqiu.tk('添加成功！')
-        wx.navigateTo({
-          url: '../myGoods/myGoods',
-        })
-      } else {
-        qingqiu.tk('添加失败！')
-      }
+      // if (re.result ==1) {
+        // qingqiu.tk('添加成功！')
+          var userid = JSON.stringify(that.addspid)
+          wx.navigateTo({
+            url: '../myGoods/myGoods?obj='+userid,
+          })
+      // } else {
+      //   qingqiu.tk('添加失败！')
+      // }
     } 
-  })
+  },'post')
   },
   // 图片上传（对接完成）
   upimg: function(e) {
