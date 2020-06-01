@@ -47,7 +47,8 @@ Page({
     ],
     goodsLists:[],
     spmyid:'',
-    spid:''
+    spid:'',
+    spxx:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -70,6 +71,7 @@ Page({
       for(var i= 0 ; i < that.goodsLists.length; i++){
         if(re.result.records[i].goodPic1 !=null && re.result.records[i].goodPic1.length>0){
           that.goodsLists[i].goodPic1 = re.result.records[i].goodPic1.split(',')
+          that.goodsLists[i].goodPic2 = re.result.records[i].goodPic2.split(',')
         }            
       } 
       that.setData ({
@@ -81,28 +83,35 @@ Page({
   } 
 })
 },
-  // 添加编辑商品
+  // 添加商品
   addEditGoods:function(e){
     wx.navigateTo({
-      url: '../addEditGoods/addEditGoods?obj='+this.spmyid,
+      url: '../addEditGoods/addEditGoods?obj='+ this.spmyid,
+    })
+  },
+  // 编辑商品
+  addEditGoods2:function(e){
+    var spxx = e.currentTarget.dataset.spxx
+    var spxx1 = JSON.stringify(spxx);
+    wx.navigateTo({
+      url: '../addEditGoods/addEditGoods?obj='+ spxx1,
     })
   },
   //删除我的商品
   DeletemyGood: function(e) {
+    var that = this
     var spid =e.currentTarget.dataset.myspid;
     var data={
       id: spid 
     }
     qingqiu.get("deleteUserGood", data, function(re) {
-      console.log(re)
     if (re.success == true) {
-      if (re.result ==1) {
-        qingqiu.tk('删除成功！')
-      } else {
-        qingqiu.tk('删除失败！')
-      }
+      var userid = JSON.stringify(that.spmyid)
+      wx.navigateTo({
+        url: '../myGoods/myGoods?obj='+userid,
+      })
     } 
-  })
+  },"delete")
 }
 
 })
