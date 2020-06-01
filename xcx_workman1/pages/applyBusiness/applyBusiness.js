@@ -563,17 +563,17 @@ Page({
         dateBirth: '0'
       }
     }
+    console.log(data)
     qingqiu.get("wxUserAdd", data, function(re) {
-      console.log(re)
-      if (re.data.success == true) {
+      if (re.success == true) {
         wx.login({
           success: function(res) {
             qingqiu.get("getKeyInfo", {
               code: res.code
             }, function(re) {
-              app.globalData.wxid = re.data.result.wxUser.id
-              app.globalData.openid = re.data.result.openId
-              app.globalData.wxState = re.data.result.wxUser.wxState
+              app.globalData.wxid = re.result.wxUser.id
+              app.globalData.openid = re.result.openId
+              app.globalData.wxState = re.result.wxUser.wxState
               wx.switchTab({
                 url: '../mine/mine',
               })
@@ -600,9 +600,7 @@ Page({
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
       sourceType: ['album', 'camera'],
       success:function(res) {
-        console.log(res)
        const tempFilePaths = res.tempFilePaths;
- 
        //获得原始图片大小
        wx.getImageInfo({
          src: res.tempFilePaths[0],
@@ -612,7 +610,6 @@ Page({
            var originWidth, originHeight;
            originHeight = res.height;
            originWidth = res.width;
-           console.log(originWidth);
            //压缩比例
            // 最大尺寸限制
            var maxWidth = 800,
@@ -829,12 +826,10 @@ Page({
             qingqiu.get("twoClassList",onedata,function(re){
               if (re.success == true){
                 if (re.result != null) {
-                  console.log(re.result)
                   var gongzhongclass2 = 'gongzhong[' + i +'].twoclasslist'
                   that.setData({
                     [gongzhongclass2]:re.result
                   })
-                  console.log(re.result)
                 }
               }
             })
