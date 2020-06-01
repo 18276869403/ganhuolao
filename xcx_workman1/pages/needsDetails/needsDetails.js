@@ -48,17 +48,21 @@ Page({
     xqxqlist:[],
     jiedanList:[],
     tupianlist:[],
-    id:''
+    id:'',
+    wxUserid:''
   },
 
   onLoad: function (options) {
     var xqxqlist = JSON.parse(options.obj1)
     this.id = xqxqlist.id
     this.setData({
-      xqxqlist: xqxqlist
+      xqxqlist: xqxqlist,
+      wxUserid: app.globalData.wxid
     })
+    console.log(this.data.wxUserid)
+    console.log(xqxqlist)
     this.SelectjiedanList()
-    this.SelecttupianList()
+    // this.SelecttupianList()
   },
   // 接单人员
   SelectjiedanList() {
@@ -115,7 +119,6 @@ Page({
       id: that.id
     }
     qingqiu.get("delYneedAndNeedSign", data, function(re) {
-      debugger
       if (re.success == true) {
         if (re.result == 1) {
           qingqiu.tk('删除成功！')

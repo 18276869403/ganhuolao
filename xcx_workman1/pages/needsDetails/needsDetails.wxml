@@ -52,13 +52,13 @@
 
         <!-- 修改，删除，确认完成，用户为创建者 -->
         <view class="content-chuangjian hengxiang">
-          <view class="update-button" bindtap="xiugaigunali">
+          <view class="update-button" bindtap="xiugaigunali" wx:if="{{xqxqlist.wxUserId == wxUserid}}">
             修改
           </view>
-          <view class="delete-button" bindtap="shancuoxuqiu">
+          <view class="delete-button" bindtap="shancuoxuqiu" wx:if="{{xqxqlist.wxUserId == wxUserid}}">
             删除
           </view>
-          <view class="complete-button" bindtap="lianxita">
+          <view class="complete-button" bindtap="lianxita" wx:if="{{xqxqlist.wxUserId == wxUserid}}">
             完成
           </view>
         </view>
