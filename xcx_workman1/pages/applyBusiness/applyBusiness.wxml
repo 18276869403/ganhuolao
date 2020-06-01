@@ -2,72 +2,68 @@
 <view class="container">
   <view class="top hengxiang">
     <view wx:for="{{needsTypeList}}" wx:key="key" bindtap="changeType" data-id="{{item.id}}" class="xuanzhong" wx:if="{{id==0}}">
-    <view wx:if="{{needsTypeid!=item.id}}" class="top-item-normal">
-        <text class="">{{item.name}}</text>
-      </view>
       <view wx:if="{{needsTypeid==item.id}}" class="top-item-checked">
         <text class="bian"> {{item.name}}</text>
+      </view>
+       <view wx:if="{{needsTypeid!=item.id}}" class="top-item-normal">
+        <text class="">{{item.name}}</text>
       </view>
     </view>
   </view>
 
-  <view class="content zongxiang" wx:if="{{needsTypeid==1}}">
+  <view class="content zongxiang" wx:if="{{needsTypeid==2}}">
     <view class="content-item hengxiang" bindtap="showModallist" wx:if="{{id==0}}">
       <view class="content-title">业务分类</view>
-      <view class="content-text" wx:if="{{yijiname==''}}">请选择业务分类</view>
-      <view class='content-text2' wx:if="{{yijiname!=''}}">{{tempClass}}</view>
-      <!-- <view class="enter">
+      <view class="content-text" wx:if="{{yijiname==''}}" style="color:#999999;">请选择业务分类</view>
+      <view class='content-text1' wx:if="{{yijiname!=''}}" style="color:#999999;">{{tempClass}}</view>
+      <view class="enter">
         <image src="../image/enter.png" class="enter-img"></image>
-      </view> -->
+      </view>
     </view>
     <view class="content-item hengxiang" wx:if="{{id!=0}}">
       <view class="content-title">业务分类</view>
-      <view class="content-text" wx:if="{{yijiname==''}}">请选择业务分类</view>
-      <view class='content-text2' wx:if="{{yijiname!=''}}">{{tempClass}}</view>
-      <!-- <view class="enter">
+      <view class="content-text" wx:if="{{yijiname==''}}" style="color:#999999;">请选择业务分类</view>
+      <view class='content-text1' wx:if="{{yijiname!=''}}" style="color:#999999;">{{tempClass}}</view>
+      <view class="enter">
         <image src="../image/enter.png" class="enter-img"></image>
-      </view> -->
+      </view>
     </view>
     <view class="content-item hengxiang">
       <view class="content-title">商铺名称</view>
-      <input type="text" placeholder="请输入商铺名称" class="shurukuang" placeholder-class="placeholder" value='{{needsname}}' name="needsname" bindinput='needsnameinput'></input>
+      <input type="text" placeholder="请输入商铺名称" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{needsname}}' name="needsname" bindinput='needsnameinput'></input>
     </view>
     <view class="content-item hengxiang">
       <view class="content-title">联系人</view>
-      <input type="text" placeholder="请输入联系人" class="shurukuang" placeholder-class="placeholder" value='{{linkman}}' name="linkman" bindinput='linkmaninput'></input>
+      <input type="text" placeholder="请输入联系人" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{linkman}}' name="linkman" bindinput='linkmaninput'></input>
     </view>
     <view class="content-item hengxiang">
       <view class="content-title">联系电话</view>
-      <input type="number" placeholder="请输入联系电话" class="shurukuang" placeholder-class="placeholder" value='{{phone}}' name="phone" bindinput='phoneinput'></input>
+      <input type="number" placeholder="请输入联系电话" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{phone}}' name="phone" bindinput='phoneinput'></input>
     </view>
     <view class="content-item hengxiang" bindtap="showModal">
       <view class="content-title">商铺区域</view>
-      <view class="content-text" wx:if="{{workcityname==''}}">请选择商铺区域</view>
+      <view class="content-text" wx:if="{{workcityname==''}}" style="color:#999999;">请选择商铺区域</view>
       <view class='content-text2' wx:if="{{workcityname!=''}}">{{workcityname}} - {{workareaname}}</view>
       <view class="enter">
         <image src="../image/enter.png" class="enter-img"></image>
       </view>
     </view>
     <view class="content-item hengxiang">
-      <view class="content-title">联系电话</view>
-      <input type="text" placeholder="请输入商铺详细地址" class="shurukuang" placeholder-class="placeholder" value='{{workaddress}}' name="workaddress" bindinput='workaddressinput'></input>
+      <view class="content-title">详细地址</view>
+      <input type="text" placeholder="请输入商铺详细地址" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{workaddress}}' name="workaddress" bindinput='workaddressinput'></input>
     </view>
     <view class="content-item-textarea">
-      <textarea class="textarea" placeholder="请输入商铺介绍" placeholder-class="placeholder" maxlength='-1' value='{{needscontent}}' name="needscontent" bindinput='needscontentinput' wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
+      <textarea class="textarea" placeholder="请输入商铺介绍" style="color:#999999;" placeholder-class="placeholder" maxlength='-1' value='{{needscontent}}' name="needscontent" bindinput='needscontentinput' wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
     </view>
     <view class="hengxiang fabu-list1">
-      <view class="fabu" bindtap='upimg' data-type='1'>
+      <view class="fabu" bindtap='upimg' data-number="0" data-type='1'>
         <image src="../image/shangchuan.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
         <image src="{{picIurl}}" class="fabu1-img" wx:if="{{picIurl!=''}}"></image>
         <view>
           上传门头照
         </view>
-
       </view>
-
-
-      <view class="fabu zongxiang" bindtap='upimg' data-type='2'>
-
+      <view class="fabu zongxiang" bindtap='upimg' data-number="0" data-type='2'>
         <view>
           <image src="../image/shangchuan.png" class="fabu-item" wx:if="{{picZz==''}}"></image>
           <image src="{{picZz}}" class="fabu1-img" wx:if="{{picZz!=''}}"></image>
@@ -78,11 +74,11 @@
     </view>
   </view>
   <!-- 申请成为工人 -->
-  <view class="content zongxiang" wx:if="{{needsTypeid==2}}">
+  <view class="content zongxiang" wx:if="{{needsTypeid==1}}">
     <view class="content-item hengxiang" bindtap="showModal2" wx:if="{{id==0}}">
       <view class="content-title-gongzhong">工种分类</view>
       <view class="content-text-gongzhong" wx:if="{{yijiname==''}}" style="color:#999999">请选择工种</view>
-      <view class='content-text1' wx:if="{{yijiname!=''}}">{{tempClass}}</view>
+      <view class='content-text1' wx:if="{{yijiname!=''}}" style="color:#999999;">{{tempClass}}</view>
       <view class="enter">
         <image src="../image/enter.png" class="enter-img"></image>
       </view>
@@ -90,14 +86,14 @@
     <view class="content-item hengxiang" wx:if="{{id!=0}}">
       <view class="content-title-gongzhong">工种分类(可选2个)</view>
       <view class="content-text-gongzhong" wx:if="{{yijiname==''}}" style="color:#999999">请选择工种分类</view>
-      <view class='content-text1' wx:if="{{yijiname!=''}}">{{tempClass}}</view>
+      <view class='content-text1' wx:if="{{yijiname!=''}}" style="color:#999999;">{{tempClass}}</view>
       <view class="enter">
         <image src="../image/enter.png" class="enter-img"></image>
       </view>
     </view>
     <view class="content-item hengxiang">
       <view class="content-title">真实姓名</view>
-      <input type="text" placeholder="请输入工人姓名" class="shurukuang" placeholder-class="placeholder" value='{{workername}}' name="workername" bindinput='workernameinput' placeholder-style="color:#999999;"></input>
+      <input type="text" style="color:#999999" placeholder="请输入工人姓名" class="shurukuang" placeholder-class="placeholder" value='{{workername}}' name="workername" bindinput='workernameinput'></input>
     </view>
     <!-- <view>
       <radio-group class="radio-group" bindchange="radioChange">
@@ -108,8 +104,8 @@
     </view> -->
     <view class="content-item hengxiang">
       <view class="content-title">出生年月</view>
-      <picker mode="date" value="{{date}}" class="shurukuang" bindchange="bindDateChange">
-        <view class="picker" style="color:#999999;">
+      <picker mode="date" value="{{date}}" class="shurukuang" bindchange="bindDateChange" style="color:#999999;">
+        <view class="picker">
           {{ date!=''?'':'请选择出生年月日' }}{{date}}
         </view>
       </picker>
@@ -117,7 +113,7 @@
     </view>
     <view class="content-item hengxiang">
       <view class="content-title">经验</view>
-      <input type="number" placeholder="请输入从业时长(多少年)" class="shurukuang" placeholder-class="placeholder" value='{{worktime}}' name="worktime" bindinput='worktimeinput' placeholder-style="color:#999999;"></input>
+      <input type="number" placeholder="请输入从业时长(多少年)" class="shurukuang" placeholder-class="placeholder" value='{{worktime}}' name="worktime" bindinput='worktimeinput' style="color:#999999;"></input>
     </view>
     <view class="content-item hengxiang" bindtap="showModal">
       <view class="content-title">所在区域</view>
@@ -132,12 +128,12 @@
     </view> -->
     <view class="content-item hengxiang">
       <view class="content-title">手机号码</view>
-      <input type="number" placeholder="请输入手机号码" class="shurukuang" placeholder-class="placeholder" value='{{workerphone}}' name="workerphone" bindinput='workerphoneinput'></input>
+      <input type="number" placeholder="请输入手机号码" class="shurukuang" placeholder-class="placeholder" value='{{workerphone}}' name="workerphone" bindinput='workerphoneinput' style="color:#999999"></input>
     </view>
 
 
     <view class="content-item-textarea" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}">
-      <textarea class="textarea" placeholder-class="placeholder" maxlength='-1' value='{{workerskill}}' name="workerskill" bindinput='workerskillinput'></textarea>
+      <textarea class="textarea" placeholder="请输入技能介绍" style="color:#999999" placeholder-class="placeholder" maxlength='-1' value='{{workerskill}}' name="workerskill" bindinput='workerskillinput'></textarea>
     </view>
 
     <view class="hengxiang fabu-list1">
@@ -308,11 +304,11 @@
     </view>
     <scroll-view scroll-y style="height:310px;" class="tankuang-content2 zongxiang">
       <view class="content2-list zongxiang" wx:for="{{gongzhong}}" wx:key="key" wx:for-index="keys" wx:for-item="itemaa">
-        <view class="conten-list-one">
-          {{itemaa.className}}
+        <view class="conten-list-one" style="color:red;font-size: 28rpx;">
+          一级分类： {{itemaa.oneclass}}
         </view>
         <view class="content-list-two zongxiang" wx:for="{{itemaa.twoclasslist}}" wx:key="key" wx:for-index="keys" wx:for-item="item">
-          <view class="list-two-item hengxiang" bindtap="changetwoclass" data-id="{{item.id}}" data-yjid="{{itemaa.id}}" data-yijiname="{{itemaa.className}}" data-erjiname="{{item.className}}">
+          <view class="list-two-item hengxiang" bindtap="changetwoclass" data-id="{{item.id}}" data-yjid="{{itemaa.id}}" data-yijiname="{{itemaa.oneclass}}" data-erjiname="{{item.className}}">
             <view class="list-two-item-left">{{item.className}}</view>
             <view class="list-two-item-right" wx:if="{{fenleitype1.typestate==true&&fenleitype1.erjiid==item.id}}">
               <image src="../image/duihao.png" class="duihao-img"></image>
