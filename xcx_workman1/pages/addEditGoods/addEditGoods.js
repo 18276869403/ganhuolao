@@ -41,36 +41,48 @@ Page({
     this.addspid = JSON.parse(options.obj)
     var spxglist = JSON.parse(options.obj)
     this.spid = spxglist.id
+    this.picIurl=this.data.viewUrl+spxglist.goodPic1[0]
+    this.picIurltwo=this.data.viewUrl+spxglist.goodPic1[1]
+    this.picDetail=this.data.viewUrl+spxglist.goodPic2[0]
+    this.picDetailtwo=this.data.viewUrl+spxglist.goodPic2[1]
     this.setData({
-      spxglist: spxglist
+      spxglist: spxglist,
+      picIurl:this.picIurl,
+      picIurltwo:this.picIurltwo,
+      picDetail:this.picDetail,
+      picDetailtwo:this.picDetailtwo
     })
-    console.log(spxglist)
+    debugger
   },
 
 
 
   //获取输入的商品名字
   goodsnameinput: function(e) {
+    var goodsname = "spxglist.goodName"
     this.setData({
-      goodsname: e.detail.value
+      [goodsname]: e.detail.value
     })
   },
   //获取输入的原价
   originalPriceinput: function(e) {
+    var originalPrice = "spxglist.oldPrice"
     this.setData({
-      originalPrice: e.detail.value
+      [originalPrice]: e.detail.value
     })
   },
   //获取输入的优惠价
   salesPriceinput: function (e) {
+    var salesPrice = "spxglist.newPrice"
     this.setData({
-      salesPrice: e.detail.value
+      [salesPrice]: e.detail.value
     })
   },
   //获取输入的商品详情
   detailscontentinput: function (e) {
+    var detailscontent = "spxglist.goodMemo"
     this.setData({
-      detailscontent: e.detail.value
+      [detailscontent]: e.detail.value
     })
   },
   // 修改商品
@@ -81,15 +93,16 @@ Page({
     var data={
       id:that.spid,
       userId:that.addspid.userId,
-      goodName: that.data.goodsname,
-      oldPrice :that.data.originalPrice,
-      newPrice:that.data.salesPrice,
-      goodMemo:that.data.detailscontent,
+      goodName: that.data.spxglist.goodName,
+      oldPrice :that.data.spxglist.oldPrice,
+      newPrice:that.data.spxglist.newPrice,
+      goodMemo:that.data.spxglist.goodMemo,
       goodPic1:that.imglunbo,
       goodPic2:that.imgDetail
     }
-    debugger
+    console.log(data)
     qingqiu.get("editUserGood", data, function(re) {
+      debugger
     if (re.success == true) {
       var userid = JSON.stringify(that.addspid.userId)
           wx.navigateTo({

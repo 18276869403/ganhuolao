@@ -29,10 +29,7 @@
   <view class="showImg hengxiang">
     <view class="showImg-text">商品轮播图（二张）</view>
     <view class="hengxiang"></view>
-    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="1" wx:if="{{spxglist.goodPic1.length>1}}">
-      <image src="{{viewUrl}}{{spxglist.goodPic1[0]}}" class="show-img"></image>
-    </view>
-    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="1" wx:if="{{spxglist.goodPic1.length==1}}">
+    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="1">
       <!-- 无数据 上传图片样式 -->
       <image src="../image/shangchuan.png" class="show-img" wx:if="{{picIurl==''}}"></image>
       <image src="{{picIurl}}" class="show-img" wx:if="{{picIurl!=''}}"></image>
@@ -42,10 +39,7 @@
       <!-- 删除图 -->
       <!-- <image src="../image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
     </view>
-    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="2" wx:if="{{spxglist.goodPic1.length>1}}">
-      <image src="{{viewUrl}}{{spxglist.goodPic1[1]}}" class="show-img"></image>
-    </view>
-    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="2"  wx:if="{{spxglist.goodPic1.length==1}}">
+    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="2">
 
       <!-- 无数据 上传图片样式 -->
       <image src="../image/shangchuan.png" class="show-img" wx:if="{{picIurltwo==''}}"></image>
@@ -62,10 +56,7 @@
   <view class="showImg hengxiang">
     <view class="showImg-text">商品详情展示图（二张长版图）</view>
     <view class="hengxiang"></view>
-    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="3" wx:if="{{spxglist.goodPic2.length>1}}">
-      <image src="{{viewUrl}}{{spxglist.goodPic2[0]}}" class="show-img"></image>
-    </view>
-    <view class="showImg-item"  bindtap='upimg' data-number="0" data-type="3" wx:if="{{spxglist.goodPic2.length==1}}">
+    <view class="showImg-item"  bindtap='upimg' data-number="0" data-type="3">
       <!-- 无数据 上传图片样式 -->
       <image src="../image/shangchuan.png" class="show-img" wx:if="{{picDetail==''}}"></image>
       <image src="{{picDetail}}" class="show-img" wx:if="{{picDetail!=''}}"></image>
@@ -75,10 +66,7 @@
       <!-- 删除图 -->
       <!-- <image src="../image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
     </view>
-    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="4" wx:if="{{spxglist.goodPic2.length>1}}">
-      <image src="{{viewUrl}}{{spxglist.goodPic2[1]}}" class="show-img"></image>
-    </view>
-    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="4" wx:if="{{spxglist.goodPic2.length==1}}">
+    <view class="showImg-item" bindtap='upimg' data-number="0" data-type="4">
 
       <!-- 无数据 上传图片样式 -->
       <image src="../image/shangchuan.png" class="show-img" wx:if="{{picDetailtwo==''}}"></image>
