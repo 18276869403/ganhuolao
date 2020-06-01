@@ -3,7 +3,6 @@ const app = getApp()
 const qingqiu = require('../../utils/request.js')
 const api = require('../../utils/config.js')
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -62,11 +61,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    debugger
      var caseMsgList= JSON.parse(options.obj)
      this.setData({
       caseMsgList: caseMsgList
     })
+    console.log(caseMsgList)
   },
 
   onShow: function() {
