@@ -35,14 +35,13 @@ Page({
   getWxUser:function(openid){
     var that = this
     var data = {
-      wxId:openid
+      wxId:app.globalData.openid,
+      id:app.globalData.wxid
     }
-    that.setData({
-      openId:openid
-    })
     qingqiu.get("queryWxUser",data,function(re){
       if(re.success){
         if(re.result != null){
+          console.log(re.result)
             if(re.result.starClass == 0){
               re.result.starClass = ""
             }else if(re.result.starClass == 1){
@@ -74,8 +73,9 @@ Page({
     })
     if (app.globalData.wxid == null || app.globalData.wxid == '') {
       this.onUser()
+    }else{
+      this.getWxUser()
     }
-    
   },
 
   onUser: function() {
@@ -91,7 +91,7 @@ Page({
           }
           app.globalData.openid = re.result.openId
           app.globalData.wxState = re.result.wxUser.wxState
-          that.getWxUser("tttt453454d3f")
+          that.getWxUser()
           that.setData({
             openid:re.result.openId
           })
@@ -272,8 +272,4 @@ Page({
       phoneNumber: '17656453456' //仅为示例，并非真实的电话号码
     })
   }
-
-
-
-
 })
