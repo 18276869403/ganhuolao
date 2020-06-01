@@ -18,9 +18,10 @@
       </view>
     </view>
     <view class="fabu">
-      <view class="fabu-item zongxiang" bindtap='upimg'>
+      <view class="fabu-item zongxiang" bindtap='upimg' data-number="0" data-type="1">
         <view>
-          <image src="../image/jiahao.png" class="fabu-img"></image>
+          <image src="../image/jiahao.png" class="fabu-img" wx:if="{{picIurl==''}}"></image>
+          <image src="{{picIurl}}" class="show-img" wx:if="{{picIurl!=''}}"></image>
         </view>
         <view>
           上传照片
@@ -61,3 +62,4 @@
     </view>
   </view>
 </view>
+<canvas canvas-id="firstCanvas" style="width: {{cw}}px; height: {{ch}}px;position:fixed;left:100%;"></canvas>

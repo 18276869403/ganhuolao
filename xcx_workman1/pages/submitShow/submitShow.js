@@ -1,5 +1,7 @@
 // pages/submitShow/submitShow.js
 const app = getApp()
+const qingqiu = require('../../utils/request.js')
+const api = require('../../utils/config.js')
 Page({
 
   /**
@@ -45,7 +47,9 @@ Page({
     tupian: '',
     tupianlist: [],
     imgUrl: '',
-    cityname1: ''
+    cityname1: '',
+    picIurl1:'',
+    picIurl:''
   },
 
   /**
@@ -65,6 +69,24 @@ Page({
     wx.switchTab({
       url: '../showwork/showwork',
     })
+  },
+  // 发布晒晒
+  lijifabu(){
+    var that =this
+    var data={
+      wxUserId : 257,
+      caseName : that.data.needscontent,
+      picOne:that.data.picIurl1
+    }
+    qingqiu.get("insterCase", data, function(re) {
+      debugger
+    console.log(re)
+    if (re.success == true) {
+          wx.navigateTo({
+            url: '../showwork/showwork',
+          })
+    } 
+  },'post')
   },
   //获取输入的晒活内容
   commentinput: function(e) {
@@ -172,6 +194,118 @@ Page({
       cityname: this.data.cityname1
     })
   },
+  // 图片上传（对接完成）
+  upimg: function(e) {
+    var type = e.currentTarget.dataset.type
+    var index = e.currentTarget.dataset.number
+    var that = this
+    let uploadFile = ''; //最后处理完，图片上传的图片地址
+    wx.chooseImage({
+      sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
+      sourceType: ['album', 'camera'],
+      success:function(res) {
+        console.log(res)
+       const tempFilePaths = res.tempFilePaths;
+ 
+       //获得原始图片大小
+       wx.getImageInfo({
+         src: res.tempFilePaths[0],
+         success(res) {
+           // console.log('获得原始图片大小',res.width)
+           //console.log(res.height)
+           var originWidth, originHeight;
+           originHeight = res.height;
+           originWidth = res.width;
+           console.log(originWidth);
+           //压缩比例
+           // 最大尺寸限制
+           var maxWidth = 1200,
+             maxHeight = 600;
+           // 目标尺寸
+           var targetWidth = originWidth,
+             targetHeight = originHeight;
+           //等比例压缩，如果宽度大于高度，则宽度优先，否则高度优先
+           if (originWidth > maxWidth || originHeight > maxHeight) {
+             if (originWidth / originHeight > maxWidth / maxHeight) {
+               // 要求宽度*(原生图片比例)=新图片尺寸
+               targetWidth = maxWidth;
+               targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+             } else {
+               targetHeight = maxHeight;
+               targetWidth = Math.round(maxHeight * (originWidth / originHeight));
+             }
+           }
+           //尝试压缩文件，创建 canvas
+           var ctx = wx.createCanvasContext('firstCanvas');
+           ctx.clearRect(0, 0, targetWidth, targetHeight);
+           ctx.drawImage(tempFilePaths[0], 0, 0, targetWidth, targetHeight);
+           ctx.draw();
+           //更新canvas大小
+           that.setData({
+             cw: targetWidth,
+             ch: targetHeight
+           });
+           //保存图片
+           setTimeout(function() {
+             wx.canvasToTempFilePath({
+               canvasId: 'firstCanvas',
+               success: (res) => {
+                 //写入图片数组
+                 var uploadpic = "uploadPic[" + index + "]";
+                 //
+                 that.setData({
+                   [uploadpic]: res.tempFilePath
+                 });
+                 uploadFile = res.tempFilePath;
+                 wx.uploadFile({
+                   url: api.uploadurl, //仅为示例，非真实的接口地址
+                   filePath: uploadFile,
+                   header: {
+                    "Content-Type": "multipart/form-data"
+                    },
+                    formData: {
+                      method: 'POST' //请求方式
+                    },
+                    name: 'file',
+                    success(res) {
+                      var r = res.data
+                      var jj = JSON.parse(r);
+                      var sj = api.viewUrl + jj.message
+                      // res.data.data = ""
+                      if (type == '1') {
+                        that.setData({
+                          picIurl: sj,
+                          picIurl1:jj.message
+                        })
+                      } else if (type == '2') {
+                        that.setData({
+                          picIurltwo: sj,
+                          picIurltwo1:jj.message
+                        })
+                      } else if (type == '3') {
+                        that.setData({
+                          picDetail: sj,
+                          picDetail1:jj.message
+                        })
+                      } else if (type == '4') {
+                        that.setData({
+                          picDetailtwo: sj,
+                          picDetailtwo1:jj.message
+                        })
+                      }
+                    }
+                 })
+               },
+               fail: (err) => {
+                 console.error(err)
+               }
+             }, this)
+           }, 500);
+          }
+        })
+      }
+    })
+  }
 
 
 
