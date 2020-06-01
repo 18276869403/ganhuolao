@@ -11,17 +11,19 @@ Page({
     showList:[],
     id:'',
     wxUserId:'',
+    workerskill:'',
+    price:0,
     istrue:0,
     flag: true,
     index: 0,
     day: 0,
+    predict:'',
     array: ['天/元', '月/元', '季/元', '年/元'],
     tian: ['天', '月', '季', '年']
   },
 
   onLoad: function (options) {
     var workerDetail = JSON.parse(options.obj)
-    console.log(workerDetail)
     var id = workerDetail.id
     var phone = workerDetail.phone
     phone = util.formatPhone(phone)
@@ -72,9 +74,18 @@ Page({
     })
   },
   bindPickerDay: function(e) {
-    // console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       day: e.detail.value
+    })
+  },
+  bindPrice:function(e){
+    this.setData({
+      price:e.detail.value
+    })
+  },
+  bindDate:function(e){
+    this.setData({
+      predict: e.detail.value
     })
   },
   bintapDetails: function() {
@@ -88,14 +99,50 @@ Page({
       flag: true
     })
   },
+  //获取雇佣事项
+  guyongshiinput: function(e) {
+    this.setData({
+      workerskill: e.detail.value
+    })
+  },
   bindCon: function() {
+    if(app.globalData.wxid == ""||app.globalData.wxid == null){
+      this.onUser()
+    }
+    var data = {
+      wxCaseId:app.globalData.wxid,
+      wxCaseId2:this.data.workerDetail.id,
+      estimatedCost:this.data.price + this.data.array[this.data.index],
+      employmentMatters:this.data.workerskill,
+      predict:this.data.predict,
+      backup1:this.data.tian[this.data.day]
+    }
+    console.log(data)
+    qingqiu.get("userWorkAdd",data,function(res){
+      console.log(res)
+    },'post')
     this.setData({
       flag: true
     })
   },
+  onUser: function() {
+    wx.login({
+      success: function(res) {
+        qingqiu.get("getKeyInfo", {
+          code: res.code
+        }, function(re) {
+          app.globalData.wxid = re.result.wxUser.id
+          if (re.result.wxUser.picUrl != null && re.result.wxUser.picUrl.length > 0) {
+            app.globalData.sqgl = 1
+          }
+          app.globalData.openid = re.result.openId
+          app.globalData.wxState = re.result.wxUser.wxState
+        }, "POST")
+      }
+    })
+  },
   phonecall:function(e){
     var phone = e.currentTarget.dataset.phone
-    console.log(phone)
     wx.makePhoneCall({
       phoneNumber: phone,
     })
