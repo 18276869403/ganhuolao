@@ -62,6 +62,7 @@ Page({
               re.result.records[i].backup1 = re.result.records[i].backup1.split(',')
             }
           }
+          console.log(re.result.records)
           that.setData ({
             needsList : re.result.records
           })
