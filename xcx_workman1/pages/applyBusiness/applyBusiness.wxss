@@ -48,7 +48,7 @@ page {
 }
 
 .content-title {
-  width: 17%;
+  width: 20%;
   text-align: left;
   margin-left: 3%;
   height: 80rpx;
@@ -75,6 +75,9 @@ page {
   line-height: 72rpx;
   width: 77%;
   margin-right: 3%;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 
 .content-text1 {
@@ -83,13 +86,19 @@ page {
   line-height: 72rpx;
   width: 80%;
   margin-right: 3%;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
  
 .content-text2 {
   color: #333;
   font-size: 28rpx;
   line-height: 72rpx;
-  width: 70%;
+  width: 80%;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
  
 .content-title-gongzhong {
@@ -134,7 +143,7 @@ page {
 }
 
 .placeholder {
-  color: #333;
+  color: #999999;
   font-size: 28rpx;
 }
 
@@ -157,6 +166,7 @@ page {
   padding-top: 16rpx;
   padding-bottom: 16rpx;
   padding-left: 25rpx;
+  z-index: 10;
   padding-right: 25rpx;
   background: #f5f6f9;
 }
@@ -651,7 +661,7 @@ page {
   background: #000;
   opacity: 0.6;
   overflow: hidden;
-  z-index: 1000;
+  z-index: 10000;
   color: #fff;
 }
 

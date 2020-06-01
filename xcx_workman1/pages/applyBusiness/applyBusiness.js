@@ -59,11 +59,11 @@ Page({
     }],
     needsTypeList: [{
         id: 1,
-        name: '商家'
+        name: '工人'
       },
       {
         id: 2,
-        name: '工人'
+        name: '商家'
       }
     ],
     items: [{
@@ -379,7 +379,21 @@ Page({
     } else {
       litype = 1;
     }
+    var typeid = "fenleitype1.yjid"
+    var typeerji = "fenleitype1.erjiid"
+    var typestate = "fenleitype1.typestate"
+    var typeid1 = "fenleitype2.yjid"
+    var typeerji1 = "fenleitype2.erjiid"
+    var typestate1 = "fenleitype2.typestate"
     that.setData({
+      [typeid]:'',
+      [typeerji]:'',
+      [typestate]:false,
+      [typeid1]:'',
+      [typeerji1]:'',
+      [typestate1]:false,
+      fenClass1:'',
+      fenClass2:'',
       needsTypeid: id,
       litype: litype,
       yijiname: '',
@@ -400,7 +414,21 @@ Page({
     } else {
       litype = 1;
     }
+    var typeid = "fenleitype1.yjid"
+    var typeerji = "fenleitype1.erjiid"
+    var typestate = "fenleitype1.typestate"
+    var typeid1 = "fenleitype2.yjid"
+    var typeerji1 = "fenleitype2.erjiid"
+    var typestate1 = "fenleitype2.typestate"
     that.setData({
+      [typeid]:'',
+      [typeerji]:'',
+      [typestate]:false,
+      [typeid1]:'',
+      [typeerji1]:'',
+      [typestate1]:false,
+      fenClass1:'',
+      fenClass2:'',
       needsTypeid: id,
       litype: litype,
       yijiname: '',
@@ -461,42 +489,6 @@ Page({
       return
     }
     if (that.data.needsTypeid == 1) {
-      if (that.data.phone.length != 11) {
-        wx.showToast({
-          title: '请输入11位手机号',
-          icon: 'none',
-          duration: 2000
-        })
-        return
-      }
-      // that.data.areaId + ",请选择商铺区域|" + 
-      var s = qingqiu.yanzheng(that.data.secondId + ",请现在业务分类|" + that.data.needsname + ",请输入商品名称|" + that.data.linkman + ",请输入联系人|" + that.data.phone + ",请输入联系电话|" + that.data.workaddress + ",请输入商铺详细地址|" + that.data.needscontent + ",请输入商铺介绍|" + that.data.picIurl + ",请上传门头照")
-      // + that.data.picZz + ",请上传营业执照"
-      if (s != 0) {
-        wx.showToast({
-          title: s,
-          icon: 'none',
-          duration: 2000
-        })
-        return
-      }
-      data = {
-        id: app.globalData.wxid,
-        oneClassName: that.data.fenleitype1.yjid + "," + that.data.fenleitype2.yjid,
-        twoClassName: that.data.fenleitype2.erjiid + "," + that.data.fenleitype2.erjiid,
-        oneAreaId: that.data.typeid,
-        twoAreaId: that.data.areaId,
-        shopName: that.data.needsname,
-        name: that.data.linkman,
-        phone: that.data.phone,
-        shopAddress: that.data.workaddress,
-        content: that.data.needscontent,
-        picIurl: that.data.picIurl,
-        picZz: that.data.picZz,
-        wxState: 0,
-        dateBirth: '0'
-      }
-    } else {
       if (that.data.workerphone.length != 11) {
         wx.showToast({
           title: '请输入11位手机号',
@@ -506,7 +498,7 @@ Page({
         return
       }
       // that.data.areaId + ",请选择区域|"
-      var s = qingqiu.yanzheng(that.data.twoClassId + ",请选择工种分类|" + that.data.workername + ",请输入工人姓名|" + that.data.date + ",请选择出生年月日|" + that.data.worktime + ",请输入从业时长|" + that.data.workerphone + ",请输入联系电话|" + that.data.workerskill + ",请输入技能介绍|" + that.data.picPerson1 + ",请上传身份证正面照|" + that.data.picPerson1 + ",请上传身份证反面照")
+      var s = qingqiu.yanzheng(that.data.fenleitype1.yjid + ",请选择工种分类|" + that.data.workername + ",请输入工人姓名|" + that.data.date + ",请选择出生年月日|" + that.data.worktime + ",请输入从业时长|" + that.data.workerphone + ",请输入联系电话|" + that.data.workerskill + ",请输入技能介绍|" + that.data.picPerson1 + ",请上传身份证正面照|" + that.data.picPerson1 + ",请上传身份证反面照")
       // + that.data.workeraddress + ",请输入详细地址|" + that.data.picPerson1 + ",请上传身份证正面|" + that.data.picPerson2 + ",请上传身份证反面"
       if (s != 0) {
         wx.showToast({
@@ -534,9 +526,45 @@ Page({
         picPerson2: that.data.picPerson4,
         wxState: 1
       }
+    } else {
+      if (that.data.phone.length != 11) {
+        wx.showToast({
+          title: '请输入11位手机号',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }
+      // that.data.areaId + ",请选择商铺区域|" + 
+      var s = qingqiu.yanzheng(that.data.fenleitype1.yjid + ",请现在业务分类|" + that.data.needsname + ",请输入商品名称|" + that.data.linkman + ",请输入联系人|" + that.data.phone + ",请输入联系电话|" + that.data.workaddress + ",请输入商铺详细地址|" + that.data.needscontent + ",请输入商铺介绍|" + that.data.picIurl + ",请上传门头照")
+      // + that.data.picZz + ",请上传营业执照"
+      if (s != 0) {
+        wx.showToast({
+          title: s,
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }
+      data = {
+        id: app.globalData.wxid,
+        oneClassName: that.data.fenleitype1.yjid + "," + that.data.fenleitype2.yjid,
+        twoClassName: that.data.fenleitype2.erjiid + "," + that.data.fenleitype2.erjiid,
+        oneAreaId: that.data.typeid,
+        twoAreaId: that.data.areaId,
+        shopName: that.data.needsname,
+        name: that.data.linkman,
+        phone: that.data.phone,
+        shopAddress: that.data.workaddress,
+        content: that.data.needscontent,
+        picIurl: that.data.picIurl,
+        picZz: that.data.picZz,
+        wxState: 0,
+        dateBirth: '0'
+      }
     }
-    console.log(data)
     qingqiu.get("wxUserAdd", data, function(re) {
+      console.log(re)
       if (re.data.success == true) {
         wx.login({
           success: function(res) {
@@ -587,8 +615,8 @@ Page({
            console.log(originWidth);
            //压缩比例
            // 最大尺寸限制
-           var maxWidth = 1200,
-             maxHeight = 600;
+           var maxWidth = 800,
+             maxHeight = 400;
            // 目标尺寸
            var targetWidth = originWidth,
              targetHeight = originHeight;
@@ -778,6 +806,8 @@ Page({
       yijiname: that.data.yijiname1
     })
   },
+
+  // 获取分类
   typefenleiyj: function() {
     var that = this 
     var type = that.data.needsTypeid
@@ -796,10 +826,10 @@ Page({
               [gongzhongclass]:re.result[i].className
             })
             var onedata = { oneClassId:re.result[i].id }
-            console.log(onedata)
             qingqiu.get("twoClassList",onedata,function(re){
               if (re.success == true){
                 if (re.result != null) {
+                  console.log(re.result)
                   var gongzhongclass2 = 'gongzhong[' + i +'].twoclasslist'
                   that.setData({
                     [gongzhongclass2]:re.result
@@ -1083,7 +1113,8 @@ Page({
     animation.opacity(0).rotateX(-100).step();
     this.setData({
       animationData3: animation.export(),
-      showModalStatus2: true
+      showModalStatus2: true,
+      showModalStatus6:true
     })
     setTimeout(function() {
       animation.opacity(1).rotateX(0).step();
@@ -1112,7 +1143,8 @@ Page({
       animation.translateY(0).step()
       this.setData({
         animationData: animation.export(),
-        showModalStatus2: false
+        showModalStatus2: false,
+        showModalStatus6: false
       })
     }.bind(this), 200)
   },
@@ -1131,7 +1163,8 @@ Page({
     animation.opacity(0).rotateX(-100).step();
     this.setData({
       animationData: animation.export(),
-      showModalStatuslist: true
+      showModalStatuslist: true,
+      showModalStatus6:true
     })
     setTimeout(function() {
       animation.opacity(1).rotateX(0).step();
@@ -1160,7 +1193,8 @@ Page({
       animation.translateY(0).step()
       this.setData({
         animationData2: animation.export(),
-        showModalStatuslist: false
+        showModalStatuslist: false,
+        showModalStatus6:false
       })
     }.bind(this), 200)
   },
@@ -1202,9 +1236,6 @@ Page({
           fenClass1: yijiname + ' | '+ erjiname
         })
       }else if(that.data.fenleitype2.typestate == false){
-        var typeid = "fenleitype2.yjid"
-        var typeerji = "fenleitype2.erjiid"
-        var typestate = "fenleitype2.typestate"
         that.setData({
           [typeid1]:yjid,
           [typeerji1]:id,
@@ -1241,9 +1272,6 @@ Page({
         return
       }
       if(that.data.fenleitype1.typestate == false){
-        var typeid = "fenleitype1.yjid"
-        var typeerji = "fenleitype1.erjiid"
-        var typestate = "fenleitype1.typestate"
         that.setData({
           [typeid]:yjid,
           [typeerji]:id,
@@ -1252,13 +1280,10 @@ Page({
           fenClass1: yijiname + ' | '+ erjiname
         })
       }else if(that.data.fenleitype2.typestate == false){
-        var typeid = "fenleitype2.yjid"
-        var typeerji = "fenleitype2.erjiid"
-        var typestate = "fenleitype2.typestate"
         that.setData({
-          [typeid]:yjid,
-          [typeerji]:id,
-          [typestate]:true,
+          [typeid1]:yjid,
+          [typeerji1]:id,
+          [typestate1]:true,
           yijiname:yijiname,
           fenClass2:yijiname + ' | '+ erjiname
         })
