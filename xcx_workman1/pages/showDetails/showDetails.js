@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    viewUrl:api.viewUrl,
     imgUrl: '',
     bannerImg:[],
     pinglunList:[],
@@ -54,20 +55,36 @@ Page({
     //   createTime: '2019.11.15 12:00',
     //   content: '室内F-10木门（含五金件）室内F-10木门（含五金件）室内F-10木门（含五金件）'
     // }]
-    caseMsgList:[]
+    caseMsgList:[],
+    ssid:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-     var caseMsgList= JSON.parse(options.obj)
-     this.setData({
-      caseMsgList: caseMsgList
-    })
-    console.log(caseMsgList)
+    this.ssid= JSON.parse(options.obj)
+    this.ssxqbyid()
   },
-
+   // 晒晒详情
+   ssxqbyid(){
+    var that =this
+    var data={
+      id : that.ssid
+    }
+    qingqiu.get("pcQueryWxCaseById", data, function(re) {
+    if (re.success == true) {
+      if (re.result != null) {
+        that.caseMsgList = re.result
+        that.setData ({
+          caseMsgList : re.result
+        })
+      } else {
+        qingqiu.tk('未查询到任何数据')
+      }
+    } 
+  })
+  },
   onShow: function() {
   },
   fangda: function(e) {
