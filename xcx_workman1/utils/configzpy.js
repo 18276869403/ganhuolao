@@ -27,6 +27,10 @@ const addUserGood = baseUrl + "pc/hall/addUserGood"
 const editUserGood = baseUrl + "pc/user/editUserGood"
 // 我的推荐
 const pcQueryUserPointPage = baseUrl + "pc/user/pcQueryUserPointPage"
+// 发布晒晒
+const insertCase = baseUrl + "pc/user/insertCase"
+// 晒晒详情
+const pcQueryWxCaseById = baseUrl + "pc/user/pcQueryWxCaseById"
 module.exports = {
   CasePage:CasePage,
   //xqurl:xqurl,
@@ -40,5 +44,7 @@ module.exports = {
   pcQueryUserPointPage:pcQueryUserPointPage,
   deleteUserGood:deleteUserGood,
   deleteMessage:deleteMessage,
-  pcQueryMessagePageByUserID:pcQueryMessagePageByUserID
+  pcQueryMessagePageByUserID:pcQueryMessagePageByUserID,
+  insertCase:insertCase,
+  pcQueryWxCaseById:pcQueryWxCaseById
 };
