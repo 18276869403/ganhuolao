@@ -33,11 +33,12 @@ Page({
     //   },
     // ],
     showList:[],
-    imgList: [
-      // "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
-      // "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
-      // "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg"
-    ]
+    // imgList: [
+    //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
+    //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
+    //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg"
+    // ],
+    imgList:[]
   },
 
   onLoad: function () {
@@ -120,9 +121,11 @@ Page({
     }.bind(this), 200)
   },
   // 跳转到晒晒详情页面
-  showDetails: function() {
+   showDetails: function(e) {
+    var ssid =e.currentTarget.dataset.ssid;
+    var ssid1=JSON.stringify(ssid);
     wx.navigateTo({
-      url: '../showDetails/showDetails',
+      url: '../showDetails/showDetails?obj='+ssid1,
     })
   },
   // 发布晒晒页面
