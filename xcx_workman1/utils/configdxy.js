@@ -1,5 +1,5 @@
 var api = require('./config.js')
-const baseUrl = "http://192.168.1.254:3000/work-boot/" 
+const baseUrl = "http://192.168.1.249:3000/work-boot/" 
 
 // 2.0需要工人，商家分类表：可选2个分类-编辑
 const WxUserAdd = baseUrl + "/pc/hall/wxUserAdd"
@@ -25,6 +25,10 @@ const QueryWxUser = baseUrl + "pc/user/queryWxUser"
 const UserWorkPage = baseUrl + "pc/user/userWorkPage"
 // 个人资料保存
 const EditWxUser = baseUrl + "pc/user/editWxUser"
+// 获取二维码
+const GetCode = baseUrl + "pc/hall/code"
+// 雇佣TA
+const UserWorkAdd = baseUrl + "/pc/hall/userWorkAdd"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -38,5 +42,7 @@ module.exports = {
   twoClassList:TwoClassList,
   queryWxUser:QueryWxUser,
   userWorkPage:UserWorkPage,
-  editWxUser:EditWxUser
+  editWxUser:EditWxUser,
+  getCode:GetCode,
+  userWorkAdd:UserWorkAdd
 };
