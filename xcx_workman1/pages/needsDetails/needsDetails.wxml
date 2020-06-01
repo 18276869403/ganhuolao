@@ -78,7 +78,7 @@
         </view>
       </view>
       <view class="zhanshi" wx:if="{{xqxqlist.backup1 == null}}">
-        <image src="../image/wutu.png" class="zhanshitu1"></image>
+        <image src="../image/zawu1.png" class="zhanshitu1"></image>
       </view>
     </view>
     <!-- 接单报名人员 -->
