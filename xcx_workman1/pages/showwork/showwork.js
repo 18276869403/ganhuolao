@@ -123,9 +123,8 @@ Page({
   // 跳转到晒晒详情页面
    showDetails: function(e) {
     var ssid =e.currentTarget.dataset.ssid;
-    var ssid1=JSON.stringify(ssid);
     wx.navigateTo({
-      url: '../showDetails/showDetails?obj='+ssid1,
+      url: '../showDetails/showDetails?obj='+ssid,
     })
   },
   // 发布晒晒页面

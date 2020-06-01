@@ -81,7 +81,7 @@
             </image>
             <video src="{{item.picOne}}" class="show-img" mode="widthFix" bindtap="imgYu" data-src="{{item.picOne}}" wx:if="{{item.backup3=='1'}}"></video>
           </view>
-          <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item}}">
+          <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
             <view class="hengxiang" >
               <view>
                 <image src="../image/liulan.png" class="liulan-img"></image>
@@ -106,7 +106,7 @@
             <image src="{{item.picOne}}" class="show-img" mode="widthFix" bindtap="imgYu" data-src="{{item.picOne}}" wx:if="{{item.backup3=='0'}}"></image>
             <video src="{{item.picOne}}" class="show-img" mode="widthFix" bindtap="imgYu" data-src="{{item.picOne}}" wx:if="{{item.backup3=='1'}}"></video>
           </view>
-          <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item}}">
+          <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
             <view class="hengxiang" >
               <view>
                 <image src="../image/liulan.png" class="liulan-img"></image>
