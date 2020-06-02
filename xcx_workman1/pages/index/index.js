@@ -49,6 +49,13 @@ Page({
     this.sjneedlist()  //商家
     this.spneedlist() //商品
   },
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    this.onShow()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+  },
   // 截获竖向滑动
   catchTouchMove:function(res){
     return false
@@ -64,14 +71,12 @@ Page({
       if (re.success == true) {
         if (re.result != null) {
           that.xuqiulist = re.result.records
-          console.log(re.result.records)
           for(var i= 0 ; i < that.xuqiulist.length; i++){
             that.xuqiulist[i].publishTime = re.result.records[i].publishTime.split(" ")[0]
             if(that.xuqiulist[i].backup1 != null&& that.xuqiulist[i].backup1.length > 0){
               that.xuqiulist[i].backup1 = re.result.records[i].backup1.split(',')
             }
           }  
-          console.log( re.result.records)
           that.setData ({
             xuqiulist : re.result.records
           })
@@ -92,6 +97,7 @@ Page({
     qingqiu.get("wxUserPage", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
+          console.log(re.result)
           for(let obj of re.result.records){
             if(obj.starClass == 0){
               obj.shopName = ""
