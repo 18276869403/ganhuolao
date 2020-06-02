@@ -1,5 +1,8 @@
 // pages/submitNeeds/submitNeeds.js
 const app = getApp()
+//调用接口js
+const qingqiu = require('../../utils/request.js')
+const api = require('../../utils/config.js')
 Page({
 
   /**
@@ -25,11 +28,11 @@ Page({
     phone: '',
     show: false,
     needsTypeList: [{
-      id: 1,
+      id: 0,
       name: '普通'
     },
     {
-      id: 2,
+      id: 1,
       name: '加急'
     }
     ],
@@ -115,25 +118,150 @@ Page({
 3、您同意，您与干活佬的协议关系终止后，干活佬仍享有下列权利：\
 1) 继续保存您未及时删除的注册信息及您使用干活佬平台服务期间发布的所有信息至法律规定的记录保存期满。\
 2）您在使用干活佬平台服务期间存在违法行为或违反本协议和/或规则的行为的，干活佬仍可依据本协议向您主张权利、追究责任。\
-'
+',
+needTitle:'',
+oneclass:[],
+twoclass:[],
+picIurl:'',
+picIurl1:'',
+needstate:'',
+city:'',
+area:'',
+curIndex:'',
+yijiname1:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    this.cityyiji()
-    this.typefenleiyj()
-    if (options.id != null && options.id != '') {
-      this.getdata(options.id)
-      this.data.id = options.id
-    }
-    this.setData({
-      imgUrl: api.imgUrl
+    onLoad: function (options) {
+      this.setData({
+        wxuserid: app.globalData.wxid
+      })
+      this.oneClass()
+      this.QueryoneArea()
+    },
+    // 发布需求
+    lijifabu(){
+      var that =this
+      var data={
+        wxUserId : that.data.wxuserid,
+        needContent:that.data.needscontent,
+        needTitle:that.data.needsname,
+        backup3:that.data.youhuijia,
+        publishMan:that.data.linkman,
+        publishPhone:that.data.phone,
+        backup1:that.data.picIurl1,
+        needState:that.data.needsTypeid,
+        oneClassId:that.data.firstId,
+        twoClassId:that.data.secondId,
+        oneAreaId:that.data.cityId,
+        twoAreaId:that.data.areaId
+      }
+      qingqiu.get("insertYneed", data, function(re) {
+        debugger
+      console.log(re)
+      if (re.success == true) {
+            wx.switchTab({
+              url: '../need/need',
+            })
+      } 
+    },'post')
+    },
+    // 一级分类
+    oneClass(){
+      var that =this
+      var data={
+        type:3
+      }
+      qingqiu.get("oneClassList", data, function(re) {
+      if (re.success == true) {
+        if (re.result != null) {
+          that.oneclass = re.result
+          that.setData ({
+            oneclass : that.oneclass
+          })
+        } else {
+          qingqiu.tk('未查询到任何数据')
+        }
+      } 
     })
-    if (app.globalData.wxid == null || app.globalData.wxid == '') {
-      this.onUser()
+    },
+    // 二级分类
+    twoClass(){
+      var that =this
+      var data={
+        type:3
+      }
+      qingqiu.get("twoClassList", data, function(re) {
+      if (re.success == true) {
+        if (re.result != null) {
+          that.twoclass = re.result
+          that.setData ({
+            twoclass : that.twoclass
+          })
+        } else {
+          qingqiu.tk('未查询到任何数据')
+        }
+      } 
+    })
+    },
+    // 一级区域
+  QueryoneArea(){
+    var that=this
+    qingqiu.get("queryOneArea", null, function(re) {
+    if (re.success == true) {
+      if (re.result != null) {
+        that.city=re.result
+        that.setData({
+          city:that.city
+        })
+      }else {
+        qingqiu.tk('未查询到任何数据')
+      }
+    } 
+  })
+  },
+  // 二级区域
+  QuerytwoArea(){
+    var that = this
+    var data ={
+      oneAreaId:that.cityId
     }
+    qingqiu.get("queryTwoArea", data, function(re) {
+    if (re.success == true) {
+      if (re.result != null) {
+        that.area=re.result
+        that.setData({
+          area:that.area
+        })
+      }else {
+        qingqiu.tk('未查询到任何数据')
+      }
+    } 
+  })
+  },
+  //隐藏弹窗样式 地址
+  hideModal: function() {
+    var that = this;
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+      hasMask: false
+    })
+    setTimeout(function() {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
+    }.bind(this), 200)
   },
   onUser: function () {
     var that = this
@@ -180,58 +308,6 @@ Page({
       })
     })
   },
-  lijifabu: function () {
-    if (this.data.select == "circle") {
-      qingqiu.tankuang('请勾选注册协议')
-      return
-    }
-    var ziduan = +this.data.needsTypeid + ",请选择发布需求类型|" + this.data.firstId + ",请选择一级分类|" + this.data.secondId + ",请选择二级分类|" + this.data.needsname + ",请输入需求标题|" + this.data.cityId + ",请选择一级区域|" + this.data.areaId + ",请选择二级区域|" + this.data.linkman + ",请输入联系人|" + this.data.phone + ",请输入联系人电话"
-    // + this.data.needscontent + ",请描述您的需求|" 
-    var s = qingqiu.yanzheng(ziduan)
-    if (s != 0) {
-      qingqiu.tankuang(s)
-      return
-    }
-    if (this.data.phone.length != 11) {
-      qingqiu.tankuang('手机号必须11位')
-      return
-    }
-    var data = {
-      needAddress: this.data.workaddress,
-      needContent: this.data.needscontent,
-      needTitle: this.data.needsname,
-      needType: this.data.needsTypeid,
-      oneAreaId: this.data.cityId,
-      oneClassId: this.data.firstId,
-      publishMan: this.data.linkman,
-      publishPhone: this.data.phone,
-      twoAreaId: this.data.areaId,
-      twoClassId: this.data.secondId,
-      wxid: app.globalData.wxid
-    }
-    if (this.data.id != null && this.data.id != '') {
-      data.nid = this.data.id
-      qingqiu.get('uploadNeed', data, function (re) {
-        if (re.data.success == true) {
-          wx.switchTab({
-            url: '../index/index',
-          })
-        } else {
-          qingqiu.tankuang('修改失败请稍后再试')
-        }
-      }, 'post')
-    } else {
-      qingqiu.get("releaseNeed", data, function (re) {
-        if (re.data.success == true) {
-          wx.switchTab({
-            url: '../index/index',
-          })
-        } else {
-          qingqiu.tankuang('发布失败稍后再试')
-        }
-      }, 'post')
-    }
-  },
   //获取输入的需求标题
   needsnameinput: function (e) {
     this.setData({
@@ -262,7 +338,7 @@ Page({
       workaddress: e.detail.value
     })
   },
-  //获取输入的工作地址
+  //获取输入的初价
   youhuijiainput: function (e) {
     this.setData({
       youhuijia: e.detail.value
@@ -323,17 +399,29 @@ Page({
   // 左侧按钮
   left: function (e) {
     var that = this;
-    var index = e.currentTarget.dataset.index;
+    //var index = e.currentTarget.dataset.index;
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name
     that.setData({
-      show: true,
+      // show: true,
       firstId: id,
-      curIndex: index,
-      yijiname1: name,
-      erjiName: []
+      yijiname1: name
     })
-    that.typefenleiej();
+    var data={
+      oneClassId:that.data.firstId
+    }
+    qingqiu.get("twoClassList", data, function(re) {
+    if (re.success == true) {
+      if (re.result != null) {
+        that.twoclass = re.result
+        that.setData ({
+          twoclass : that.twoclass
+        })
+      } else {
+        qingqiu.tk('未查询到任何数据')
+      }
+    } 
+  })
   },
   // 右侧单选点击
   right: function (e) {
@@ -342,11 +430,11 @@ Page({
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name
     that.setData({
-      show: false,
       secondId: id,
       curIndex: index,
       erjiname: name,
-      yijiname: this.data.yijiname1
+      yijiname: this.data.yijiname1,
+      showModalStatus6: false,
     })
   },
   // 
@@ -503,7 +591,21 @@ Page({
       cityname1: name,
       show: true
     })
-    this.cityerji()
+    var data ={
+      oneAreaId:that.data.cityId
+    }
+    qingqiu.get("queryTwoArea", data, function(re) {
+    if (re.success == true) {
+      if (re.result != null) {
+        that.area=re.result
+        that.setData({
+          area:that.area
+        })
+      }else {
+        qingqiu.tk('未查询到任何数据')
+      }
+    } 
+  })
   },
   // 右侧单选点击
   arearight: function (e) {
@@ -516,7 +618,8 @@ Page({
       curIndex: index,
       areaname: name,
       show: false,
-      cityname: that.data.cityname1
+      cityname: that.data.cityname1,
+      showModalStatus: false,
     })
   },
   // 服务规则页面显示
@@ -577,53 +680,101 @@ Page({
     })
     console.log(img)
   },
-  //上传图片
-  upimg: function () {
-    var that = this;
-    if (that.data.workaddress.split(',').length >= 6) {
-      qingqiu.tankuang('图片最多可以上传6个')
-      return
-    }
+  // 图片上传（对接完成）
+  upimg: function(e) {
+    var type = e.currentTarget.dataset.type
+    var index = e.currentTarget.dataset.number
+    var that = this
+    let uploadFile = ''; //最后处理完，图片上传的图片地址
     wx.chooseImage({
-      sizeType: ['original', 'compressed'],
+      count:9,
+      sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
       sourceType: ['album', 'camera'],
-      count: 1,
-      success: function (res) {
-        // const tempFilePaths = res.tempFilePaths
-        for (var i = 0; i < res.tempFilePaths.length; i++) {
-          // console.log("第一个请求地址tempFilePaths:" + res.tempFilePaths[i])
-
-          wx.uploadFile({
-            url: api['addimgUrl'], //仅为示例，非真实的接口地址
-            filePath: res.tempFilePaths[i],
-            header: {
-              "Content-Type": "multipart/form-data"
-            },
-            formData: {
-              method: 'POST' //请求方式
-            },
-            name: 'file',
-            success(res) {
-              // var sj = "files/20191220/微信图片_201912191116351_1576820870302.png"
-              var r = res.data
-              var jj = JSON.parse(r);
-              var sj = jj.message
-              var tu = ''
-              if (that.data.workaddress == '') {
-                tu = sj
-              } else {
-                tu = (that.data.workaddress + "," + sj)
-              }
-              that.setData({
-                workaddress: tu,
-                tupianlist: tu.split(',')
-              })
-
-              // res.data.data = ""
-            }
-          })
-        }
+      success:function(res) {
+        console.log(res)
+       const tempFilePaths = res.tempFilePaths;
+ 
+       //获得原始图片大小
+       wx.getImageInfo({
+         src: res.tempFilePaths[0],
+         success(res) {
+           // console.log('获得原始图片大小',res.width)
+           //console.log(res.height)
+           var originWidth, originHeight;
+           originHeight = res.height;
+           originWidth = res.width;
+           console.log(originWidth);
+           //压缩比例
+           // 最大尺寸限制
+           var maxWidth = 1200,
+             maxHeight = 600;
+           // 目标尺寸
+           var targetWidth = originWidth,
+             targetHeight = originHeight;
+           //等比例压缩，如果宽度大于高度，则宽度优先，否则高度优先
+           if (originWidth > maxWidth || originHeight > maxHeight) {
+             if (originWidth / originHeight > maxWidth / maxHeight) {
+               // 要求宽度*(原生图片比例)=新图片尺寸
+               targetWidth = maxWidth;
+               targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+             } else {
+               targetHeight = maxHeight;
+               targetWidth = Math.round(maxHeight * (originWidth / originHeight));
+             }
+           }
+           //尝试压缩文件，创建 canvas
+           var ctx = wx.createCanvasContext('firstCanvas');
+           ctx.clearRect(0, 0, targetWidth, targetHeight);
+           ctx.drawImage(tempFilePaths[0], 0, 0, targetWidth, targetHeight);
+           ctx.draw();
+           //更新canvas大小
+           that.setData({
+             cw: targetWidth,
+             ch: targetHeight
+           });
+           //保存图片
+           setTimeout(function() {
+             wx.canvasToTempFilePath({
+               canvasId: 'firstCanvas',
+               success: (res) => {
+                 //写入图片数组
+                 var uploadpic = "uploadPic[" + index + "]";
+                 //
+                 that.setData({
+                   [uploadpic]: res.tempFilePath
+                 });
+                 uploadFile = res.tempFilePath;
+                 wx.uploadFile({
+                   url: api.uploadurl, //仅为示例，非真实的接口地址
+                   filePath: uploadFile,
+                   header: {
+                    "Content-Type": "multipart/form-data"
+                    },
+                    formData: {
+                      method: 'POST' //请求方式
+                    },
+                    name: 'file',
+                    success(res) {
+                      var r = res.data
+                      var jj = JSON.parse(r);
+                      var sj = api.viewUrl + jj.message
+                      // res.data.data = ""
+                        that.setData({
+                          picIurl: sj,
+                          picIurl1:jj.message
+                        })
+                      
+                    }
+                 })
+               },
+               fail: (err) => {
+                 console.error(err)
+               }
+             }, this)
+           }, 500);
+          }
+        })
       }
     })
-  },
+  }
 })

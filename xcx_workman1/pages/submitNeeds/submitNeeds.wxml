@@ -25,8 +25,8 @@
     </view>
 
     <view class="content-item hengxiang">
-      <view class="content-title">优惠价</view>
-      <input type="text" placeholder="请输入优惠价" class="shurukuang" placeholder-class="placeholder" value='{{needsname}}' name="youhuijia" bindinput='youhuijiainput'></input>
+      <view class="content-title">初价</view>
+      <input type="text" placeholder="请输入初价" class="shurukuang" placeholder-class="placeholder" value='{{youhuijia}}' name="youhuijia" bindinput='youhuijiainput'></input>
     </view>
 
     <view class="content-item-textarea">
@@ -35,7 +35,7 @@
     <view class="content-item hengxiang" bindtap="showModal">
       <view class="content-title">所在区域</view>
       <view class="content-text" wx:if="{{cityname==''}}">请选择所在区域</view>
-      <view class='content-text2' wx:if="{{cityname!=''}}">{{cityname}} - {{areaname}}</view>
+      <view class='content-text2' wx:if="{{cityname!=''}}" >{{cityname}} - {{areaname}}</view>
       <view class="enter">
         <image src="../image/enter.png" class="enter-img"></image>
       </view>
@@ -64,8 +64,9 @@
       <image src="../image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image>
     </view>
   </view>
-  <view class="fabu">
-    <image src="../image/shangchuan.png" class="fabu-item"></image>
+  <view class="fabu" bindtap="upimg" data-number="0" data-type="1">
+    <image src="../image/shangchuan.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
+    <image src="{{picIurl}}" class="show-img" wx:if="{{picIurl!=''}}"></image>
   </view>
   <view class='content-icon hengxiang'>
     <icon type="{{select}}" size="22" data-index="{{index}}" data-select="{{select}}" bindtap="change" />
@@ -93,7 +94,7 @@
       <view class='s-left'>
         <scroll-view class='left-navbar' scroll-y="true">
           <view class='normal-title'>一级分类</view>
-          <view wx:for="{{navLeftItems}}" class="nav_left_items {{firstId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="left" data-index="{{index}}" data-name=" {{item.className}}" data-id='{{item.id}}' wx:if="{{item.backup1=='3'}}">
+          <view wx:for="{{oneclass}}" class="nav_left_items {{firstId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="left" data-index="{{index}}" data-name=" {{item.className}}" data-id='{{item.id}}' >
             <!-- <view class='scroll-name'> -->
             {{item.className}}
             <!-- </view> -->
@@ -104,7 +105,7 @@
       <view class='s-right'>
         <scroll-view class='left-navbar1' scroll-y="true">
           <view class='normal-title'>二级分类</view>
-          <view wx:for="{{navRightItems}}" class="nav_left_items {{secondId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="right" data-index="{{index}}" data-name=" {{item.className}}" data-id='{{item.id}}'>
+          <view wx:for="{{twoclass}}" class="nav_left_items {{secondId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="right" data-index="{{index}}" data-name=" {{item.className}}" data-id='{{item.id}}'>
             <!-- <view class='scroll-name'> -->
             {{item.className}}
             <!-- </view> -->
@@ -155,3 +156,4 @@
     <view class='close-button' bindtap='hideModal1'>关闭</view>
   </view>
 </view>
+<canvas canvas-id="firstCanvas" style="width: {{cw}}px; height: {{ch}}px;position:fixed;left:100%;"></canvas>
