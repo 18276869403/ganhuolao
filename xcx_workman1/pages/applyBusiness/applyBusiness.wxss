@@ -556,7 +556,7 @@ page {
   border-radius: 8rpx;
   font-size: 14px;
   color: #999;
-  margin-bottom: 30rpx;
+  margin-bottom: 10rpx;
   position: relative;
 }
 

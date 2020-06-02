@@ -59,12 +59,20 @@ Page({
           that.showList=re.result.records
           for(var i= 0 ; i < that.showList.length; i++){
             that.showList[i].picOne = api.viewUrl+re.result.records[i].picOne.split(',')[0]
-          }  
+          } 
           that.setData({
             showList:re.result.records
           })
         } 
       } 
+    })
+  },
+  // 晒晒点击事件
+  goshowshai:function(e){
+    var obj = e.currentTarget.dataset.id
+    console.log(obj)
+    wx.navigateTo({
+      url: '../showDetails/showDetails?obj='+ obj,
     })
   },
   bindPickerChange: function(e) {

@@ -50,7 +50,7 @@ Page({
         if(re.result != null){
           console.log(re.result)
             if(re.result.starClass == 0){
-              re.result.starClass = ""
+              re.result.starClass = "暂未评定"
             }else if(re.result.starClass == 1){
               re.result.starClass = "一级工匠"
             }else if(re.result.starClass == 2){

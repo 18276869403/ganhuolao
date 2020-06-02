@@ -98,7 +98,7 @@
       <view class="content-basic-title">晒晒</view>
       <view class="content-show">
         <view class="show-item zongxiang" wx:for="{{showList}}" wx:key="key">
-          <view class="show">
+          <view class="show" bindtap="goshowshai" data-id="{{item.id}}">
             <view class="show-item-top">
               <image src="{{item.picOne}}" class="show-img" wx:if="{{item.backup3=='0'}}"></image>
               <video src="{{item.picOne}}" class="show-img" wx:if="{{item.backup3=='1'}}"></video>

@@ -51,7 +51,7 @@ Page({
         name: '室内F-10木门（含五室内F-10木门（含五',
         price: '12',
       },
-    ],
+    ]
   },
   // 图片预览
   tupian:function(e){
@@ -85,15 +85,18 @@ Page({
     qingqiu.get("casePage", data, function(re) {
     if (re.success == true) {
       if (re.result.records != null) {
-         that.goodsList = re.result.records
-         for(let obj of re.result.records){
-           obj.picOne= that.data.viewUrl + obj.picOne.split(',')[0]
-           obj.picTwo= that.data.viewUrl + obj.picTwo.split(',')[0]
-           }
-        //   console.log(re.result.records)
-        //  that.setData ({
-        //   goodslists: re.result.records
-        //   })
+          that.goodsList = re.result.records
+          for(let obj of re.result.records){
+            if(obj.picOne.indexOf(",") == -1){
+              obj.picOne = that.data.viewUrl + obj.picOne
+            }else{
+              obj.picOne= that.data.viewUrl + obj.picOne.split(',')[0]
+              obj.picTwo= that.data.viewUrl + obj.picTwo.split(',')[0]
+            }
+          }
+          that.setData ({
+            showList: re.result.records
+          })
         }
       } 
     })
@@ -126,7 +129,6 @@ Page({
             that.setData ({
               goodslists: re.result.records
             })
-  
           } else {
             qingqiu.tk('未查询到任何数据')
           }

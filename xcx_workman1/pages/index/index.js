@@ -51,7 +51,7 @@ Page({
   },
   // 下拉刷新
   onPullDownRefresh: function () {
-    this.onShow()
+    this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
@@ -100,7 +100,7 @@ Page({
           console.log(re.result)
           for(let obj of re.result.records){
             if(obj.starClass == 0){
-              obj.shopName = ""
+              obj.shopName = "暂未评定"
             }else if(obj.starClass == 1){
               obj.shopName = "一级工匠"
             }else if(obj.starClass == 2){

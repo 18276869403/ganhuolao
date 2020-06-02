@@ -152,14 +152,24 @@
       </view> -->
       <view class="fabu1">
         <view class="fabu-item1 zongxiang" bindtap='upimg' data-number="0" data-type='3'>
-          <view wx:if="{{picPerson1=='' ||picPerson1==null}}">
-            <image src="../image/zhengmian.png" class="fabu-item1"></image>
+          <view wx:if="{{picIurl=='' ||picIurl==null}}">
+            <image src="../image/touxiang.png" class="fabu-item1"></image>
           </view>
 
+          <view wx:if="{{picIurl!=''&&picIurl!=null}}">
+            <image src="{{picIurl}}" class="fabu1-img"></image>
+          </view>
+
+        </view>
+      </view>
+      <view class="fabu1">
+        <view class="fabu-item1 zongxiang" bindtap='upimg' data-number="0" data-type='4'>
+          <view wx:if="{{picPerson1==''||picPerson1==null}}">
+            <image src="../image/zhengmian.png" class="fabu-item1"></image>
+          </view>
           <view wx:if="{{picPerson1!=''&&picPerson1!=null}}">
             <image src="{{picPerson1}}" class="fabu1-img"></image>
           </view>
-
         </view>
       </view>
       <view class="fabu1">
@@ -167,7 +177,6 @@
           <view wx:if="{{picPerson2==''||picPerson2==null}}">
             <image src="../image/fanmian.png" class="fabu-item1"></image>
           </view>
-
           <view wx:if="{{picPerson2!=''&&picPerson2!=null}}">
             <image src="{{picPerson2}}" class="fabu1-img"></image>
           </view>

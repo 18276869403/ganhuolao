@@ -1,5 +1,5 @@
 var api = require('./config.js')
-const baseUrl = "http://192.168.1.249:3000/work-boot/" 
+const baseUrl = "http://192.168.1.250:3000/work-boot/" 
 
 // 2.0需要工人，商家分类表：可选2个分类-编辑
 const WxUserAdd = baseUrl + "/pc/hall/wxUserAdd"

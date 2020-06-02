@@ -64,7 +64,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.ssid= JSON.parse(options.obj)
+    this.ssid= options.obj
     this.ssxqbyid()
   },
    // 晒晒详情

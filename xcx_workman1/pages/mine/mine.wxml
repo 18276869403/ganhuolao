@@ -32,7 +32,7 @@
             <view>
               <image src="../image/gongjiang.png" class="sort-img"></image>
             </view>
-            <view style="width:80rpx;">{{wxUser.starClass}}</view>
+            <view style="width:110rpx;">{{wxUser.starClass}}</view>
           </view>
           <view class="hengxiang top-left-sort">
             <view>

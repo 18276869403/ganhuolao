@@ -174,6 +174,34 @@ Page({
 '
   },
 
+  // 获取一级区域
+  getcity:function(){
+    var that = this
+    qingqiu.get("queryOneArea",null,function(res){
+      if(res.success==true){
+        for(let i=0;i<res.result.length;i++){
+          that.getarea(res.result[i].id)
+        }
+        that.setData({
+          city:res.result
+        })
+      }
+    })
+  },
+  // 获取二级区域
+  getarea:function(e){
+    var that = this
+    var data = {
+      oneAreaId:e
+    }
+    qingqiu.get("queryTwoArea",data,function(res){
+      if(res.success == true){
+        that.setData({
+          area:res.result
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -200,6 +228,7 @@ Page({
         needsTypeid:options.typeid
       })
     }
+    this.getcity()
   },
   onUser: function() {
     var that = this
@@ -208,7 +237,6 @@ Page({
         qingqiu.get("getKeyInfo", {
           code: res.code
         }, function(re) {
-          console.log(re)
           app.globalData.wxid = re.result.wxUser.id
           if (re.result.wxUser.picUrl != null && re.result.wxUser.picUrl.length > 0) {
             app.globalData.sqgl = 1
@@ -327,7 +355,7 @@ Page({
   },
   // 日期选择
   bindDateChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
     })
@@ -440,7 +468,7 @@ Page({
   },
   // 性别选择
   radioChange: function(e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
+    // console.log('radio发生change事件，携带value值为：', e.detail.value)
     this.setData({
       sex: e.detail.value
     })
@@ -497,8 +525,7 @@ Page({
         })
         return
       }
-      // that.data.areaId + ",请选择区域|"
-      var s = qingqiu.yanzheng(that.data.fenleitype1.yjid + ",请选择工种分类|" + that.data.workername + ",请输入工人姓名|" + that.data.date + ",请选择出生年月日|" + that.data.worktime + ",请输入从业时长|" + that.data.workerphone + ",请输入联系电话|" + that.data.workerskill + ",请输入技能介绍|" + that.data.picPerson1 + ",请上传身份证正面照|" + that.data.picPerson1 + ",请上传身份证反面照")
+      var s = qingqiu.yanzheng(that.data.areaId + ",请选择区域|" + that.data.fenleitype1.yjid + ",请选择工种分类|" + that.data.workername + ",请输入工人姓名|" + that.data.date + ",请选择出生年月日|" + that.data.worktime + ",请输入从业时长|" + that.data.workerphone + ",请输入联系电话|" + that.data.workerskill + ",请输入技能介绍|" + that.data.picPerson1 + ",请上传身份证正面照|" + that.data.picPerson1 + ",请上传身份证反面照")
       // + that.data.workeraddress + ",请输入详细地址|" + that.data.picPerson1 + ",请上传身份证正面|" + that.data.picPerson2 + ",请上传身份证反面"
       if (s != 0) {
         wx.showToast({
@@ -535,8 +562,7 @@ Page({
         })
         return
       }
-      // that.data.areaId + ",请选择商铺区域|" + 
-      var s = qingqiu.yanzheng(that.data.fenleitype1.yjid + ",请现在业务分类|" + that.data.needsname + ",请输入商品名称|" + that.data.linkman + ",请输入联系人|" + that.data.phone + ",请输入联系电话|" + that.data.workaddress + ",请输入商铺详细地址|" + that.data.needscontent + ",请输入商铺介绍|" + that.data.picIurl + ",请上传门头照")
+      var s = qingqiu.yanzheng(that.data.areaId + ",请选择商铺区域|" + that.data.fenleitype1.yjid + ",请现在业务分类|" + that.data.needsname + ",请输入商品名称|" + that.data.linkman + ",请输入联系人|" + that.data.phone + ",请输入联系电话|" + that.data.workaddress + ",请输入商铺详细地址|" + that.data.needscontent + ",请输入商铺介绍|" + that.data.picIurl + ",请上传门头照")
       // + that.data.picZz + ",请上传营业执照"
       if (s != 0) {
         wx.showToast({
@@ -563,8 +589,8 @@ Page({
         dateBirth: '0'
       }
     }
+    console.log(data)
     qingqiu.get("wxUserAdd", data, function(re) {
-      console.log(re)
       if (re.success == true) {
         wx.showToast({
           title: '入驻成功',
@@ -707,7 +733,7 @@ Page({
                  })
                },
                fail: (err) => {
-                 console.error(err)
+                //  console.error(err)
                }
              }, this)
            }, 500);
@@ -757,11 +783,11 @@ Page({
   },
   cityyiji: function() {
     var that = this
-    qingqiu.get("oneAreaService", {}, function(re) {
+    qingqiu.get("queryOneArea", {}, function(re) {
       if (re.data.result.length > 0) {
         that.setData({
-          typeid: re.data.result[0].id,
-          workcityname1: re.data.result[0].areaName
+          typeid: re.result[0].id,
+          workcityname1: re.result[0].areaName
         })
       }
       that.setData({
@@ -775,9 +801,9 @@ Page({
     var data = {
       oneAreaId: that.data.typeid
     }
-    qingqiu.get("getAllTwoArea", data, function(re) {
+    qingqiu.get("queryTwoArea", data, function(re) {
       that.setData({
-        area: re.data.result
+        area: re.result
       })
     })
   },
@@ -821,7 +847,6 @@ Page({
     qingqiu.get("oneClassList", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
-          console.log(re.result)
           for(let i=0;i<re.result.length;i++){
             var gongzhongclass = 'gongzhong[' + i +'].oneclass'
             var gongzhongid = 'gongzhong[' + i + '].id'
@@ -1289,7 +1314,6 @@ Page({
           yijiname:yijiname,
           fenClass2:yijiname + ' | '+ erjiname
         })
-        console.log(that.data.fenClass2)
       }else{
         wx.showToast({
           title: '只能同时选择两种',
