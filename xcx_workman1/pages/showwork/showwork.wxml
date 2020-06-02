@@ -76,10 +76,10 @@
     <view class="left">
       <block wx:for-items="{{showList}}" wx:key="{{item.id}}">
         <view class="show" wx:if="{{index%2 == 0}}">
-          <view class="show-item-top">
-            <image src="{{item.picOne}}" class="show-img" mode="widthFix" bindtap="imgYu" data-src="{{item.picOne}}" wx:if="{{item.backup3=='0'}}">
+          <view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
+            <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}">
             </image>
-            <video src="{{item.picOne}}" class="show-img" mode="widthFix" bindtap="imgYu" data-src="{{item.picOne}}" wx:if="{{item.backup3=='1'}}"></video>
+            <video src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}"></video>
           </view>
           <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
             <view class="hengxiang" >
@@ -102,9 +102,9 @@
     <view class="right">
       <block wx:for-items="{{showList}}" wx:key="{{item.id}}">
         <view class="show" wx:if="{{index%2 != 0}}">
-          <view class="show-item-top">
-            <image src="{{item.picOne}}" class="show-img" mode="widthFix" bindtap="imgYu" data-src="{{item.picOne}}" wx:if="{{item.backup3=='0'}}"></image>
-            <video src="{{item.picOne}}" class="show-img" mode="widthFix" bindtap="imgYu" data-src="{{item.picOne}}" wx:if="{{item.backup3=='1'}}"></video>
+          <view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
+            <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}"></image>
+            <video src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}"></video>
           </view>
           <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
             <view class="hengxiang" >

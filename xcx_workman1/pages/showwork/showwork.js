@@ -66,14 +66,14 @@ Page({
       } 
     })
   },
-  // 晒晒点击事件
-  imgYu:function(event){
-    var src = event.currentTarget.dataset.src;
-    wx.previewImage({
-      current: src,
-      urls: this.data.imgList
-    })
-  },
+  // // 晒晒点击事件
+  // imgYu:function(event){
+  //   var src = event.currentTarget.dataset.src;
+  //   wx.previewImage({
+  //     current: src,
+  //     urls: this.data.imgList
+  //   })
+  // },
   // 发布弹窗显示
   showModal1: function () {
     this.setData({
