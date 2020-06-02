@@ -1,10 +1,13 @@
 // pages/goodsDetails/goodsDetails.js
+const qingqiu = require('../../utils/request.js')
+const api = require('../../utils/config.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    viewUrl:api.viewUrl,
     spxqlist:[]
   },
 
@@ -13,13 +16,40 @@ Page({
    */
   onLoad: function (options) {
     // this.spxiangqinglist()
-  var splist = JSON.parse(options.obj)
-  console.log(splist);
-  this.setData({
-    splist: splist
-  })
+    var splist = JSON.parse(options.obj)
+    this.setData({
+      splist: splist
+    })
   },
-
+  tupian:function(e){
+    var current = e.currentTarget.dataset.src
+    wx.previewImage({
+      current: current,//当前显示图片的http链接，我这边是把图片转成了base64
+      urls: [current] //需要预览的图片http链接列表
+    })
+  },
+  // 进他的店
+  goShopping:function(){
+    var that = this
+    var data = {
+      id:that.data.splist.userId,
+    }
+    qingqiu.get("queryWxUser",data,function(res){
+      if(res.success==true){
+        res.result.picIurl = that.data.viewUrl + res.result.picIurl
+        var obj = JSON.stringify(res.result)
+        wx.navigateTo({
+          url: '../businessDetails/businessDetails?obj=' + obj,
+        })
+      }else{
+        wx.showToast({
+          title: '操作出错了',
+          icon:'none',
+          duration:'2000'
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
