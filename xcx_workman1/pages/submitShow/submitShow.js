@@ -13,24 +13,26 @@ Page({
     areaname: '',
     cityId: '',
     areaId: '',
-    city: [{
-        id: 1,
-        areaName: '万载'
-      },
-      {
-        id: 2,
-        areaName: '万载111'
-      }
-    ],
-    area: [{
-        id: 1,
-        areaName: '双桥镇'
-      },
-      {
-        id: 2,
-        areaName: '双桥镇11'
-      }
-    ],
+    // city: [{
+    //     id: 1,
+    //     areaName: '万载'
+    //   },
+    //   {
+    //     id: 2,
+    //     areaName: '万载111'
+    //   }
+    // ],
+    city:[],
+    // area: [{
+    //     id: 1,
+    //     areaName: '双桥镇'
+    //   },
+    //   {
+    //     id: 2,
+    //     areaName: '双桥镇11'
+    //   }
+    // ],
+    area:[],
     showImg: [{
         id: 1,
         showimg: '../image/tu.png'
@@ -49,14 +51,55 @@ Page({
     imgUrl: '',
     cityname1: '',
     picIurl1:'',
-    picIurl:''
+    picIurl:'',
+    addresslist:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.setData({
+      wxuserid: app.globalData.wxid
+    })
+    this.QueryoneArea()
+    // this.QuerytwoArea()
+  },
+  // 一级区域
+  QueryoneArea(){
+    var that = this
+    qingqiu.get("queryOneArea", null, function(re) {
+    if (re.success == true) {
+      if (re.result != null) {
+        that.city=re.result
+        console.log(that.addresslist)
+        that.setData({
+          city:that.city
+        })
+      }else {
+        qingqiu.tk('未查询到任何数据')
+      }
+    } 
+  })
+  },
+  // 二级区域
+  QuerytwoArea(){
+    var that = this
+    var data ={
+      oneAreaId:that.cityId
+    }
+    qingqiu.get("queryTwoArea", data, function(re) {
+    if (re.success == true) {
+      if (re.result != null) {
+        that.area=re.result
+        that.setData({
+          area:that.area
+        })
+      }else {
+        qingqiu.tk('未查询到任何数据')
+      }
+    } 
+  })
   },
 
   onShow: function() {
@@ -70,15 +113,36 @@ Page({
       url: '../showwork/showwork',
     })
   },
+  // // 发布晒晒
+  // lijifabu(){
+  //   var that =this
+  //   var data={
+  //     wxUserId : 257,
+  //     backup3:0,
+  //     caseName : that.data.needscontent,
+  //     picOne:that.data.picIurl1
+  //   }
+  //   qingqiu.get("insertCase", data, function(re) {
+  //   console.log(re)
+  //   if (re.success == true) {
+  //         wx.switchTab({
+  //           url: '../showwork/showwork',
+  //         })
+  //   } 
+  // },'post')
+  // },
   // 发布晒晒
   lijifabu(){
     var that =this
     var data={
-      wxUserId : 257,
+      wxUserId : that.data.wxuserid,
       backup3:0,
+      oneAreaId:that.data.cityId,
+      twoAreaId:that.data.areaId,
       caseName : that.data.needscontent,
       picOne:that.data.picIurl1
     }
+    debugger
     qingqiu.get("insertCase", data, function(re) {
     console.log(re)
     if (re.success == true) {
@@ -96,7 +160,6 @@ Page({
   },
   //地址 显示弹窗样式
   showModal: function(e) {
-    debugger
     this.setData({
       hasMask: true
     })
@@ -171,24 +234,38 @@ Page({
   // 左侧按钮
   cityleft: function(e) {
     var that = this;
-    var index = e.currentTarget.dataset.index;
+    // var index = e.currentTarget.dataset.index;
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name
     that.setData({
       cityId: id,
-      curIndex: index,
       cityname1: name,
+    })
+    var data ={
+      oneAreaId:id
+    }
+    qingqiu.get("queryTwoArea", data, function(re) {
+      if (re.success == true) {
+        if (re.result != null) {
+          that.area=re.result
+          that.setData({
+            area:that.area
+          })
+        }else {
+          qingqiu.tk('未查询到任何数据')
+        }
+      } 
     })
   },
   // 右侧单选点击
   arearight: function(e) {
     var that = this;
-    var index = e.currentTarget.dataset.index;
+    //var index = e.currentTarget.dataset.index;
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name
     that.setData({
       areaId: id,
-      curIndex: index,
+      //curIndex: index,
       areaname: name,
       showModalStatus: false,
       cityname: this.data.cityname1
@@ -201,6 +278,7 @@ Page({
     var that = this
     let uploadFile = ''; //最后处理完，图片上传的图片地址
     wx.chooseImage({
+      count:9,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
       sourceType: ['album', 'camera'],
       success:function(res) {
