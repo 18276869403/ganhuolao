@@ -1,6 +1,6 @@
 var api = require('./config.js')
 //const baseUrl = "http://192.168.1.242:8081/work-boot/"
-const baseUrl = "http://192.168.1.249:3000/work-boot/"
+const baseUrl = "http://192.168.1.250:3000/work-boot/"
 // 需求列表
 // const xqurl = baseUrl + "work/yneed/list"
 // 大厅最新需求
@@ -31,7 +31,23 @@ const pcQueryUserPointPage = baseUrl + "pc/user/pcQueryUserPointPage"
 const insertCase = baseUrl + "pc/user/insertCase"
 // 晒晒详情
 const pcQueryWxCaseById = baseUrl + "pc/user/pcQueryWxCaseById"
+// 一级区域
+const queryOneArea = baseUrl + "pc/hall/queryOneArea"
+// 二级区域
+const queryTwoArea = baseUrl + "pc/hall/queryTwoArea"
+// 需求发布
+const insertYnend = baseUrl + "pc/user/insertYnend"
+// 一级分类
+const oneClassList = baseUrl + "pc/hall/oneClassList"
+// 二级分类
+const twoClassList = baseUrl + "pc/hall/twoClassList"
+
 module.exports = {
+  twoClassList:twoClassList,
+  oneClassList:oneClassList,
+  insertYnend:insertYnend,
+  queryOneArea:queryOneArea,
+  queryTwoArea:queryTwoArea,
   CasePage:CasePage,
   //xqurl:xqurl,
   zuixinxq:zuixinxq,
