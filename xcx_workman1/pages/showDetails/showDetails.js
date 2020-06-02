@@ -56,6 +56,7 @@ Page({
     //   content: '室内F-10木门（含五金件）室内F-10木门（含五金件）室内F-10木门（含五金件）'
     // }]
     caseMsgList:[],
+    imgList:[],
     ssid:''
   },
 
@@ -76,6 +77,11 @@ Page({
     if (re.success == true) {
       if (re.result != null) {
         that.caseMsgList = re.result
+        that.imgList = that.caseMsgList.picOne.split(',')
+        for(var i= 0 ; i < that.imgList.length; i++){
+          that.imgList[i]=api.viewUrl+that.imgList[i]
+        }
+
         that.setData ({
           caseMsgList : re.result
         })
@@ -84,6 +90,15 @@ Page({
       }
     } 
   })
+  },
+  // 晒晒点击事件
+  imgYu:function(event){
+    var that =this
+    // var src = event.currentTarget.dataset.src;
+    wx.previewImage({
+      current: api.viewUrl+this.data.caseMsgList.picOne,
+      urls: that.imgList
+    })
   },
   onShow: function() {
   },

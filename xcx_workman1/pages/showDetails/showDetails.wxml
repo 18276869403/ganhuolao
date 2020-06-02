@@ -3,7 +3,7 @@
   <view class='banner'>
     <swiper indicator-dots="true" indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff" autoplay="true" class="swiper">
       <block wx:key="{{item.id}}">
-        <swiper-item>
+        <swiper-item bindtap="imgYu">
           <image src=" {{viewUrl}}{{caseMsgList.picOne}}" bindtap="fangda" data-img="{{item}}" class="slide-image" />
         </swiper-item>
       </block>
@@ -35,9 +35,9 @@
         </view>
       </view>
     </view>
-    <view class="top-button" bindtap="lianxita">
+    <!-- <view class="top-button" bindtap="lianxita">
       联系TA
-    </view>
+    </view> -->
   </view>
   <!-- 评论 -->
   <view class="content zongxiang">
