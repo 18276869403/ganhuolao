@@ -48,7 +48,8 @@ Page({
     goodsLists:[],
     spmyid:'',
     spid:'',
-    spxx:''
+    spxx:'',
+    type:0
   },
   /**
    * 生命周期函数--监听页面加载
@@ -86,7 +87,7 @@ Page({
   // 添加商品
   addEditGoods:function(e){
     wx.navigateTo({
-      url: '../addEditGoods/addEditGoods?obj='+ this.spmyid,
+      url: '../addEditGoods/addEditGoods?obj='+ this.spmyid, 
     })
   },
   // 编辑商品
@@ -94,7 +95,7 @@ Page({
     var spxx = e.currentTarget.dataset.spxx
     var spxx1 = JSON.stringify(spxx);
     wx.navigateTo({
-      url: '../addEditGoods/addEditGoods?obj='+ spxx1,
+      url: '../addEditGoods/addEditGoods?obj1='+ spxx1,
     })
   },
   //删除我的商品
