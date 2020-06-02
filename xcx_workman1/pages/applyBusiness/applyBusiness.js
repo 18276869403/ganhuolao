@@ -548,7 +548,7 @@ Page({
         shopAddress: that.data.workeraddress,
         phone: that.data.workerphone,
         content: that.data.workerskill,
-        picZz: that.data.picZz,
+        picIurl: that.data.pirIurl1,
         picPerson1: that.data.picPerson3,
         picPerson2: that.data.picPerson4,
         wxState: 1
@@ -589,7 +589,6 @@ Page({
         dateBirth: '0'
       }
     }
-    console.log(data)
     qingqiu.get("wxUserAdd", data, function(re) {
       if (re.success == true) {
         wx.showToast({
@@ -728,6 +727,8 @@ Page({
                           picPerson2: sj,
                           picPerson4:jj.message
                         })
+                      }else if(type == '5'){
+
                       }
                     }
                  })

@@ -56,20 +56,15 @@
       <textarea class="textarea" placeholder="请输入商铺介绍" style="color:#999999;" placeholder-class="placeholder" maxlength='-1' value='{{needscontent}}' name="needscontent" bindinput='needscontentinput' wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
     </view>
     <view class="hengxiang fabu-list1">
-      <view class="fabu" bindtap='upimg' data-number="0" data-type='1'>
-        <image src="../image/shangchuan.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
+      <view class="fabu" bindtap='upimg' data-number="0" data-type='5'>
+        <image src="../image/sctouxiang.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
         <image src="{{picIurl}}" class="fabu1-img" wx:if="{{picIurl!=''}}"></image>
-        <view>
-          上传门头照
-        </view>
       </view>
       <view class="fabu zongxiang" bindtap='upimg' data-number="0" data-type='2'>
         <view>
           <image src="../image/shangchuan.png" class="fabu-item" wx:if="{{picZz==''}}"></image>
           <image src="{{picZz}}" class="fabu1-img" wx:if="{{picZz!=''}}"></image>
         </view>
-        <view> 上传营业执照</view>
-
       </view>
     </view>
   </view>
@@ -151,19 +146,17 @@
         </view>
       </view> -->
       <view class="fabu1">
-        <view class="fabu-item1 zongxiang" bindtap='upimg' data-number="0" data-type='3'>
-          <view wx:if="{{picIurl=='' ||picIurl==null}}">
-            <image src="../image/touxiang.png" class="fabu-item1"></image>
+        <view class="fabu-item1 zongxiang" bindtap='upimg' data-number="0" data-type='1'>
+          <view wx:if="{{picIurl==''||picIurl==null}}">
+            <image src="../image/sctouxiang.png" class="fabu-item1"></image>
           </view>
-
           <view wx:if="{{picIurl!=''&&picIurl!=null}}">
             <image src="{{picIurl}}" class="fabu1-img"></image>
           </view>
-
         </view>
       </view>
       <view class="fabu1">
-        <view class="fabu-item1 zongxiang" bindtap='upimg' data-number="0" data-type='4'>
+        <view class="fabu-item1 zongxiang" bindtap='upimg' data-number="0" data-type='3'>
           <view wx:if="{{picPerson1==''||picPerson1==null}}">
             <image src="../image/zhengmian.png" class="fabu-item1"></image>
           </view>
