@@ -32,6 +32,13 @@ Page({
   //   })
   //   this.getWxUser()
   // },
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    this.onShow()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+  },
   getWxUser:function(openid){
     var that = this
     var data = {
@@ -55,7 +62,6 @@ Page({
             }if(re.result.starClass == 5){
               re.result.starClass = "五级工匠"
             }
-            re.result.title = util.subName(re.result.name)
             re.result.picIurl = that.data.viewUrl + re.result.picIurl
             re.result.oneClassName = re.result.oneClassName.replace(/,/, " | ")
             re.result.twoClassName = re.result.twoClassName.replace(/,/, " | ")

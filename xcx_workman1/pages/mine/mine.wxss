@@ -17,7 +17,7 @@ page {
 
 .minebg-img {
   width: 750rpx;
-  height: 316rpx;
+  height: 366rpx;
 }
 
 .content-list {
@@ -187,8 +187,9 @@ page {
   font-size: 14px;
   color: #333;
   position: absolute;
-  top: 240rpx;
+  /* top: 240rpx; */
   text-align: center;
+  margin-top: 145px;
 }
 
 .content-item1 {
@@ -267,7 +268,7 @@ page {
 
 .content-top {
   position: absolute;
-  top: 0rpx;
+  /* top: 0rpx; */
   width: 94%;
   margin-left: 3%;
   margin-right: 3%;
@@ -287,6 +288,7 @@ page {
   font-size: 40rpx;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
+  padding-left: 10rpx;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
@@ -301,13 +303,13 @@ page {
   font-size: 22rpx;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
-  margin-left: 50rpx;
+  margin-left: 10rpx;
 }
 
 .sort-img {
   width: 24rpx;
   height: 24rpx;
-  margin-top: 38rpx;
+  margin-top: 14rpx;
   margin-right: 5rpx;
 }
 

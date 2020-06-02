@@ -1,6 +1,5 @@
 <!--pages/mine/mine.wxml-->
 <view class="container">
-  <view class="top"></view>
 
   <!-- 上方详情块  普通用户-->
   <view class="content zongxiang" wx:if="{{userType==0}}">
@@ -26,12 +25,14 @@
     <view class="content-top hengxiang">
       <view class="content-top-left zongxiang">
         <view class="hengxiang top-left-details">
-          <view class="top-left-name" style="font-weight:350;">{{wxUser.title}}</view>
+          <view class="top-left-name" style="font-weight:350;">{{wxUser.name}}</view>
+        </view>
+        <view class="top-left-type hengxiang">
           <view class="hengxiang top-left-sort">
             <view>
               <image src="../image/gongjiang.png" class="sort-img"></image>
             </view>
-            <view>{{wxUser.starClass}}</view>
+            <view style="width:80rpx;">{{wxUser.starClass}}</view>
           </view>
           <view class="hengxiang top-left-sort">
             <view>
