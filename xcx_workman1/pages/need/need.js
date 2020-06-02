@@ -41,7 +41,13 @@ Page({
     // ],
     needsList:[]
   },
-
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    this.onLoad()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+  },
   onLoad: function() {
     this.xqneedlist()
   },
