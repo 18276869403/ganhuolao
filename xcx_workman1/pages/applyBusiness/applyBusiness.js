@@ -563,26 +563,33 @@ Page({
         dateBirth: '0'
       }
     }
-    console.log(data)
     qingqiu.get("wxUserAdd", data, function(re) {
+      console.log(re)
       if (re.success == true) {
-        wx.login({
-          success: function(res) {
-            qingqiu.get("getKeyInfo", {
-              code: res.code
-            }, function(re) {
-              app.globalData.wxid = re.result.wxUser.id
-              app.globalData.openid = re.result.openId
-              app.globalData.wxState = re.result.wxUser.wxState
-              wx.switchTab({
-                url: '../mine/mine',
-              })
-            }, "POST")
-          }
+        wx.showToast({
+          title: '入驻成功',
+          icon: 'success',
+          duration: 3000
         })
+        setTimeout(function(){
+          wx.login({
+            success: function(res) {
+              qingqiu.get("getKeyInfo", {
+                code: res.code
+              }, function(re) {
+                app.globalData.wxid = re.result.wxUser.id
+                app.globalData.openid = re.result.openId
+                app.globalData.wxState = re.result.wxUser.wxState
+                wx.switchTab({
+                  url: '../mine/mine',
+                })
+              }, "POST")
+            }
+          })
+        },1000)
       } else {
         wx.showToast({
-          title: re.data.message,
+          title: re.message,
           icon: 'none',
           duration: 2000
         })
