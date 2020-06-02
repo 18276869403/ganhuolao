@@ -75,7 +75,7 @@ page {
   width: 94%;
   margin-left: 3%;
   margin-right: 3%;
-  margin-top: 60rpx;
+  margin-top: 20rpx;
 }
 
 .content-list {
