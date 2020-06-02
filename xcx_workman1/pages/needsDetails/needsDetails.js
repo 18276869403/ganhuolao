@@ -149,7 +149,6 @@ Page({
         if(res.confirm){
           qingqiu.get("delYneedAndNeedSign", data, function(re) {
             if (re.success == true) {
-              if (re.result == 1) {
                wx.showToast({
                  title: '删除成功',
                  icon:'success',
@@ -161,8 +160,7 @@ Page({
                   icon: 'none',
                   duration: 2000
                 })
-              }
-            } 
+              } 
           })
         }else{
           return
@@ -175,7 +173,7 @@ Page({
     var that = this
     var data={
       id: that.id,
-      needState: that.data.xqxqlist.needState
+      needState: 1
     }
     console.log(data)
     qingqiu.get("needUpdateStateById", data, function(re) {
