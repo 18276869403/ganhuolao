@@ -40,7 +40,9 @@ Page({
     // ],
     imgList:[]
   },
-
+  onPullDownRefresh: function () {
+    wx.stopPullDownRefresh()
+  },
   onLoad: function () {
     this.SelectshowList()
   },
