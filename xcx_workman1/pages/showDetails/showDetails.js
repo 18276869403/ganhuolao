@@ -81,7 +81,6 @@ Page({
         for(var i= 0 ; i < that.imgList.length; i++){
           that.imgList[i]=api.viewUrl+that.imgList[i]
         }
-
         that.setData ({
           caseMsgList : re.result
         })

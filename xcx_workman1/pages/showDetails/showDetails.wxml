@@ -23,7 +23,7 @@
       <view class="top-content-bottom hengxiang">
         <view class="top-content-bottom-item hengxiang">
           <image src="../image/dingwei.png" class="dingwei-img"></image>
-          <view class="top-dingwei">{{caseMsgList.oneAreaId}} | {{caseMsgList.twoAreaId}}</view>
+          <view class="top-dingwei">{{caseMsgList.oneAreaName}} | {{caseMsgList.twoAreaName}}</view>
         </view>
         <view class="hengxiang top-content-bottom-item1">
           <view>
