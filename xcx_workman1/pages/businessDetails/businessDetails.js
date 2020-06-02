@@ -76,6 +76,14 @@ Page({
       phoneNumber: phone,
     })
   },
+  // 跳转商家详情页
+  goshowshai:function(e){
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../showDetails/showDetails?obj=' + id,
+    })
+  },
+
   // 获取店家晒晒
   getGoodsdata:function(id){
     var that = this
