@@ -105,6 +105,8 @@ Page({
       workerskill: e.detail.value
     })
   },
+
+  // 确认雇佣
   bindCon: function() {
     if(app.globalData.wxid == ""||app.globalData.wxid == null){
       this.onUser()
@@ -117,9 +119,20 @@ Page({
       predict:this.data.predict,
       backup1:this.data.tian[this.data.day]
     }
-    console.log(data)
     qingqiu.get("userWorkAdd",data,function(res){
-      console.log(res)
+      if(success == true){
+        wx.showToast({
+          title: '雇佣成功',
+          icon:'success',
+          duration:3000
+        })
+      }else{
+        wx.showToast({
+          title: '雇佣失败',
+          icon:'none',
+          duration:3000
+        })
+      }
     },'post')
     this.setData({
       flag: true
