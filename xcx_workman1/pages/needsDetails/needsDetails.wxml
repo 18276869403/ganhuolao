@@ -52,6 +52,12 @@
 
         <!-- 修改，删除，确认完成，用户为创建者 -->
         <view class="content-chuangjian hengxiang">
+          <view class="delete-button" bindtap="baoming" wx:if="{{xqxqlist.wxUserId!=wxUserid}}">
+            报名
+          </view>
+          <view class="complete-button" style="width:155rpx;" bindtap="zaixianlianxi" wx:if="{{xqxqlist.wxUserId!=wxUserid}}">
+            在线联系
+          </view>
           <view class="update-button" bindtap="xiugaigunali" wx:if="{{xqxqlist.wxUserId===wxUserid}}">
             修改
           </view>
