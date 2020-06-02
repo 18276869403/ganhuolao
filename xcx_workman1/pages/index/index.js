@@ -97,7 +97,6 @@ Page({
     qingqiu.get("wxUserPage", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
-          console.log(re.result)
           for(let obj of re.result.records){
             if(obj.starClass == 0){
               obj.shopName = "暂未评定"
