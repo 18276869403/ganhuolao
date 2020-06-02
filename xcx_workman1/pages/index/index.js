@@ -49,6 +49,10 @@ Page({
     this.sjneedlist()  //商家
     this.spneedlist() //商品
   },
+  // 截获竖向滑动
+  catchTouchMove:function(res){
+    return false
+  },
   // 需求列表
   xqneedlist() {
     var that = this
