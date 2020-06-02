@@ -31,9 +31,9 @@
     <view class="content-button" bindtap="lijifabu">
       立即发布
     </view>
-    <view class="content-button" bindtap="fanhui" style=" margin-top: 11rpx;background: #bec2c6;">
+    <!-- <view class="content-button" bindtap="fanhui" style=" margin-top: 11rpx;background: #bec2c6;">
       不想发布了，返回
-    </view>
+    </view> -->
   </view>
 </view>
 
