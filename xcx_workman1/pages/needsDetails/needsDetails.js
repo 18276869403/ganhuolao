@@ -112,38 +112,88 @@ Page({
   //     } 
   //   })
   // },
+  // 需求修改
+  xiugaigunali(){
+    wx.showToast({
+      title: '这个按钮还没有对接哦！',
+      icon:'success',
+      duration:2000
+    })
+  },
+  // 需求在线联系
+  zaixianlianxi(){
+    wx.showToast({
+      title: '这个按钮还没有对接哦！',
+      icon:'success',
+      duration:2000
+    })
+  },
+  // 需求报名
+  baoming(){
+    wx.showToast({
+      title: '这个按钮还没有对接哦！',
+      icon:'success',
+      duration:2000
+    })
+  },
   // 需求删除
   shancuoxuqiu() {
     var that = this
     var data={
       id: that.id
     }
-    qingqiu.get("delYneedAndNeedSign", data, function(re) {
-      if (re.success == true) {
-        if (re.result == 1) {
-          qingqiu.tk('删除成功！')
-        } else {
-          qingqiu.tk('删除失败！')
+    wx.showModal({
+      title:'提示',
+      content:'您确定删除吗？',
+      success:function(res){
+        if(res.confirm){
+          qingqiu.get("delYneedAndNeedSign", data, function(re) {
+            if (re.success == true) {
+              if (re.result == 1) {
+               wx.showToast({
+                 title: '删除成功',
+                 icon:'success',
+                 duration:2000
+               })
+              } else {
+                wx.showToast({
+                  title: re.message,
+                  icon: 'none',
+                  duration: 2000
+                })
+              }
+            } 
+          })
+        }else{
+          return
         }
-      } 
+      }
     })
   },
   // 需求完成
   lianxita() {
     var that = this
     var data={
-      id: that.id
+      id: that.id,
+      needState: that.data.xqxqlist.needState
     }
+    console.log(data)
     qingqiu.get("needUpdateStateById", data, function(re) {
-      debugger
+      console.log(re)
       if (re.success == true) {
-        if (re.result == 1) {
-          qingqiu.tk('已完成')
-        } else {
-          qingqiu.tk('完成失败')
-        }
-      } 
-    })
+        wx.showToast({
+          title: '需求已完成',
+          icon: 'success',
+          duration: 3000
+        })
+      } else{
+        wx.showToast({
+          title: re.message,
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    },"put")
   }
 
 })
