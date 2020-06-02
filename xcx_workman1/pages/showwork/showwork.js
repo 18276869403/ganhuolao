@@ -41,7 +41,10 @@ Page({
     imgList:[]
   },
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh()
+    this.onLoad()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
   },
   onLoad: function () {
     this.SelectshowList()
