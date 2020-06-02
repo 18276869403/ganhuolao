@@ -31,8 +31,8 @@
     <view class="hengxiang"></view>
     <view class="showImg-item" bindtap='upimg' data-number="0" data-type="1">
       <!-- 无数据 上传图片样式 -->
-      <image src="../image/shangchuan.png" class="show-img" wx:if="{{picIurl==''}}"></image>
-      <image src="{{picIurl}}" class="show-img" wx:if="{{picIurl!=''}}"></image>
+      <image src="../image/shangchuan.png" class="show-img" wx:if="{{picIurl1==''}}"></image>
+      <image src="{{viewUrl}}{{picIurl1}}" class="show-img" wx:if="{{picIurl1!=''}}"></image>
       <!-- 轮播图展示第一张 -->
       <!-- <image src="../image/top.png" class="show-img"></image> -->
       <!-- 有数据展示样式 -->
@@ -42,8 +42,8 @@
     <view class="showImg-item" bindtap='upimg' data-number="0" data-type="2">
 
       <!-- 无数据 上传图片样式 -->
-      <image src="../image/shangchuan.png" class="show-img" wx:if="{{picIurltwo==''}}"></image>
-      <image src="{{picIurltwo}}" class="show-img" wx:if="{{picIurltwo!=''}}"></image>
+      <image src="../image/shangchuan.png" class="show-img" wx:if="{{picIurltwo1==''}}"></image>
+      <image src="{{viewUrl}}{{picIurltwo1}}" class="show-img" wx:if="{{picIurltwo1!=''}}"></image>
       <!-- 轮播图展示第二张 -->
       <!-- <image src="../image/top.png" class="show-img"></image> -->
       <!-- 有数据展示样式 -->
@@ -58,8 +58,8 @@
     <view class="hengxiang"></view>
     <view class="showImg-item"  bindtap='upimg' data-number="0" data-type="3">
       <!-- 无数据 上传图片样式 -->
-      <image src="../image/shangchuan.png" class="show-img" wx:if="{{picDetail==''}}"></image>
-      <image src="{{picDetail}}" class="show-img" wx:if="{{picDetail!=''}}"></image>
+      <image src="../image/shangchuan.png" class="show-img" wx:if="{{picDetail1==''}}"></image>
+      <image src="{{viewUrl}}{{picDetail1}}" class="show-img" wx:if="{{picDetail1!=''}}"></image>
       <!-- 轮播图展示第一张 -->
       <!-- <image src="../image/top.png" class="show-img"></image> -->
       <!-- 有数据展示样式 -->
@@ -69,8 +69,8 @@
     <view class="showImg-item" bindtap='upimg' data-number="0" data-type="4">
 
       <!-- 无数据 上传图片样式 -->
-      <image src="../image/shangchuan.png" class="show-img" wx:if="{{picDetailtwo==''}}"></image>
-      <image src="{{picDetailtwo}}" class="show-img" wx:if="{{picDetailtwo!=''}}"></image>
+      <image src="../image/shangchuan.png" class="show-img" wx:if="{{picDetailtwo1==''}}"></image>
+      <image src="{{viewUrl}}{{picDetailtwo1}}" class="show-img" wx:if="{{picDetailtwo1!=''}}"></image>
       <!-- 轮播图展示第二张 -->
       <!-- <image src="../image/top.png" class="show-img"></image> -->
       <!-- 有数据展示样式 -->

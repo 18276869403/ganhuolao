@@ -12,6 +12,9 @@ Page({
     imgUrl: '',
     needsname: '',
     goodsname:'',
+    originalPrice:'',
+    salesPrice:'',
+    detailscontent:'',
     needscontent: '',
     workaddress: '',
     linkman: '',
@@ -38,51 +41,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.addspid = JSON.parse(options.obj)
-    var spxglist = JSON.parse(options.obj)
-    this.spid = spxglist.id
-    this.picIurl=this.data.viewUrl+spxglist.goodPic1[0]
-    this.picIurltwo=this.data.viewUrl+spxglist.goodPic1[1]
-    this.picDetail=this.data.viewUrl+spxglist.goodPic2[0]
-    this.picDetailtwo=this.data.viewUrl+spxglist.goodPic2[1]
+    var spxglist= JSON.parse(options.obj1==undefined?options.obj:options.obj1)
+    this.spid=spxglist
+    if(options.obj==undefined)
+    {
+      var picIurl1=spxglist.goodPic1[0]
+      var picIurltwo1=spxglist.goodPic1[1]
+      var picDetail1=spxglist.goodPic2[0]
+      var picDetailtwo1=spxglist.goodPic2[1]
+    }else{
+      var picIurl1=""
+      var picIurltwo1=""
+      var picDetail1=""
+      var picDetailtwo1=""
+    }
+    console.log(spxglist)
     this.setData({
-      spxglist: spxglist,
-      picIurl:this.picIurl,
-      picIurltwo:this.picIurltwo,
-      picDetail:this.picDetail,
-      picDetailtwo:this.picDetailtwo
-    })
-    debugger
-  },
-
-
-
-  //获取输入的商品名字
-  goodsnameinput: function(e) {
-    var goodsname = "spxglist.goodName"
-    this.setData({
-      [goodsname]: e.detail.value
-    })
-  },
-  //获取输入的原价
-  originalPriceinput: function(e) {
-    var originalPrice = "spxglist.oldPrice"
-    this.setData({
-      [originalPrice]: e.detail.value
-    })
-  },
-  //获取输入的优惠价
-  salesPriceinput: function (e) {
-    var salesPrice = "spxglist.newPrice"
-    this.setData({
-      [salesPrice]: e.detail.value
-    })
-  },
-  //获取输入的商品详情
-  detailscontentinput: function (e) {
-    var detailscontent = "spxglist.goodMemo"
-    this.setData({
-      [detailscontent]: e.detail.value
+      spxglist:spxglist,
+      picIurl1:picIurl1,
+      picIurltwo1:picIurltwo1,
+      picDetail1:picDetail1,
+      picDetailtwo1:picDetailtwo1
     })
   },
   // 修改商品
@@ -91,33 +70,32 @@ Page({
     that.imglunbo=that.data.picIurl1+','+that.data.picIurltwo1
     that.imgDetail=that.data.picDetail1+','+that.data.picDetailtwo1
     var data={
-      id:that.spid,
-      userId:that.addspid.userId,
-      goodName: that.data.spxglist.goodName,
-      oldPrice :that.data.spxglist.oldPrice,
-      newPrice:that.data.spxglist.newPrice,
-      goodMemo:that.data.spxglist.goodMemo,
-      goodPic1:that.imglunbo,
-      goodPic2:that.imgDetail
+      id:that.data.spxglist.id,
+      userId:that.data.spxglist.userId,
+      goodName:that.data.goodsname!=""?that.data.goodsname:that.data.spxglist.goodName,
+      oldPrice:that.data.originalPrice!=""?that.data.originalPrice:that.data.spxglist.oldPrice,
+      newPrice:that.data.salesPrice!=""?that.data.salesPrice:that.data.spxglist.newPrice,
+      goodMemo:that.data.detailscontent!=""?that.data.detailscontent:that.data.spxglist.goodMemo,
+      goodPic1:that.imglunbo!=","?that.imglunbo:that.data.spxglist.goodPic1[0]+','+that.data.spxglist.goodPic1[1],
+      goodPic2:that.imgDetail!=","?that.imglunbo:that.data.spxglist.goodPic2[0]+','+that.data.spxglist.goodPic2[1],
     }
     console.log(data)
     qingqiu.get("editUserGood", data, function(re) {
-      debugger
     if (re.success == true) {
-      var userid = JSON.stringify(that.addspid.userId)
-          wx.navigateTo({
-            url: '../myGoods/myGoods?obj='+userid,
-          })
+      wx.navigateTo({
+        url: '../myGoods/myGoods?obj='+data.userId,
+      })
     } 
   },'put')
   },
+
   // 添加商品
   lijifabu(){
     var that =this
     that.imglunbo=that.data.picIurl1+','+that.data.picIurltwo1
     that.imgDetail=that.data.picDetail1+','+that.data.picDetailtwo1
     var data={
-      userId : that.yhid,
+      userId : that.spid,
       goodName : that.data.goodsname,
       oldPrice :that.data.originalPrice,
       newPrice:that.data.salesPrice,
@@ -125,22 +103,40 @@ Page({
       goodPic1:that.imglunbo,
       goodPic2:that.imgDetail
     }
+    console.log(data)
     qingqiu.get("addUserGood", data, function(re) {
-    console.log(re)
-    debugger
     if (re.success == true) {
-      // if (re.result ==1) {
-        // qingqiu.tk('添加成功！')
-          var userid = JSON.stringify(that.addspid)
           wx.navigateTo({
-            url: '../myGoods/myGoods?obj='+userid,
+            url: '../myGoods/myGoods?obj='+data.userId,
           })
-      // } else {
-      //   qingqiu.tk('添加失败！')
-      // }
     } 
   },'post')
   },
+  //获取输入的商品名字
+  goodsnameinput: function(e) {
+    this.setData({
+      goodsname: e.detail.value
+    })
+  },
+  //获取输入的原价
+  originalPriceinput: function(e) {
+    this.setData({
+      originalPrice: e.detail.value
+    })
+  },
+  //获取输入的优惠价
+  salesPriceinput: function (e) {
+    this.setData({
+      salesPrice: e.detail.value
+    })
+  },
+  //获取输入的商品详情
+  detailscontentinput: function (e) {
+    this.setData({
+      detailscontent: e.detail.value
+    })
+  },
+  
   // 图片上传（对接完成）
   upimg: function(e) {
     var type = e.currentTarget.dataset.type
