@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    needsTypeid: 1,
+    needsTypeid: 0,
     select: 'circle',
     hasMask: false,
     imgUrl: '',
@@ -146,20 +146,20 @@ yijiname1:''
       var that =this
       var data={
         wxUserId : that.data.wxuserid,
+        needType:that.data.needsTypeid,
         needContent:that.data.needscontent,
         needTitle:that.data.needsname,
         backup3:that.data.youhuijia,
         publishMan:that.data.linkman,
         publishPhone:that.data.phone,
         backup1:that.data.picIurl1,
-        needState:that.data.needsTypeid,
+        needState:0,
         oneClassId:that.data.firstId,
         twoClassId:that.data.secondId,
         oneAreaId:that.data.cityId,
         twoAreaId:that.data.areaId
       }
       qingqiu.get("insertYneed", data, function(re) {
-        debugger
       console.log(re)
       if (re.success == true) {
             wx.switchTab({
