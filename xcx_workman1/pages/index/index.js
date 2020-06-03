@@ -224,7 +224,7 @@ Page({
   applyBusiness: function(e) {
     var obj = e.currentTarget.dataset.typeid
     wx.navigateTo({
-      url: '../applyBusiness/applyBusiness?typeid=' + obj,
+      url: '../applyBusiness/applyBusiness?typeid=' + obj + "&type=" + 2,
     })
   },
   // 跳转到推荐有礼页面
