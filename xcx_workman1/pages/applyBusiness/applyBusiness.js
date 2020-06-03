@@ -644,8 +644,8 @@ Page({
            originWidth = res.width;
            //压缩比例
            // 最大尺寸限制
-           var maxWidth = 800,
-             maxHeight = 400;
+           var maxWidth = 1200,
+             maxHeight = 600;
            // 目标尺寸
            var targetWidth = originWidth,
              targetHeight = originHeight;
@@ -682,18 +682,8 @@ Page({
                    [uploadpic]: res.tempFilePath
                  });
                  uploadFile = res.tempFilePath;
-                 //保存到相册
-                 // wx.saveImageToPhotosAlbum({
-                 //   filePath: res.tempFilePath,
-                 //   success: (res) => {
-                 //     console.log(res)
-                 //   },
-                 //   fail: (err) => {
-                 //     console.error(err)
-                 //   }
-                 // })
                  wx.uploadFile({
-                   url: api.uploadurl, //仅为示例，非真实的接口地址
+                   url: api.uploadurl2 + "/" + targetWidth + "/" + targetHeight, //仅为示例，非真实的接口地址
                    filePath: uploadFile,
                    header: {
                     "Content-Type": "multipart/form-data"
@@ -706,6 +696,7 @@ Page({
                       var r = res.data
                       var jj = JSON.parse(r);
                       var sj = that.data.viewUrl + jj.message
+                      console.log(res)
                       // res.data.data = ""
                       if (type == '1') {
                         that.setData({
@@ -727,8 +718,6 @@ Page({
                           picPerson2: sj,
                           picPerson4:jj.message
                         })
-                      }else if(type == '5'){
-
                       }
                     }
                  })
