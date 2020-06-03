@@ -244,7 +244,7 @@ Page({
         url: '../applyBusiness/applyBusiness?typeid='+ "1" + '&type=' + this.data.wxUser.wxState,
       })
     }else{
-      wx.navigateTo({ 
+      wx.navigateTo({  
         url: '../applyBusiness/applyBusiness?typeid='+ "2" + '&type=' + this.data.wxUser.wxState,
       })
     }
