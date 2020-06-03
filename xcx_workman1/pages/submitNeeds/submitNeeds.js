@@ -144,6 +144,23 @@ yijiname1:''
     // 发布需求
     lijifabu(){
       var that =this
+      if(that.data.firstId==""||that.data.secondId==""||that.data.cityId==""||that.data.areaId==""||that.data.picIurl1==""||that.data.phone==""||that.data.linkman==""||that.data.youhuijia==""||that.data.needscontent==""){
+        wx.showToast({
+          title: '有选项未填写！',
+          icon:'none',
+          duration:2000
+        })
+        return
+      }
+      if(that.data.select=="circle")
+      {
+        wx.showToast({
+          title: '请勾选同意协议！',
+          icon:'none',
+          duration:2000
+        })
+        return
+      }
       var data={
         wxUserId : that.data.wxuserid,
         needType:that.data.needsTypeid,
