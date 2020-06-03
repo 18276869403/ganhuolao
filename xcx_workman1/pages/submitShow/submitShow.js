@@ -33,20 +33,21 @@ Page({
     //   }
     // ],
     area:[],
-    showImg: [{
-        id: 1,
-        showimg: '../image/tu.png'
-      },
-      {
-        id: 2,
-        showimg: '../image/tu.png'
-      },
-      {
-        id: 3,
-        showimg: '../image/tu.png'
-      }
-    ],
+    // showImg: [{
+    //     id: 1,
+    //     showimg: '../image/tu.png'
+    //   },
+    //   {
+    //     id: 2,
+    //     showimg: '../image/tu.png'
+    //   },
+    //   {
+    //     id: 3,
+    //     showimg: '../image/tu.png'
+    //   }
+    // ],
     tupian: '',
+    id:'',
     tupianlist: [],
     imgUrl: '',
     cityname1: '',
@@ -63,7 +64,7 @@ Page({
       wxuserid: app.globalData.wxid
     })
     this.QueryoneArea()
-    // this.QuerytwoArea()
+    this.QuerytwoArea()
   },
   // 一级区域
   QueryoneArea(){
@@ -72,7 +73,6 @@ Page({
     if (re.success == true) {
       if (re.result != null) {
         that.city=re.result
-        console.log(that.addresslist)
         that.setData({
           city:that.city
         })
@@ -86,7 +86,7 @@ Page({
   QuerytwoArea(){
     var that = this
     var data ={
-      oneAreaId:that.cityId
+      oneAreaId:that.data.id
     }
     qingqiu.get("queryTwoArea", data, function(re) {
     if (re.success == true) {
@@ -284,7 +284,6 @@ Page({
       success:function(res) {
         console.log(res)
        const tempFilePaths = res.tempFilePaths;
- 
        //获得原始图片大小
        wx.getImageInfo({
          src: res.tempFilePaths[0],
