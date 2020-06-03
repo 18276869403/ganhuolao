@@ -124,16 +124,22 @@ Page({
       wxCaseId2:this.data.workerDetail.id,
       estimatedCost:this.data.price + this.data.array[this.data.index],
       employmentMatters:this.data.workerskill,
+      hiringTime:util.formatDate(new Date()),
       predict:this.data.predict,
       backup1:this.data.tian[this.data.day]
     }
     qingqiu.get("userWorkAdd",data,function(res){
-      if(success == true){
+      if(res.success == true){
         wx.showToast({
           title: '雇佣成功',
           icon:'success',
           duration:3000
         })
+        setTimeout(function(){
+          wx.navigateTo({
+            url: '../myEmploy/myEmploy',
+          })
+        },1500)
       }else{
         wx.showToast({
           title: '雇佣失败',
