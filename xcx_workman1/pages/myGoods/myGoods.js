@@ -105,14 +105,31 @@ Page({
     var data={
       id: spid 
     }
-    qingqiu.get("deleteUserGood", data, function(re) {
-    if (re.success == true) {
-      var userid = JSON.stringify(that.spmyid)
-      wx.navigateTo({
-        url: '../myGoods/myGoods?obj='+userid,
-      })
-    } 
-  },"delete")
+    var userid = JSON.stringify(that.spmyid)
+    wx.showModal({
+      title: '提示',
+      content: '你确定要删除吗？',
+      success (res) {
+        if (res.confirm) {
+          qingqiu.get("deleteUserGood", data, function(re) {
+            if (re.success == true) {
+              wx.showToast({
+                title: '删除成功！',
+                icon:'none',
+                duration:2000
+              })
+              wx.navigateTo({
+                url: '../myGoods/myGoods?obj='+userid,
+              })
+            }},"delete")
+        } else if (res.cancel) {
+          wx.showToast({
+            title: '取消删除！',
+            icon:'none',
+            duration:2000
+          })
+        }
+      }
+    })
 }
-
 })
