@@ -1,6 +1,6 @@
 <!--pages/applyBusiness/applyBusiness.wxml-->
 <view class="container">
-  <view class="top hengxiang">
+  <view class="top hengxiang" wx:if="{{type==2}}">
     <view wx:for="{{needsTypeList}}" wx:key="key" bindtap="changeType" data-id="{{item.id}}" class="xuanzhong" wx:if="{{id==0}}">
       <view wx:if="{{needsTypeid==item.id}}" class="top-item-checked">
         <text class="bian"> {{item.name}}</text>
@@ -8,6 +8,14 @@
        <view wx:if="{{needsTypeid!=item.id}}" class="top-item-normal">
         <text class="">{{item.name}}</text>
       </view>
+    </view>
+  </view>
+  <view class="top hengxiang"  wx:if="{{type!=2}}">
+    <view wx:if="{{needsTypeid==1}}" class="top-item-checked">
+      <text class="bian"> 工人</text>
+    </view>
+    <view wx:if="{{needsTypeid==2}}" class="top-item-checked">
+      <text class="bian"> 商家</text>
     </view>
   </view>
 
@@ -43,7 +51,7 @@
     <view class="content-item hengxiang" bindtap="showModal">
       <view class="content-title">商铺区域</view>
       <view class="content-text" wx:if="{{workcityname==''}}" style="color:#999999;">请选择商铺区域</view>
-      <view class='content-text2' wx:if="{{workcityname!=''}}">{{workcityname}} - {{workareaname}}</view>
+      <view class='content-text2' wx:if="{{workcityname!=''}}" style="color:#999999">{{workcityname}} - {{workareaname}}</view>
       <view class="enter">
         <image src="../image/enter.png" class="enter-img"></image>
       </view>
@@ -113,7 +121,7 @@
     <view class="content-item hengxiang" bindtap="showModal">
       <view class="content-title">所在区域</view>
       <view class="content-text" wx:if="{{workcityname==''}}" style="color:#999999">请选择区域</view>
-      <view class='content-text1' wx:if="{{workcityname!=''}}">{{workcityname}} - {{workareaname}}</view>
+      <view class='content-text1' wx:if="{{workcityname!=''}}" style="color:#999999">{{workcityname}} - {{workareaname}}</view>
       <view class="enter">
         <image src="../image/enter.png" class="enter-img"></image>
       </view>

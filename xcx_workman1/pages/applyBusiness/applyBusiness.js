@@ -11,8 +11,12 @@ Page({
    */
   data: {
     viewUrl:api.viewUrl,
+    type:2,
+    // 获取分类
     fenleitype1:{yjid:'',erjiid:'',typestate:false},
     fenleitype2:{yjid:'',erjiid:'',typestate:false},
+    // 用户信息
+    wxUser:'',
     id: 0,
     needsTypeid: 1,
     select: 'circle',
@@ -206,21 +210,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    if(options.type == 0 || options.type ==1){
+      this.setData({
+        type:options.type
+      })
+      this.getshuju()
+    }
     this.setData({
       imgUrl: api.imgUrl
     })
     if (app.globalData.wxid == null || app.globalData.wxid == '') {
       this.onUser()
-    }
-    if (options.id != null) {
-      this.setData({
-        id: options.id
-      })
-      this.data.id = options.id
-      // this.getshuju()
-    } else {
-      // this.typefenleiyj()
-      // this.cityyiji()
     }
     if(options.typeid != ""){
       this.onloadchangeType(options.typeid)
@@ -247,61 +247,128 @@ Page({
       }
     })
   },
-  // 获取分类
 
+  // 获取信息
   getshuju() {
     var data = {
-      id: this.data.id
+      id: app.globalData.wxid,
     }
     var that = this
-    qingqiu.get('getWXUserById', data, function(re) {
-      if (re.data.result.wxState == 0) {
+    qingqiu.get('queryWxUser', data, function(re) {
+    var typeid = "fenleitype1.yjid"
+    var typeerji = "fenleitype1.erjiid"
+    var typestate = "fenleitype1.typestate"
+    var typeid1 = "fenleitype2.yjid"
+    var typeerji1 = "fenleitype2.erjiid"
+    var typestate1 = "fenleitype2.typestate"
+      if (re.result.wxState == 0) {
+        var str = []
+        var index = []
+        var index1 = []
+        if(re.result.oneClassName.indexOf(',') > -1){
+          str = re.result.oneClassName.split(',')
+          index = re.result.oneClassIds.split(',')
+        }else{
+          str = re.result.oneClassName
+        }
+        var str1 = []
+        if(re.result.twoClassName.indexOf(',') > -1){
+          str1 = re.result.twoClassName.split(',')
+          index1 = re.result.twoClassIds.split(',')
+        }else{
+          str1 = re.result.twoClassName
+        }
+        var temp = ''
+        if(str.length > 0 && str1.length > 0){
+          temp = str[0] + str1[0] + str[1] + str1[1]
+        }else{
+          temp = str[0] + str1[0]
+        }
         that.setData({
-          yijiname: re.data.result.oneClassName,
-          erjiworkname: re.data.result.twoClassName,
-          workcityname: re.data.result.oneAreaName,
-          workareaname: re.data.result.twoAreaName,
-          typeyj: re.data.result.oneClassId,
-          secondId: re.data.result.twoClassId,
-          typeid: re.data.result.oneAreaId,
-          areaId: re.data.result.twoAreaId,
-          needsname: re.data.result.shopName,
-          linkman: re.data.result.name,
-          phone: re.data.result.phone,
-          phone: re.data.result.phone,
-          workaddress: re.data.result.shopAddress,
-          needscontent: re.data.result.content,
-          picIurl: re.data.result.picIurl,
-          picPerson1: re.data.result.picPerson1,
-          picZz: re.data.result.picZz,
-          picPerson2: re.data.result.picPerson,
-          wxState: re.data.result.wxState,
-          needsTypeid: 1,
+          tempClass: temp,
+          yijiname:temp,
+          [typeid]:index[0],
+          [typeerji]:index[1],
+          [typestate]:true,
+          [typeid1]:index1[0],
+          [typeerji1]:index1[1],
+          [typestate1]:true,
+          oneClassName:index[0] + "," + index1[0],
+          twoClassName:index[1] + "," + index1[1],
+          workcityname: re.result.oneAreaName,
+          workareaname: re.result.twoAreaName,
+          typeyj: re.result.oneClassId,
+          secondId: re.result.twoClassId,
+          typeid: re.result.oneAreaId,
+          areaId: re.result.twoAreaId,
+          needsname: re.result.shopName,
+          linkman: re.result.name,
+          phone: re.result.phone,
+          workaddress: re.result.shopAddress,
+          needscontent: re.result.content,
+          picIurl: api.viewUrl +  re.result.picIurl,
+          picPerson1: api.viewUrl +  re.result.picPerson1,
+          picZz: api.viewUrl + re.result.picZz,
+          picPerson2: api.viewUrl +  re.result.picPerson,
+          wxState: re.result.wxState,
+          needsTypeid: 2,
           select: 'success'
         })
       } else {
-        var data = re.data.result.dateBirth.split(' ')
+        var str = []
+        var index = []
+        var index1 = []
+        if(re.result.oneClassName.indexOf(',') > -1){
+          str = re.result.oneClassName.split(',')
+          index = re.result.oneClassIds.split(',')
+        }else{
+          str = re.result.oneClassName
+        }
+        var str1 = []
+        if(re.result.twoClassName.indexOf(',') > -1){
+          str1 = re.result.twoClassName.split(',')
+          index1 = re.result.twoClassIds.split(',')
+        }else{
+          str1 = re.result.twoClassName
+        }
+        var temp = ''
+        if(str.length > 0 && str1.length > 0){
+          temp = str[0] + "|" + str1[0] +","+ str[1] + "|"+ str1[1]
+        }else{
+          temp = str[0] + "," + str1[0]
+        }
+        var data = re.result.dateBirth.split(' ')
         that.setData({
-          yijiname: re.data.result.oneClassName,
-          erjiworkname: re.data.result.twoClassName,
-          workcityname: re.data.result.oneAreaName,
-          workareaname: re.data.result.twoAreaName,
-          typeyj: re.data.result.oneClassId,
-          secondId: re.data.result.twoClassId,
-          typeid: re.data.result.oneAreaId,
-          areaId: re.data.result.twoAreaId,
-          workername: re.data.result.name,
-          sex: re.data.result.sex,
+          tempClass: temp,
+          yijiname:temp,
+          [typeid]:index[0],
+          [typeerji]:index[1],
+          [typeid1]:index1[0],
+          [typeerji1]:index1[1],
+          oneClassName: index[0] + "," + index1[0],
+          twoClassName: index[1] + "," + index1[1],
+          workcityname: re.result.oneAreaName,
+          workareaname: re.result.twoAreaName,
+          typeyj: re.result.oneClassId,
+          secondId: re.result.twoClassId,
+          typeid: re.result.oneAreaId,
+          areaId: re.result.twoAreaId,
+          workername: re.result.name,
+          sex: re.result.sex,
           date: data[0],
-          worktime: re.data.result.employ,
-          workerphone: re.data.result.phone,
-          workeraddress: re.data.result.shopAddress,
-          workerskill: re.data.result.content,
-          picZz: re.data.result.picZz,
-          picPerson1: re.data.result.picPerson1,
-          picPerson2: re.data.result.picPerson2,
-          wxState: re.data.result.wxState,
-          needsTypeid: 2,
+          worktime: re.result.employ,
+          workerphone: re.result.phone,
+          workeraddress: re.result.shopAddress,
+          workerskill: re.result.content,
+          picIurl: api.viewUrl +  re.result.picIurl,
+          picZz: api.viewUrl + re.result.picZz,
+          picPerson1: api.viewUrl + re.result.picPerson1,
+          picPerson2: api.viewUrl + re.result.picPerson2,
+          pirIurl1:re.result.picIurl,
+          picPerson3:re.result.picPerson1,
+          picPerson4:re.result.picPerson2,
+          wxState: re.result.wxState,
+          needsTypeid: 1,
           select: 'success'
         })
       }
@@ -504,10 +571,7 @@ Page({
   tijiaoshenqing: function() {
     var that = this
     var data = {}
-    this.setData({
-      areaId:1,
-      typeid:1
-    })
+    debugger
     if (that.data.select != 'success') {
       wx.showToast({
         title: '未勾选注册协议',
@@ -589,37 +653,71 @@ Page({
         dateBirth: '0'
       }
     }
-    qingqiu.get("wxUserAdd", data, function(re) {
-      if (re.success == true) {
-        wx.showToast({
-          title: '入驻成功',
-          icon: 'success',
-          duration: 3000
-        })
-        setTimeout(function(){
-          wx.login({
-            success: function(res) {
-              qingqiu.get("getKeyInfo", {
-                code: res.code
-              }, function(re) {
-                app.globalData.wxid = re.result.wxUser.id
-                app.globalData.openid = re.result.openId
-                app.globalData.wxState = re.result.wxUser.wxState
-                wx.switchTab({
-                  url: '../mine/mine',
-                })
-              }, "POST")
-            }
+    if(that.data.type == 1 || that.data.type == 0){
+      qingqiu.get("editWxUser",data,function(re){
+        if (re.success == true) {
+          wx.showToast({
+            title: '修改成功',
+            icon: 'success',
+            duration: 3000
           })
-        },1000)
-      } else {
-        wx.showToast({
-          title: re.message,
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    }, 'post')
+          setTimeout(function(){
+            wx.login({
+              success: function(res) {
+                qingqiu.get("getKeyInfo", {
+                  code: res.code
+                }, function(re) {
+                  app.globalData.wxid = re.result.wxUser.id
+                  app.globalData.openid = re.result.openId
+                  app.globalData.wxState = re.result.wxUser.wxState
+                  wx.switchTab({
+                    url: '../mine/mine',
+                  })
+                }, "POST")
+              }
+            })
+          },1000)
+        } else {
+          wx.showToast({
+            title: re.message,
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      },'put')
+    }else{
+      qingqiu.get("wxUserAdd", data, function(re) {
+        if (re.success == true) {
+          wx.showToast({
+            title: '入驻成功',
+            icon: 'success',
+            duration: 3000
+          })
+          setTimeout(function(){
+            wx.login({
+              success: function(res) {
+                qingqiu.get("getKeyInfo", {
+                  code: res.code
+                }, function(re) {
+                  app.globalData.wxid = re.result.wxUser.id
+                  app.globalData.openid = re.result.openId
+                  app.globalData.wxState = re.result.wxUser.wxState
+                  wx.switchTab({
+                    url: '../mine/mine',
+                  })
+                }, "POST")
+              }
+            })
+          },1000)
+        } else {
+          wx.showToast({
+            title: re.message,
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }, 'post')
+    }
   },
 
   // 图片上传（对接完成）
