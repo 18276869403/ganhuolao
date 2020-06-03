@@ -50,10 +50,10 @@
       </view>
     </view>
     <!-- 第五张 -->
-    <view class="fabu" wx:if="{{picimg4!=''}}">
-      <view class="fabu-item zongxiang" data-number="0" data-type="4">
+    <view class="fabu" wx:if="{{picimg5!=''}}">
+      <view class="fabu-item zongxiang" data-number="0" data-type="5">
         <view>
-          <image src="{{picimg4}}" class="show-img"></image>
+          <image src="{{picimg5}}" class="show-img"></image>
         </view>
       </view>
     </view>
