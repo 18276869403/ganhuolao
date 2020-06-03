@@ -20,8 +20,10 @@ Page({
     twoclass:[],
     firstId:'',
     firstname:'',
+    firstnamewhere:'',
     secondId:'',
-    secondname:''
+    secondname:'',
+    secondnamewhere:''
   },
    // 搜索框
    shurukuang:function(e){
@@ -29,30 +31,35 @@ Page({
       sousuotext:e.detail.value
     })
   },
+  // 全部
+  quanbu:function(){
+     var that = this
+     that.data.firstId=''
+     that.data.secondId=''
+     that.data.firstname=''
+     that.setData({
+        showModalStatus: false,
+        firstname:that.data.firstname
+      })
+  },
   // 搜索按钮
   btnsearch:function(){
-    this.setData({
-      needsList:[]
-    })
-    if(this.data.sousuotext == ""){
-      this.setData({
-        needsList:this.data.needsListfy
-      })
-      return
+    var obj = {
+      pageNo:1,
+      pageSize:10
     }
-    var needs = this.data.needsListfy
-    var index = 0 // 索引
-    // 循环数组
-    for(let i=0;i<needs.length;i++){
-      if(needs[i].needTitle.indexOf(this.data.sousuotext) > -1){
-        var list = "needsList["+ index +"]"
-        this.setData({
-          [list]:needs[i]
-        })
-        ++index
-      }
+    if(this.data.sousuotext != "" || this.data.firstId != "undefined" || this.data.firstId != null){
+      obj.needTitle = this.data.sousuotext
     }
+    if(this.data.firstId != "" || this.data.firstId != "undefined" || this.data.firstId != null){
+      obj.oneClassId = this.data.firstId
+    }
+    if(this.data.secondId != ""|| this.data.secondId != "undefined" || this.data.firstId != null){
+      obj.twoClassId = this.data.secondId
+    }
+    this.xqneedlist(obj)
   },
+  // 获取需求
   // 下拉刷新
   onPullDownRefresh: function () {
     this.onLoad()
@@ -61,7 +68,7 @@ Page({
     }, 1000);
   },
   onLoad: function() {
-    this.xqneedlist()
+    this.xqneedlist({pageNo:1,pageSize:10})
     this.oneClass()
     this.twoClass()
   },
@@ -138,17 +145,10 @@ Page({
       yijiname: this.data.yijiname1,
       showModalStatus: false,
     })
-    this.xqneedlist()
   },
   // 需求列表
-  xqneedlist() {
+  xqneedlist(data) {
     var that = this
-    var data={
-      oneClassId:that.data.firstId,
-      twoClassId:that.data.secondId,
-      pages: 1,
-      size: 10
-    }
     qingqiu.get("zuixinxq", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
@@ -161,7 +161,8 @@ Page({
           }
           console.log(re.result.records)
           that.setData ({
-            needsList : re.result.records
+            needsList : re.result.records,
+            needsListfy : re.result.records
           })
         } else {
           qingqiu.tk('未查询到任何数据')

@@ -137,14 +137,13 @@ Page({
     var data={
       wxUserId : that.data.wxuserid,
       backup3:0,
+      backup4:0,
       oneAreaId:that.data.cityId,
       twoAreaId:that.data.areaId,
       caseName : that.data.needscontent,
       picOne:that.data.picIurl1
     }
-    debugger
     qingqiu.get("insertCase", data, function(re) {
-    console.log(re)
     if (re.success == true) {
           wx.switchTab({
             url: '../showwork/showwork',
