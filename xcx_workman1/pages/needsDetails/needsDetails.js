@@ -130,11 +130,26 @@ Page({
   },
   // 需求报名
   baoming(){
-    wx.showToast({
-      title: '这个按钮还没有对接哦！',
-      icon:'success',
-      duration:2000
-    })
+    var that = this
+    var data = {
+      id:that.id,
+      wxUserId:app.globalData.wxid
+    }
+    wx.showModal({
+      title:'提示',
+      cancelText:'否',
+      content:'你确认参与该需求吗？确认后雇主将能够看见你的联系方式！',
+      confirmText:'是',
+      success:function(res){
+        if(res.confirm){
+          qingqiu.get("insertNeedSign",data,function(res){
+            console.log(res)
+          })
+        }else{
+          return
+        }
+      }
+    },'post')
   },
   // 需求删除
   shancuoxuqiu() {
