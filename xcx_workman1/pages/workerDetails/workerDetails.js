@@ -133,13 +133,13 @@ Page({
         wx.showToast({
           title: '雇佣成功',
           icon:'success',
-          duration:3000
+          duration:2000
         })
         setTimeout(function(){
           wx.navigateTo({
             url: '../myEmploy/myEmploy',
           })
-        },1500)
+        },1000)
       }else{
         wx.showToast({
           title: '雇佣失败',
