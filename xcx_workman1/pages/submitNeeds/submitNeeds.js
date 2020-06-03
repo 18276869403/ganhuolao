@@ -13,7 +13,7 @@ Page({
     select: 'circle',
     hasMask: false,
     imgUrl: '',
-    firstId: '',
+    firstId: 3,
     secondId: '',
     yijiname: '',
     erjiname: '',
@@ -139,7 +139,9 @@ yijiname1:''
         wxuserid: app.globalData.wxid
       })
       this.oneClass()
+      this.twoClass()
       this.QueryoneArea()
+      this.QuerytwoArea()
     },
     // 发布需求
     lijifabu(){
@@ -208,7 +210,7 @@ yijiname1:''
     twoClass(){
       var that =this
       var data={
-        type:3
+        oneClassId:that.data.firstId
       }
       qingqiu.get("twoClassList", data, function(re) {
       if (re.success == true) {
@@ -243,7 +245,7 @@ yijiname1:''
   QuerytwoArea(){
     var that = this
     var data ={
-      oneAreaId:that.cityId
+      oneAreaId:that.data.cityId
     }
     qingqiu.get("queryTwoArea", data, function(re) {
     if (re.success == true) {
@@ -704,13 +706,10 @@ yijiname1:''
     var that = this
     let uploadFile = ''; //最后处理完，图片上传的图片地址
     wx.chooseImage({
-      count:9,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
       sourceType: ['album', 'camera'],
       success:function(res) {
-        console.log(res)
        const tempFilePaths = res.tempFilePaths;
- 
        //获得原始图片大小
        wx.getImageInfo({
          src: res.tempFilePaths[0],
@@ -720,7 +719,6 @@ yijiname1:''
            var originWidth, originHeight;
            originHeight = res.height;
            originWidth = res.width;
-           console.log(originWidth);
            //压缩比例
            // 最大尺寸限制
            var maxWidth = 1200,
@@ -762,7 +760,7 @@ yijiname1:''
                  });
                  uploadFile = res.tempFilePath;
                  wx.uploadFile({
-                   url: api.uploadurl, //仅为示例，非真实的接口地址
+                   url: api.uploadurl2 + "/" + targetWidth + "/" + targetHeight, //仅为示例，非真实的接口地址
                    filePath: uploadFile,
                    header: {
                     "Content-Type": "multipart/form-data"
@@ -775,17 +773,16 @@ yijiname1:''
                       var r = res.data
                       var jj = JSON.parse(r);
                       var sj = api.viewUrl + jj.message
-                      // res.data.data = ""
-                        that.setData({
-                          picIurl: sj,
-                          picIurl1:jj.message
-                        })
-                      
+                      console.log(res)
+                      that.setData({
+                        picIurl: sj,
+                        picIurl1:jj.message
+                      })
                     }
                  })
                },
                fail: (err) => {
-                 console.error(err)
+                //  console.error(err)
                }
              }, this)
            }, 500);
@@ -793,5 +790,5 @@ yijiname1:''
         })
       }
     })
-  }
+  },
 })
