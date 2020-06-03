@@ -235,10 +235,19 @@ Page({
   },
   // 跳转到我的资料页面
   myInfo: function () {
-    var obj = JSON.stringify(this.data.wxUser)
-    wx.navigateTo({
-      url: '../myInfo/myInfo?obj=' + obj,
-    })
+    if (this.data.wxUser.wxState == 2){
+      wx.navigateTo({
+        url: '../myInfo/myInfo?obj=' + obj,
+      })
+    }else if(this.data.wxUser.wxState == 1){
+      wx.navigateTo({
+        url: '../applyBusiness/applyBusiness?typeid='+ "1" + '&type=' + this.data.wxUser.wxState,
+      })
+    }else{
+      wx.navigateTo({
+        url: '../applyBusiness/applyBusiness?typeid='+ "2" + '&type=' + this.data.wxUser.wxState,
+      })
+    }
   },
   // 跳转到我的需求页面
   myNeeds: function() {
