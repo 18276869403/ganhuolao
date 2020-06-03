@@ -18,6 +18,7 @@ Page({
     oneclass:[],
     twoclass:[],
     firstId:'',
+    navRightItems:[],
     firstname:'',
     secondId:'',
     secondname:''
@@ -37,54 +38,27 @@ Page({
   },
   // 搜索按钮
   btnsearch:function(){
+    var data = { pages: 1,size: 10, wxState:this.data.chooseworker }
+    if(this.data.firstId != "" || this.data.firstId != "undefined" || this.data.firstId != null){
+      data.oneClassId = this.data.firstId
+    }
+    if(this.data.secondId != "" || this.data.secondId != "undefined" || this.data.secondId != null){
+      data.twoClassId = this.data.secondId
+    }
     if(this.data.chooseworker == 1){
-      this.setData({
-        workerlist:[]
-      })
-      if(this.data.sousuotext == ""){
-        this.setData({
-          workerlist:this.data.workerlist1
-        })
-        return
+      if(this.data.sousuotext != "" || this.data.sousuotext != "undefined" || this.data.sousuotext != null){
+        data.name = this.data.sousuotext
       }
-      var needs = this.data.workerlist1
-      var index = 0 // 索引
-      // 循环数组
-      for(let i=0;i<needs.length;i++){
-        if(needs[i].needTitle.indexOf(this.data.sousuotext) > -1){
-          var list = "workerlist["+ index +"]"
-          this.setData({
-            [list]:needs[i]
-          })
-          ++index
-        }
-      }
+      this.grneedlist(data)
     }else{
-      this.setData({
-        businesslist:[]
-      })
-      if(this.data.sousuotext == ""){
-        this.setData({
-          businesslist:this.data.businesslist1
-        })
-        return
+      if(this.data.sousuotext != "" || this.data.sousuotext != "undefined" || this.data.sousuotext != null){
+        data.shopName = this.data.sousuotext
       }
-      var needs = this.data.businesslist1
-      var index = 0 // 索引
-      // 循环数组
-      for(let i=0;i<needs.length;i++){
-        if(needs[i].needTitle.indexOf(this.data.sousuotext) > -1){
-          var list = "businesslist["+ index +"]"
-          this.setData({
-            [list]:needs[i]
-          })
-          ++index
-        }
-      }
+      this.sjneedlist(data)
     }
   },
   onLoad: function() {
-    this.grneedlist(this.data.chooseworker)
+    this.grneedlist({pages:1,size:10,wxState:this.data.chooseworker})
     this.oneClass()
     this.twoClass()
   },
@@ -94,12 +68,12 @@ Page({
       that.setData({
         chooseworker: 1
       })
-      that.grneedlist(that.data.chooseworker)
+      that.grneedlist({pages:1,size:10,wxState:that.data.chooseworker})
     } else {
       that.setData({
         chooseworker: 0
       })
-      that.sjneedlist(that.data.chooseworker)
+      that.sjneedlist({pages:1,size:10,wxState:that.data.chooseworker})
     }
   },
   // 一级分类
@@ -174,8 +148,6 @@ Page({
       yijiname: this.data.yijiname1,
       showModalStatus: false,
     })
-    this.grneedlist()
-    this.sjneedlist()
   },
   // 全部
   quanbu:function(){
@@ -187,8 +159,6 @@ Page({
       showModalStatus: false,
       firstname:that.data.firstname
     })
-    this.grneedlist()
-    this.sjneedlist()
   },
   // 跳转到商家详情页面
   businessDetails: function (e) {
@@ -198,15 +168,8 @@ Page({
     })
   },
   // 推荐工人
-  grneedlist(type) {
+  grneedlist(data) {
     var that = this
-    var data={
-      pages: 1,
-      size: 10,
-      wxState:type,
-      oneClassId:that.data.firstId,
-      twoClassId:that.data.secondId
-    }
     qingqiu.get("wxUserPage", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
@@ -239,15 +202,8 @@ Page({
   },
 
   // 推荐商家
-  sjneedlist(type) {
+  sjneedlist(data) {
     var that = this
-    var data={
-      pages: 1,
-      size: 10,
-      wxState:type,
-      oneClassId:that.data.firstId,
-      twoClassId:that.data.secondId
-    }
     qingqiu.get("wxUserPage", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
@@ -325,7 +281,6 @@ Page({
             erjiId = that.data.navRightItems[i].id
             erjiName = that.data.navRightItems[i].name
           }
-
           that.setData({
             erjiName: erjiName,
             erjiId: erjiId,

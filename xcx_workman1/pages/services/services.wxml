@@ -106,7 +106,7 @@
         </view>
         <view class="list-item-right zongxiang">
           <view class="right-name">
-            {{item.wxNc}}
+            {{item.name}}
             <text class="right-text-age">{{item.dateBirth}}岁</text>
           </view>
           <view class="right-content hengxiang">
