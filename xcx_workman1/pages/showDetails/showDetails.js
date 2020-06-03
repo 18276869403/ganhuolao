@@ -78,6 +78,7 @@ Page({
       if (re.result != null) {
         that.caseMsgList = re.result
         that.imgList = that.caseMsgList.picOne.split(',')
+        that.caseMsgList.addTime=that.caseMsgList.addTime.substring(0, 16)
         for(var i= 0 ; i < that.imgList.length; i++){
           that.imgList[i]=api.viewUrl+that.imgList[i]
         }
