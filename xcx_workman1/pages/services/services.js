@@ -9,62 +9,74 @@ Page({
   data: {
     viewUrl: api.viewUrl,
     chooseworker: 1,
-    needsList: [{
-        id: 1,
-        needType: 0,
-        title: '祥源乡新农村工程点需要友们火速联系！',
-        price: '350/天',
-        location: '万载 | 双桥镇',
-        number: 2,
-        date: '2019.11.15',
-        status: '进行中'
-      },
-      {
-        id: 2,
-        needType: 1,
-        title: '祥源乡新农村工程点需要友们火速联系！',
-        price: '350/天',
-        location: '万载 | 双桥镇',
-        number: 2,
-        date: '2019.11.15',
-        status: '进行中'
-      },
-      {
-        id: 3,
-        needType: 0,
-        title: '祥源乡新农村工程点需要友们火速联系！',
-        price: '350/天',
-        location: '万载 | 双桥镇',
-        number: 2,
-        date: '2019.11.15',
-        status: '进行中'
-      }
-    ],
-    goodsdata3: [{
-        id: 1,
-        name: '商家'
-      },
-      {
-        id: 2,
-        name: '工人'
-      }
-    ],
+    needsList: [],
+    goodsdata3: [],
     workerlist: [],
-    businesslist: [{
-        id: 1,
-        businessname: '新飞电器万载店'
-      },
-      {
-        id: 2,
-        businessname: '新飞电器万载店'
-      },
-      {
-        id: 3,
-        businessname: '新飞电器万载店'
-      }
-    ]
+    workerlist1:[],
+    businesslist1:[],
+    businesslist: []
   },
-
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    this.onLoad()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+  },
+  // 搜索框
+  shurukuang:function(e){
+    this.setData({
+      sousuotext:e.detail.value
+    })
+  },
+  // 搜索按钮
+  btnsearch:function(){
+    if(this.data.chooseworker == 1){
+      this.setData({
+        workerlist:[]
+      })
+      if(this.data.sousuotext == ""){
+        this.setData({
+          workerlist:this.data.workerlist1
+        })
+        return
+      }
+      var needs = this.data.workerlist1
+      var index = 0 // 索引
+      // 循环数组
+      for(let i=0;i<needs.length;i++){
+        if(needs[i].needTitle.indexOf(this.data.sousuotext) > -1){
+          var list = "workerlist["+ index +"]"
+          this.setData({
+            [list]:needs[i]
+          })
+          ++index
+        }
+      }
+    }else{
+      this.setData({
+        businesslist:[]
+      })
+      if(this.data.sousuotext == ""){
+        this.setData({
+          businesslist:this.data.businesslist1
+        })
+        return
+      }
+      var needs = this.data.businesslist1
+      var index = 0 // 索引
+      // 循环数组
+      for(let i=0;i<needs.length;i++){
+        if(needs[i].needTitle.indexOf(this.data.sousuotext) > -1){
+          var list = "businesslist["+ index +"]"
+          this.setData({
+            [list]:needs[i]
+          })
+          ++index
+        }
+      }
+    }
+  },
   onLoad: function() {
     this.grneedlist(this.data.chooseworker)
   },
@@ -119,9 +131,9 @@ Page({
             obj.oneClassName = obj.oneClassName.replace(/,/, " | ")
             obj.twoClassName = obj.twoClassName.replace(/,/, " | ")
           }
-          console.log(re.result.records)
           that.setData({
-            workerlist:re.result.records
+            workerlist:re.result.records,
+            workerlist1:re.result.records
           })
         } 
       } 
@@ -144,9 +156,9 @@ Page({
             obj.oneClassName = obj.oneClassName.replace(/,/, "|")
             obj.twoClassName = obj.twoClassName.replace(/,/, "|")
           }
-          console.log(re.result.records)
           that.setData({
-            businesslist:re.result.records
+            businesslist:re.result.records,
+            businesslist1:re.result.records
           })
         } 
       } 
