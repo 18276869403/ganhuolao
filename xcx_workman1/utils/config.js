@@ -18,5 +18,5 @@ module.exports = {
 	zhu: zhu,
 	viewUrl: viewUrl, // 图片路径
 	uploadurl:Uploadurl,	// 上传路径
-	uploadurl2:Uploadurl2
+	uploadurl2:Uploadurl2 
 };
