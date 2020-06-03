@@ -32,26 +32,14 @@ Page({
   },
   // 搜索按钮
   btnsearch:function(){
-    this.setData({
-      xuqiulist:[]
-    })
-    if(this.data.sousuotext == ""){
-      this.setData({
-        xuqiulist:this.data.needsListfy
-      })
-      return
+    var obj = {
+      pageNo:1,
+      pageSize:10
     }
-    var needs = this.data.needsListfy
-    var index = 0
-    for(let i=0;i<needs.length;i++){
-      if(needs[i].needTitle.indexOf(this.data.sousuotext) > -1){
-        var list = "xuqiulist["+ index +"]"
-        this.setData({
-          [list]:needs[i]
-        })
-        ++index
-      }
+    if(this.data.sousuotext != "" || this.data.firstId != "undefined" || this.data.firstId != null){
+      obj.needTitle = this.data.sousuotext
     }
+    this.xqneedlist(obj)
   },
   onLoad: function() {
     var that = this
@@ -74,7 +62,7 @@ Page({
     })
     this.firstbanner() //banner
     this.pointList() //通知
-    this.xqneedlist() //需求
+    this.xqneedlist({pageNo:1,pageSize:10}) //需求
     this.grneedlist() //工人
     this.sjneedlist()  //商家
     this.spneedlist() //商品
@@ -91,12 +79,9 @@ Page({
     return false
   },
   // 需求列表
-  xqneedlist() {
+  xqneedlist(data) {
     var that = this
-    var data={
-      pages: 1,
-      size: 10
-    }
+    console.log(data)
     qingqiu.get("zuixinxq", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
@@ -109,8 +94,8 @@ Page({
           }  
           that.setData ({
             xuqiulist : re.result.records,
-            needsListfy : re.result.records
           })
+          console.log(that.data.xuqiulist)
         } else {
           qingqiu.tk('未查询到任何数据')
         }
