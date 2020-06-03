@@ -159,8 +159,7 @@ Page({
         that.setData ({
           twoclass : that.twoclass
         })
-      } else {
-      }
+      } else {}
     } 
   })
   },

@@ -159,7 +159,7 @@
     </view>
     <!-- 找商家 -->
 
-    <view class="content-business zongxiang" wx:for="{{businesslist}}" wx:key="key" data-id="{{item.id}}" wx:if="{{chooseworker==0}}">
+  <view class="content-business zongxiang" wx:for="{{businesslist}}" wx:key="key" data-id="{{item.id}}" wx:if="{{chooseworker==0}}">
       <view class="content-business-list zongxiang" bindtap="businessDetails" data-vals="{{item}}">
         <view class="content-business-img">
           <image src="{{item.picIurl}}" class="business-img"></image>
