@@ -154,6 +154,7 @@ Page({
                  icon:'success',
                  duration:2000
                })
+               setTimeout()
               } else {
                 wx.showToast({
                   title: re.message,
@@ -161,7 +162,7 @@ Page({
                   duration: 2000
                 })
               } 
-          })
+          },'delete')
         }else{
           return
         }
