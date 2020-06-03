@@ -2,9 +2,9 @@
 <view class="container">
   <view class='banner'>
     <swiper indicator-dots="true" indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff" autoplay="true" class="swiper">
-      <block wx:key="{{item.id}}">
-        <swiper-item bindtap="imgYu">
-          <image src=" {{viewUrl}}{{caseMsgList.picOne}}" bindtap="fangda" data-img="{{item}}" class="slide-image" />
+      <block wx:for="{{caseMsgList.picOne}}">
+        <swiper-item bindtap="imgYu" data-src="{{item}}">
+          <image src=" {{viewUrl}}{{item}}" bindtap="fangda" class="slide-image" />
         </swiper-item>
       </block>
     </swiper>
@@ -16,7 +16,7 @@
   <!-- 顶部详情 -->
   <view class="top hengxiang">
     <view class="top-left">
-      <image src="{{viewUrl}}{{caseMsgList.picOne}}" class="avator-img"></image>
+      <image src="{{viewUrl}}{{caseMsgList.picOne[0]}}" class="avator-img"></image>
     </view>
     <view class="top-content zongxiang">
       <view class="top-content-top">{{caseMsgList.name}}</view>

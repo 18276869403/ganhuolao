@@ -78,12 +78,14 @@ Page({
       if (re.result != null) {
         that.caseMsgList = re.result
         that.imgList = that.caseMsgList.picOne.split(',')
+        that.caseMsgList.picOne = that.caseMsgList.picOne.split(',')
         that.caseMsgList.addTime=that.caseMsgList.addTime.substring(0, 16)
         for(var i= 0 ; i < that.imgList.length; i++){
           that.imgList[i]=api.viewUrl+that.imgList[i]
         }
         that.setData ({
-          caseMsgList : re.result
+          caseMsgList : re.result,
+          imgList :that.imgList
         })
       } else {
         qingqiu.tk('未查询到任何数据')
@@ -94,9 +96,9 @@ Page({
   // 晒晒点击事件
   imgYu:function(event){
     var that =this
-    // var src = event.currentTarget.dataset.src;
+    var src = event.currentTarget.dataset.src;
     wx.previewImage({
-      current: api.viewUrl+this.data.caseMsgList.picOne,
+      current: api.viewUrl+src,
       urls: that.imgList
     })
   },
