@@ -49,6 +49,8 @@
       <view class='s-left'>
         <scroll-view class='left-navbar' scroll-y="true">
           <view class='normal-title'>一级分类</view>
+          <!-- <view class="nav_left_items {{firstId == item.id? 'active' : 'normal'}}" bindtap="quanbu">全部</view> -->
+          <view class="nav_left_items {{firstId == item.id? 'active' : 'normal'}}" bindtap="quanbu">全部</view>
           <view wx:for="{{oneclass}}" class="nav_left_items {{firstId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="left" data-index="{{index}}" data-name=" {{item.className}}" data-id='{{item.id}}' >
             {{item.className}}
           </view>
@@ -57,6 +59,7 @@
       <view class='s-right'>
         <scroll-view class='left-navbar1' scroll-y="true">
           <view class='normal-title'>二级分类</view>
+          <view class="nav_left_items {{firstId == item.id? 'active' : 'normal'}}" bindtap="quanbu">全部</view>
           <view wx:for="{{twoclass}}" class="nav_left_items {{secondId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="right" data-index="{{index}}" data-name=" {{item.className}}" data-id='{{item.id}}'>
             {{item.className}}
           </view>
