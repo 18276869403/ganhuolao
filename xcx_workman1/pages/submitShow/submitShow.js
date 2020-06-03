@@ -146,11 +146,33 @@ Page({
   // 发布晒晒
   lijifabu(){
     var that =this
+    if(that.data.needscontent==""){
+      wx.showToast({
+        title: '晒晒详情不能为空！',
+        icon:'none',
+        duration:2000
+      })
+      return
+    }
+    if(that.data.cityId==""||that.data.areaId==""){
+      wx.showToast({
+        title: '请选择所在区域！',
+        icon:'none',
+        duration:2000
+      })
+      return
+    }
     if(that.data.picimgs5==""){
       if(that.data.picimgs4==""){
         if(that.data.picimgs3==""){
           if(that.data.picimgs2==""){
             if(that.data.picimgs1==""){
+              wx.showToast({
+                title: '请上传图片！',
+                icon:'none',
+                duration:2000
+              })
+              return
             }else{
               var tupians = that.data.picimgs1
             }
@@ -180,6 +202,11 @@ Page({
     }
     qingqiu.get("insertCase", data, function(re) {
     if (re.success == true) {
+      wx.showToast({
+        title: '发布成功！',
+        icon:'success',
+        duration:2000
+      })
           wx.switchTab({
             url: '../showwork/showwork',
           })
