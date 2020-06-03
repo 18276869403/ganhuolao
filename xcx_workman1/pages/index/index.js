@@ -9,11 +9,13 @@ const util = require('../../utils/util.js')
 Page({
   data: {
     viewUrl:api.viewUrl,
+    sousuotext:'',
     gongren:'2',
     shangjia:'1',
     msgList: [],
     bannerImg: [],
     needsList: [],
+    needsListfy:[],
     workerList: [],
     storeList: [],
     goodsList: [],
@@ -22,7 +24,35 @@ Page({
     sjlist:[],
     tupian:[]
   },
-
+  // 搜索框
+  shurukuang:function(e){
+    this.setData({
+      sousuotext:e.detail.value
+    })
+  },
+  // 搜索按钮
+  btnsearch:function(){
+    this.setData({
+      xuqiulist:[]
+    })
+    if(this.data.sousuotext == ""){
+      this.setData({
+        xuqiulist:this.data.needsListfy
+      })
+      return
+    }
+    var needs = this.data.needsListfy
+    var index = 0
+    for(let i=0;i<needs.length;i++){
+      if(needs[i].needTitle.indexOf(this.data.sousuotext) > -1){
+        var list = "xuqiulist["+ index +"]"
+        this.setData({
+          [list]:needs[i]
+        })
+        ++index
+      }
+    }
+  },
   onLoad: function() {
     var that = this
     wx.login({
@@ -78,7 +108,8 @@ Page({
             }
           }  
           that.setData ({
-            xuqiulist : re.result.records
+            xuqiulist : re.result.records,
+            needsListfy : re.result.records
           })
         } else {
           qingqiu.tk('未查询到任何数据')

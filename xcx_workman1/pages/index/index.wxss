@@ -504,6 +504,10 @@ page {
   white-space: nowrap;
 }
 
+.xuqiu-list{
+  height: 666rpx;
+}
+
 .rank-img {
   width: 24rpx;
   height: 24rpx;
