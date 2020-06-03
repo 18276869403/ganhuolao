@@ -17,11 +17,51 @@
         <image src="../image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image>
       </view>
     </view>
-    <view class="fabu">
-      <view class="fabu-item zongxiang" bindtap='upimg' data-number="0" data-type="1">
+    <!-- 第一张 -->
+    <view class="fabu" wx:if="{{picimg1!=''}}">
+      <view class="fabu-item zongxiang" data-number="0" data-type="1">
         <view>
-          <image src="../image/jiahao.png" class="fabu-img" wx:if="{{picIurl==''}}"></image>
-          <image src="{{picIurl}}" class="show-img" wx:if="{{picIurl!=''}}"></image>
+          <image src="{{picimg1}}" class="show-img"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 第二张 -->
+    <view class="fabu" wx:if="{{picimg2!=''}}">
+      <view class="fabu-item zongxiang" data-number="0" data-type="2">
+        <view>
+          <image src="{{picimg2}}" class="show-img"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 第三张 -->
+    <view class="fabu" wx:if="{{picimg3!=''}}">
+      <view class="fabu-item zongxiang" data-number="0" data-type="3">
+        <view>
+          <image src="{{picimg3}}" class="show-img"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 第四张 -->
+    <view class="fabu" wx:if="{{picimg4!=''}}">
+      <view class="fabu-item zongxiang" data-number="0" data-type="4">
+        <view>
+          <image src="{{picimg4}}" class="show-img"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 第五张 -->
+    <view class="fabu" wx:if="{{picimg5!=''}}">
+      <view class="fabu-item zongxiang" data-number="0" data-type="5">
+        <view>
+          <image src="{{picimg5}}" class="show-img"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 上传 -->
+     <view class="fabu" wx-if="{{num<6}}">
+      <view class="fabu-item zongxiang" bindtap='upimg' data-number="0" data-type="{{num}}">
+        <view>
+          <image src="../image/jiahao.png" class="fabu-img"></image>
         </view>
         <view>
           上传照片
