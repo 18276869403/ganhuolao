@@ -1,4 +1,5 @@
 // pages/myEmploy/myEmploy.js
+const app = getApp()
 const qingqiu = require("../../utils/request.js")
 const api = require("../../utils/config.js")
 
@@ -53,11 +54,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    this.getmyEmploy(options.id)
-    this.setData({
-      id:options.id
-    })
+  onLoad: function() {
+    this.getmyEmploy()
   },
   changeType: function(e) {
     var that = this;
@@ -65,7 +63,7 @@ Page({
     that.setData({
       needsTypeid: id
     })
-    this.getmyEmploy(that.data.id)
+    this.getmyEmploy()
   },
   phonecall: function(e) {
     var phone = e.currentTarget.dataset.phone
@@ -73,25 +71,32 @@ Page({
       phoneNumber: phone 
     })
   },
-  
+  // 删除我的雇佣
+  delEmploy:function(e){
+    var that = this
+    var data = {
+      id:e.currentTarget.dataset.id
+    }
+    qingqiu.get("deleteUserWork",data,function(res){
+      console.log(res)
+    },'delete')
+  },
   // 获取我的雇佣
-  getmyEmploy:function(id){
+  getmyEmploy:function(){
     var that = this
     var data = ""
-    console.log(that.data.needsTypeid)
     if(that.data.needsTypeid == 1){
       data = {
-        wxCaseId:id
+        wxCaseId:app.globalData.wxid
       }
     }else{
       data = {
-        wxCaseId2:id
+        wxCaseId2:app.globalData.wxid
       }
     }
     qingqiu.get("userWorkPage",data,function(re){
       if (re.success == true) {
         if (re.result != null) {
-          console.log(re.result)
           for(let obj of re.result.records){
             obj.picIurl = api.viewUrl + obj.picIurl
             obj.hiringTime = obj.hiringTime.split(' ')[0]
@@ -99,9 +104,12 @@ Page({
           that.setData({
             messageList:re.result.records
           })
-          console.log(that.data.messageList)
-        } else {
-          qingqiu.tk('未查询到任何数据')
+        }else{
+          wx.showToast({
+            title: '未雇佣工人',
+            icon:'none',
+            duration:3000
+          })
         }
       } 
     })
