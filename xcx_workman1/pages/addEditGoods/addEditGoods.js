@@ -82,6 +82,11 @@ Page({
     console.log(data)
     qingqiu.get("editUserGood", data, function(re) {
     if (re.success == true) {
+      wx.showToast({
+        title: '修改成功！',
+        icon:'success',
+        duration:2000
+      })
       wx.navigateTo({
         url: '../myGoods/myGoods?obj='+data.userId,
       })
@@ -106,6 +111,11 @@ Page({
     console.log(data)
     qingqiu.get("addUserGood", data, function(re) {
     if (re.success == true) {
+      wx.showToast({
+        title: '添加成功！',
+        icon:'success',
+        duration:2000
+      })
           wx.navigateTo({
             url: '../myGoods/myGoods?obj='+data.userId,
           })
