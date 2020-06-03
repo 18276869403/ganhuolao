@@ -14,7 +14,13 @@ Page({
     workerlist: [],
     workerlist1:[],
     businesslist1:[],
-    businesslist: []
+    businesslist: [],
+    oneclass:[],
+    twoclass:[],
+    firstId:'',
+    firstname:'',
+    secondId:'',
+    secondname:''
   },
   // 下拉刷新
   onPullDownRefresh: function () {
@@ -79,6 +85,8 @@ Page({
   },
   onLoad: function() {
     this.grneedlist(this.data.chooseworker)
+    this.oneClass()
+    this.twoClass()
   },
   changeType: function(e) {
     var that = this
@@ -94,6 +102,95 @@ Page({
       that.sjneedlist(that.data.chooseworker)
     }
   },
+  // 一级分类
+  oneClass(){
+    var that =this
+    var data={
+      type:3
+    }
+    qingqiu.get("oneClassList", data, function(re) {
+    if (re.success == true) {
+      if (re.result != null) {
+        that.oneclass = re.result
+        that.setData ({
+          oneclass : that.oneclass
+        })
+      } else {
+        qingqiu.tk('未查询到任何数据')
+      }
+    } 
+  })
+  },
+  // 二级分类
+  twoClass(){
+    var that =this
+    var data={
+      oneClassId:3
+    }
+    qingqiu.get("twoClassList", data, function(re) {
+    if (re.success == true) {
+      if (re.result != null) {
+        that.twoclass = re.result
+        that.setData ({
+          twoclass : that.twoclass
+        })
+      } else {
+        qingqiu.tk('未查询到任何数据')
+      }
+    } 
+  })
+  },
+  // 左侧按钮
+  left: function (e) {
+    var that = this;
+    var id = e.currentTarget.dataset.id
+    var name = e.currentTarget.dataset.name
+    that.setData({
+      firstId: id,
+      firstname: name
+    })
+    var data={
+      oneClassId:that.data.firstId
+    }
+    qingqiu.get("twoClassList", data, function(re) {
+    if (re.success == true) {
+      if (re.result != null) {
+        that.twoclass = re.result
+        that.setData ({
+          twoclass : that.twoclass
+        })
+      } else {
+      }
+    } 
+  })
+  },
+  // 右侧单选点击
+  right: function (e) {
+    var that = this;
+    var id = e.currentTarget.dataset.id
+    var name = e.currentTarget.dataset.name
+    that.setData({
+      secondId: id,
+      secondname: name,
+      yijiname: this.data.yijiname1,
+      showModalStatus: false,
+    })
+    this.grneedlist()
+    this.sjneedlist()
+  },
+  // 全部
+  quanbu:function(){
+    var that = this
+    that.data.firstId=''
+    that.data.secondId=''
+    that.data.firstname=''
+    that.setData({
+      showModalStatus: false,
+      firstname:that.data.firstname
+    })
+    this.grneedlist()
+    this.sjneedlist()
+  },
   // 跳转到商家详情页面
   businessDetails: function (e) {
     var obj = JSON.stringify(e.currentTarget.dataset.vals)
@@ -107,7 +204,9 @@ Page({
     var data={
       pages: 1,
       size: 10,
-      wxState:type
+      wxState:type,
+      oneClassId:that.data.firstId,
+      twoClassId:that.data.secondId
     }
     qingqiu.get("wxUserPage", data, function(re) {
       if (re.success == true) {
@@ -146,7 +245,9 @@ Page({
     var data={
       pages: 1,
       size: 10,
-      wxState:type
+      wxState:type,
+      oneClassId:that.data.firstId,
+      twoClassId:that.data.secondId
     }
     qingqiu.get("wxUserPage", data, function(re) {
       if (re.success == true) {
@@ -170,5 +271,72 @@ Page({
     wx.navigateTo({
       url: '../workerDetails/workerDetails?obj=' + obj,
     })
+  },
+  //显示弹窗样式
+  showModal: function (e) {
+    this.setData({
+      hasMask: true
+    })
+    var animation = wx.createAnimation({
+      duration: 300,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.opacity(0).rotateX(-100).step();
+    this.setData({
+      animationData: animation.export(),
+      showModalStatus: true
+    })
+    setTimeout(function () {
+      animation.opacity(1).rotateX(0).step();
+      this.setData({
+        animationData: animation.export()
+      })
+    }.bind(this), 200)
+  },
+  //隐藏弹窗样式
+  hideModal6: function () {
+    var that = this;
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+      hasMask: false
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
+      var erjiId = ''
+      var erjiName = ""
+      for (var i = 0; i < that.data.navRightItems.length; i++) {
+        if (that.data.navRightItems[i].isSelected == true) {
+          if (erjiId != '') {
+            erjiId = erjiId + ',' + that.data.navRightItems[i].id
+            erjiName = erjiName + ',' + that.data.navRightItems[i].name
+          } else {
+            erjiId = that.data.navRightItems[i].id
+            erjiName = that.data.navRightItems[i].name
+          }
+
+          that.setData({
+            erjiName: erjiName,
+            erjiId: erjiId,
+          })
+        }
+      }
+      that.setData({
+        itemList: [],
+        cost: ''
+      })
+    }.bind(this), 200)
   },
 })
