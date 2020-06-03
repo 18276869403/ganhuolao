@@ -13,37 +13,8 @@ Page({
     animationData:'',
     navRightItems:'',
     hasMask:'',
-    // needsList: [{
-    //     id: 1,
-    //     needType: 0,
-    //     title: '祥源乡新农村工程点需要友们火速联系！',
-    //     price: '350/天',
-    //     location: '万载 | 双桥镇',
-    //     number: 2,
-    //     date: '2019.11.15',
-    //     status: '进行中'
-    //   },
-    //   {
-    //     id: 2,
-    //     needType: 1,
-    //     title: '祥源乡新农村工程点需要友们火速联系！',
-    //     price: '350/天',
-    //     location: '万载 | 双桥镇',
-    //     number: 2,
-    //     date: '2019.11.15',
-    //     status: '进行中'
-    //   },
-    //   {
-    //     id: 3,
-    //     needType: 0,
-    //     title: '祥源乡新农村工程点需要友们火速联系！',
-    //     price: '350/天',
-    //     location: '万载 | 双桥镇',
-    //     number: 2,
-    //     date: '2019.11.15',
-    //     status: '进行中'
-    //   }
-    // ],
+    sousuotext:'',
+    needsListfy:[],
     needsList:[],
     oneclass:[],
     twoclass:[],
@@ -51,6 +22,36 @@ Page({
     firstname:'',
     secondId:'',
     secondname:''
+  },
+   // 搜索框
+   shurukuang:function(e){
+    this.setData({
+      sousuotext:e.detail.value
+    })
+  },
+  // 搜索按钮
+  btnsearch:function(){
+    this.setData({
+      needsList:[]
+    })
+    if(this.data.sousuotext == ""){
+      this.setData({
+        needsList:this.data.needsListfy
+      })
+      return
+    }
+    var needs = this.data.needsListfy
+    var index = 0 // 索引
+    // 循环数组
+    for(let i=0;i<needs.length;i++){
+      if(needs[i].needTitle.indexOf(this.data.sousuotext) > -1){
+        var list = "needsList["+ index +"]"
+        this.setData({
+          [list]:needs[i]
+        })
+        ++index
+      }
+    }
   },
   // 下拉刷新
   onPullDownRefresh: function () {
