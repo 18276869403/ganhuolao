@@ -13,15 +13,15 @@ Page({
     areaname: '',
     cityId: '',
     areaId: '',
-    // city: [{
-    //     id: 1,
-    //     areaName: '万载'
-    //   },
-    //   {
-    //     id: 2,
-    //     areaName: '万载111'
-    //   }
-    // ],
+    ceshi: [{
+        id: 1,
+        areaName: '万载'
+      },
+      {
+        id: 2,
+        areaName: '万载111'
+      }
+    ],
     city:[],
     // area: [{
     //     id: 1,
@@ -53,6 +53,18 @@ Page({
     cityname1: '',
     picIurl1:'',
     picIurl:'',
+    picimg:'',
+    picimg1:'',
+    picimg2:'',
+    picimg3:'',
+    picimg4:'',
+    picimg5:'',
+    picimgs1:'',
+    picimgs2:'',
+    picimgs3:'',
+    picimgs4:'',
+    picimgs5:'',
+    num:1,
     addresslist:[]
   },
 
@@ -134,6 +146,29 @@ Page({
   // 发布晒晒
   lijifabu(){
     var that =this
+    if(that.data.picimgs5==""){
+      if(that.data.picimgs4==""){
+        if(that.data.picimgs3==""){
+          if(that.data.picimgs2==""){
+            if(that.data.picimgs1==""){
+            }else{
+              var tupians = that.data.picimgs1
+            }
+          }else{
+            var tupians = that.data.picimgs1+','+that.data.picimgs2
+          }
+        }else{
+          var tupians = that.data.picimgs1+','+that.data.picimgs2+','+
+          that.data.picimgs3
+        }
+      }else{
+        var tupians = that.data.picimgs1+','+that.data.picimgs2+','+
+        that.data.picimgs3+','+that.data.picimgs4
+      }
+    }else{
+      var tupians = that.data.picimgs1+','+that.data.picimgs2+','+
+      that.data.picimgs3+','+that.data.picimgs4+','+that.data.picimgs5
+    }
     var data={
       wxUserId : that.data.wxuserid,
       backup3:0,
@@ -141,7 +176,7 @@ Page({
       oneAreaId:that.data.cityId,
       twoAreaId:that.data.areaId,
       caseName : that.data.needscontent,
-      picOne:that.data.picIurl1
+      picOne:tupians
     }
     qingqiu.get("insertCase", data, function(re) {
     if (re.success == true) {
@@ -333,6 +368,10 @@ Page({
                    [uploadpic]: res.tempFilePath
                  });
                  uploadFile = res.tempFilePath;
+                 that.data.num +=1;
+                 that.setData({
+                  num: that.data.num 
+                 });
                  wx.uploadFile({
                    url: api.uploadurl, //仅为示例，非真实的接口地址
                    filePath: uploadFile,
@@ -350,23 +389,28 @@ Page({
                       // res.data.data = ""
                       if (type == '1') {
                         that.setData({
-                          picIurl: sj,
-                          picIurl1:jj.message
+                          picimg1: sj,
+                          picimgs1:jj.message
                         })
                       } else if (type == '2') {
                         that.setData({
-                          picIurltwo: sj,
-                          picIurltwo1:jj.message
+                          picimg2: sj,
+                          picimgs2:jj.message
                         })
                       } else if (type == '3') {
                         that.setData({
-                          picDetail: sj,
-                          picDetail1:jj.message
+                          picimg3: sj,
+                          picimgs3:jj.message
                         })
                       } else if (type == '4') {
                         that.setData({
-                          picDetailtwo: sj,
-                          picDetailtwo1:jj.message
+                          picimg4: sj,
+                          picimgs4:jj.message
+                        })
+                      } else if (type == '5') {
+                        that.setData({
+                          picimg5: sj,
+                          picimgs5:jj.message
                         })
                       }
                     }
