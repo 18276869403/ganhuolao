@@ -36,7 +36,7 @@ const queryOneArea = baseUrl + "pc/hall/queryOneArea"
 // 二级区域
 const queryTwoArea = baseUrl + "pc/hall/queryTwoArea"
 // 需求发布
-const insertYnend = baseUrl + "pc/user/insertYnend"
+const insertYneed = baseUrl + "pc/user/insertYneed"
 // 一级分类
 const oneClassList = baseUrl + "pc/hall/oneClassList"
 // 二级分类
@@ -45,7 +45,7 @@ const twoClassList = baseUrl + "pc/hall/twoClassList"
 module.exports = {
   twoClassList:twoClassList,
   oneClassList:oneClassList,
-  insertYnend:insertYnend,
+  insertYneed:insertYneed,
   queryOneArea:queryOneArea,
   queryTwoArea:queryTwoArea,
   CasePage:CasePage,
