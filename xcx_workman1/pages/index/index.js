@@ -81,7 +81,6 @@ Page({
   // 需求列表
   xqneedlist(data) {
     var that = this
-    console.log(data)
     qingqiu.get("zuixinxq", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
