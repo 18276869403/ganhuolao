@@ -45,16 +45,16 @@
     <view class="show-item zongxiang" wx:for="{{goodslist}}" wx:key="key" data-id="{{item.id}}">
       <view class="goods">
         <view class="show-item-top">
-          <image src="{{item.img}}" class="show-img"></image>
+          <image src="{{item.goodPic1}}" class="show-img"></image>
         </view>
-        <view class="goods-name">{{item.name}}</view>
-        <view class="goods-price">¥{{item.price}}</view>
+        <view class="goods-name">{{item.goodName}}</view>
+        <view class="goods-price">¥{{item.newPrice}}</view>
         <view class="goods-store hengxiang">
         <view class="goods-store-img">
         <image src="../image/store.png" class="store-img"></image>
         </view>
         <view class="goods-store-text">
-       {{item.storename}}
+        {{item.goodMemo}}
         </view>
         </view>
       </view>
