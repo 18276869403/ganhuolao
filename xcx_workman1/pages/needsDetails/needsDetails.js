@@ -135,8 +135,8 @@ Page({
     var that = this
     var data = {
       needId:that.id,
-      wxUserId:app.globalData.wxid,
-      signTime:utils.formatTime(new Date())
+      wxUserId:app.globalData.wxid
+      // signTime:utils.formatTime(new Date())
     }
     wx.showModal({
       title:'提示',
