@@ -64,6 +64,8 @@ Page({
     picimgs3:'',
     picimgs4:'',
     picimgs5:'',
+    picimg6:'',
+    picimgs6:'',
     num:1,
     addresslist:[]
   },
@@ -435,6 +437,11 @@ Page({
                         that.setData({
                           picimg5: sj,
                           picimgs5:jj.message
+                        })
+                      } else if (type == '6') {
+                        that.setData({
+                          picimg6: sj,
+                          picimgs6:jj.message
                         })
                       }
                     }
