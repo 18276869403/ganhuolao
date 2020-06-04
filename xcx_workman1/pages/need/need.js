@@ -248,7 +248,7 @@ Page({
   // 跳转到提交需求页面
   submitNeeds: function() {
     wx.navigateTo({
-      url: '../submitNeeds/submitNeeds',
+      url: '../submitNeeds/submitNeeds?type=0&id=0',
     })
   },
 })
