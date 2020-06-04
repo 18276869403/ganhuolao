@@ -229,11 +229,12 @@ line-height: 38rpx;
   width: 88rpx;
   height: 52rpx;
   border-radius: 4rpx;
-  border: 2rpx solid #cacaca;
+  border: 2rpx solid #38bdf1;
   line-height: 52rpx;
   text-align: center;
   font-size: 14px;
-  color: #cacaca;
+  color: #fff;
+  background: #38bdf1;
   margin-right: 30rpx;
 }
 

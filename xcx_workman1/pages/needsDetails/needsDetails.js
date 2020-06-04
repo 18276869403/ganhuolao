@@ -79,7 +79,6 @@ Page({
           for(let obj of re.result.records){
             obj.picIurl = api.viewUrl + obj.picIurl
           } 
-          console.log(re.result.records)
           that.setData ({
             jiedanList : re.result.records
           })
@@ -114,10 +113,8 @@ Page({
   // },
   // 需求修改
   xiugaigunali(){
-    wx.showToast({
-      title: '这个按钮还没有对接哦！',
-      icon:'success',
-      duration:2000
+    wx.navigateTo({
+      url: '../submitNeeds/submitNeeds?type=1&id=' + this.data.xqxqlist.id,
     })
   },
   // 需求在线联系
@@ -143,7 +140,19 @@ Page({
       success:function(res){
         if(res.confirm){
           qingqiu.get("insertNeedSign",data,function(res){
-            console.log(res)
+            if(res.success == true){
+              wx.showToast({
+                title: '报名成功',
+                icon:'success',
+                duration:2000
+              })
+            }else{
+              wx.showToast({
+                title: res.message,
+                icon:'none',
+                duration:2000
+              })
+            }
           })
         }else{
           return
@@ -191,9 +200,7 @@ Page({
       id: that.id,
       needState: 1
     }
-    console.log(data)
     qingqiu.get("needUpdateStateById", data, function(re) {
-      console.log(re)
       if (re.success == true) {
         wx.showToast({
           title: '需求已完成',
@@ -208,6 +215,17 @@ Page({
         })
       }
     },"put")
+  },
+  // 图片放大
+  fangda:function(e){
+    var currentUrl = e.currentTarget.dataset.src
+    var imglist = []
+    for(let i =0;i<this.data.xqxqlist.backup1.length;i++){
+      imglist[i] = this.data.viewUrl + this.data.xqxqlist.backup1[i]
+    }
+    wx.previewImage({
+      current: currentUrl, // 当前显示图片的http链接
+      urls: imglist // 需要预览的图片http链接列表
+    })
   }
-
 })
