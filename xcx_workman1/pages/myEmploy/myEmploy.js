@@ -145,12 +145,11 @@ Page({
       predict:this.data.predict,
       backup1:this.data.tian[this.data.day]
     }
-    console.log(data)
-    qingqiu.get("userWorkAdd",data,function(res){
+    qingqiu.get("userWorkUpdateById",data,function(res){
       console.log(res)
       if(res.success == true){
         wx.showToast({
-          title: '雇佣成功',
+          title: '修改成功',
           icon:'success',
           duration:2000
         })
@@ -161,7 +160,7 @@ Page({
         },1000)
       }else{
         wx.showToast({
-          title: '雇佣失败',
+          title: '修改失败',
           icon:'none',
           duration:3000
         })
