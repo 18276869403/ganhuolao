@@ -236,7 +236,6 @@ Page({
           oneAreaId:that.data.cityId,
           twoAreaId:that.data.areaId
         }
-        console.log(data)
         qingqiu.get("needUpdateStateById", data, function(re) {
           if (re.success == true) {
             wx.showToast({
