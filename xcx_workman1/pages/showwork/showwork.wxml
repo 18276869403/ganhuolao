@@ -14,10 +14,10 @@
           <image src="../image/search.png" class="search-img"></image>
         </view>
         <view class="top-title-right-shuru">
-          <input type="text" placeholder="输入搜索内容" class="shurukuang"></input>
+          <input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入搜索内容" class="shurukuang"></input>
         </view>
         <view class="top-title-right-sousuo">
-          <view class="sousuo-button">搜索</view>
+          <view class="sousuo-button" bindtap="btnsearch">搜索</view>
         </view>
       </view>
     </view>

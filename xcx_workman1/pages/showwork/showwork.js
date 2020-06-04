@@ -38,7 +38,9 @@ Page({
     //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
     //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg"
     // ],
-    imgList:[]
+    imgList:[],
+    sousuotext:'',
+    sousuonr:''
   },
   onPullDownRefresh: function () {
     this.onLoad()
@@ -54,7 +56,8 @@ Page({
     var that = this
     var data={
       pages: 1,
-      size: 10
+      size: 10,
+      caseName:that.data.sousuonr
     }
     qingqiu.get("CasePage", data, function(re) {
       if (re.success == true) {
@@ -124,6 +127,18 @@ Page({
         showModalStatus1: false
       })
     }.bind(this), 200)
+  },
+  // 搜索框
+   shurukuang:function(e){
+    this.setData({
+      sousuotext:e.detail.value
+    })
+  },
+  // 搜索
+  btnsearch:function(){
+    var that=this
+    that.data.sousuonr=that.data.sousuotext
+    that.SelectshowList()
   },
   // 跳转到晒晒详情页面
    showDetails: function(e) {
