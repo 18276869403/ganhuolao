@@ -158,12 +158,12 @@ Page({
                 duration:2000
               })
             }
-          })
+          },'post')
         }else{
           return
         }
       }
-    },'post')
+    })
   },
   // 需求删除
   shancuoxuqiu() {
