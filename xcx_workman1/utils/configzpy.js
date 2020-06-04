@@ -1,6 +1,6 @@
 var api = require('./config.js')
 //const baseUrl = "http://192.168.1.242:8081/work-boot/"
-const baseUrl = "http://192.168.1.250:3000/work-boot/"
+const baseUrl = "http://192.168.1.234:3000/work-boot/"
 // 需求列表
 // const xqurl = baseUrl + "work/yneed/list"
 // 大厅最新需求
@@ -9,7 +9,7 @@ const zuixinxq = baseUrl + "pc/hall/yneedList"
 const tjsp = baseUrl + "pc/hall/userGoodPage"
 // 工人晒晒
 const CasePage = baseUrl + "pc/hall/casePage"
-// 需求详情
+// 需求详情-报名接单人员
 const needSignPage = baseUrl + "pc/hall/needSignPage"
 // 需求删除
 const delYneedAndNeedSign = baseUrl + "pc/hall/delYneedAndNeedSign"
