@@ -48,7 +48,10 @@
     <view class="content-need">
       <view class="list zongxiang" wx:for="{{needsList}}" wx:for-index="index" wx:key="index" >
         <view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
-          <view class="need-list-left">
+          <view class="need-list-left" wx:if="{{item.backup1[0]==null}}">
+            <image src="../image/zawu1.png" class="need-content-img"></image>
+          </view>
+          <view class="need-list-left"  wx:if="{{item.backup1[0]!=null}}">
             <image src="{{viewUrl}}{{item.backup1[0]}}" class="need-content-img"></image>
           </view>
           <view class="need-list-right zongxiang">
