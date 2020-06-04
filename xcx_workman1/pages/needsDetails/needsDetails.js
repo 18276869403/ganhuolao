@@ -219,13 +219,9 @@ Page({
   // 图片放大
   fangda:function(e){
     var currentUrl = e.currentTarget.dataset.src
-    var imglist = []
-    for(let i =0;i<this.data.xqxqlist.backup1.length;i++){
-      imglist[i] = this.data.viewUrl + this.data.xqxqlist.backup1[i]
-    }
     wx.previewImage({
       current: currentUrl, // 当前显示图片的http链接
-      urls: imglist // 需要预览的图片http链接列表
+      urls: [currentUrl] // 需要预览的图片http链接列表
     })
   }
 })

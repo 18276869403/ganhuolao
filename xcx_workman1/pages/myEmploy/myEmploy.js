@@ -2,9 +2,9 @@
 const app = getApp()
 const qingqiu = require("../../utils/request.js")
 const api = require("../../utils/config.js")
+const util = require("../../utils/util.js")
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -155,9 +155,47 @@ Page({
   bintapDetails: function(e) {
     // console.log(1)
     var xqlist = e.currentTarget.dataset.item
+    xqlist.estimatedCost = xqlist.estimatedCost.replace('天/元','')
+    console.log(xqlist)
     this.setData({
       flag: false,
       xqlist: xqlist
+    })
+  },
+  // 修改雇佣
+  bindCon: function() {
+    var data = {
+      id:this.data.xqlist.id,
+      estimatedCost:this.data.price + this.data.array[this.data.index],
+      employmentMatters:this.data.workerskill,
+      hiringTime:util.formatDate(new Date()),
+      predict:this.data.predict,
+      backup1:this.data.tian[this.data.day]
+    }
+    console.log(data)
+    qingqiu.get("userWorkAdd",data,function(res){
+      console.log(res)
+      if(res.success == true){
+        wx.showToast({
+          title: '雇佣成功',
+          icon:'success',
+          duration:2000
+        })
+        setTimeout(function(){
+          wx.navigateTo({
+            url: '../myEmploy/myEmploy',
+          })
+        },1000)
+      }else{
+        wx.showToast({
+          title: '雇佣失败',
+          icon:'none',
+          duration:3000
+        })
+      }
+    },'put')
+    this.setData({
+      flag: true
     })
   },
   bindClose: function() {

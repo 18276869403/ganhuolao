@@ -37,11 +37,9 @@ Page({
   // 图片放大，放大预览
   preview:function(e){
     var current = e.currentTarget.dataset.src
-    var imglist = []
-    imglist[0] = current
     wx.previewImage({
       current: current, // 当前显示图片的http链接
-      urls: imglist // 需要预览的图片http链接列表
+      urls: [current] // 需要预览的图片http链接列表
     })
   },
 
