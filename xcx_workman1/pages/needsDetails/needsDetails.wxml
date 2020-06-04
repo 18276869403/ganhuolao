@@ -103,12 +103,12 @@
             <image src="../image/liuyan.png" class="img"></image>
           </view>
           <view class="jiedan-top-right1">
-            <image src="../image/dianhua.png" class="img"></image>
+            <image src="../image/dianhua.png" bindtap="phonecell" class="img"></image>
           </view>
         </view>
-        <view class="content-bottom">
+        <!-- <view class="content-bottom">
        {{item.moneyMemo}}
-        </view>
+        </view> -->
       </view>
     </view>
   </view>

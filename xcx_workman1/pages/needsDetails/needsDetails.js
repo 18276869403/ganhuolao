@@ -3,6 +3,7 @@ const app = getApp()
 //调用接口js
 const qingqiu = require('../../utils/request.js')
 const api = require('../../utils/config.js')
+const utils = require('../../utils/util.js')
 
 Page({
 
@@ -78,6 +79,7 @@ Page({
           that.jiedanList = re.result.records
           for(let obj of re.result.records){
             obj.picIurl = api.viewUrl + obj.picIurl
+            obj.signTime = obj.signTime.substring(0,16)
           } 
           that.setData ({
             jiedanList : re.result.records
@@ -129,8 +131,9 @@ Page({
   baoming(){
     var that = this
     var data = {
-      id:that.id,
-      wxUserId:app.globalData.wxid
+      needId:that.id,
+      wxUserId:app.globalData.wxid,
+      // signTime:utils.formatTime(new Date()).substring(0,15)
     }
     wx.showModal({
       title:'提示',
@@ -139,7 +142,9 @@ Page({
       confirmText:'是',
       success:function(res){
         if(res.confirm){
+          console.log(data)
           qingqiu.get("insertNeedSign",data,function(res){
+            console.log(res)
             if(res.success == true){
               wx.showToast({
                 title: '报名成功',
