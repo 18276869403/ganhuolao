@@ -120,6 +120,7 @@
     <image src="../image/kefu.png" class="kefu-img"></image>
   </view>
 </view>
+
 <!-- 遮罩 -->
 <view class="commodity_screen2" wx:if="{{showModalStatuslist}}"></view>
 <view animation="{{animationData2}}" class="commodity_attr_box2" wx:if="{{showModalStatuslist}}">

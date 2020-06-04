@@ -485,16 +485,4 @@ Page({
       flerjiid : that.data.flerjiid
     })
   },
-  // 获取选择分类
-  // selectfenlei(){
-  //   var that=this
-  //   that.setData({
-  //     yijiname : that.data.yijiname,
-  //     erjiname : that.data.erjiname,
-  //     showModalStatuslist: false,
-  //     showModalStatus6:false
-  //   })
-  //   console.log(that.data.yijiname)
-  //   console.log(that.data.erjiname)
-  // }
 })
