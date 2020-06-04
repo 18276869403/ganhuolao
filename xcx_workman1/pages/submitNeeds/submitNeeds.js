@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    viewUrl:api.viewUrl,
     id:'',
     needsTypeid: 0,
     select: 'circle',
@@ -138,6 +139,7 @@ Page({
     onLoad: function (options) {
       if(options.type == 1){
         this.setData({
+          type:1,
           id:options.id,
           wxuserid: app.globalData.wxid
         })
@@ -148,6 +150,7 @@ Page({
         this.needSignPage()
       }else{
         this.setData({
+          type:0,
           wxuserid: app.globalData.wxid
         })
         this.oneClass()
@@ -170,22 +173,29 @@ Page({
       var data = {
         id:that.data.id
       }
-      qingqiu.get("needSignPage",data,function(res){
-        console.log(res)
+      console.log(data)
+      qingqiu.get("yneedBy",data,function(res){
         if(res.success == true){
-          // wxUserId : that.data.wxuserid,
-          // needType:that.data.needsTypeid,
-          // needContent:that.data.needscontent,
-          // needTitle:that.data.needsname,
-          // backup3:that.data.youhuijia,
-          // publishMan:that.data.linkman,
-          // publishPhone:that.data.phone,
-          // backup1:that.data.picIurl1,
-          // needState:0,
-          // oneClassId:that.data.firstId,
-          // twoClassId:that.data.secondId,
-          // oneAreaId:that.data.cityId,
-          // twoAreaId:that.data.areaId
+          console.log(res)
+          that.setData({
+            wxuserid:res.result.wxUserId,
+            needsTypeid:res.result.needType,
+            needscontent:res.result.needContent,
+            needsname:res.result.needTitle,
+            youhuijia:res.result.backup3,
+            linkman:res.result.publishMan,
+            phone:res.result.publishPhone,
+            picIurl:that.data.viewUrl + res.result.backup1,
+            needstate:res.result.needState,
+            firstId:res.result.oneClassId,
+            secondId:res.result.twoClassId,
+            cityId:res.result.oneAreaId,
+            areaId:res.result.twoAreaId,
+            yijiname:res.result.oneClassName,
+            erjiname:res.result.twoClassName,
+            cityname:res.result.oneAreaName,
+            areaname:res.result.twoAreaName,
+          })
         }
       })
     },
@@ -209,7 +219,7 @@ Page({
         })
         return
       }
-      if(type == 1){
+      if(that.data.type == 1){
         var data={
           id:that.data.id,
           wxUserId : that.data.wxuserid,
@@ -220,12 +230,13 @@ Page({
           publishMan:that.data.linkman,
           publishPhone:that.data.phone,
           backup1:that.data.picIurl1,
-          needState:0,
+          needState:that.data.needstate,
           oneClassId:that.data.firstId,
           twoClassId:that.data.secondId,
           oneAreaId:that.data.cityId,
           twoAreaId:that.data.areaId
         }
+        console.log(data)
         qingqiu.get("needUpdateStateById", data, function(re) {
           if (re.success == true) {
             wx.showToast({
@@ -293,12 +304,15 @@ Page({
       qingqiu.get("oneClassList", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
-          that.oneclass = re.result
           that.setData ({
-            oneclass : that.oneclass
+            oneclass : re.result
           })
         } else {
-          qingqiu.tk('未查询到任何数据')
+          wx.showToast({
+            title: '一级分类：' + re.message,
+            icon:'none',
+            duration:2000
+          })
         }
       } 
     })
@@ -309,15 +323,18 @@ Page({
       var data={
         oneClassId:that.data.firstId
       }
-      qingqiu.get("twoClassList", data, function(re) {
+      qingqiu.get("oneClassList", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
-          that.twoclass = re.result
           that.setData ({
-            twoclass : that.twoclass
+            twoclass : re.result
           })
         } else {
-          qingqiu.tk('未查询到任何数据')
+          wx.showToast({
+            title: '二级分类：' + re.message,
+            icon:'none',
+            duration:2000
+          })
         }
       } 
     })
@@ -333,7 +350,11 @@ Page({
           city:that.city
         })
       }else {
-        qingqiu.tk('未查询到任何数据')
+        wx.showToast({
+          title: '一级区域：' + re.message,
+          icon:'none',
+          duration:2000
+        })
       }
     } 
   })
@@ -352,7 +373,11 @@ Page({
           area:that.area
         })
       }else {
-        qingqiu.tk('未查询到任何数据')
+        wx.showToast({
+          title: '二级区域：' + re.message,
+          icon:'none',
+          duration:2000
+        })
       }
     } 
   })
@@ -794,7 +819,6 @@ Page({
       workaddress: img,
       tupianlist: img != '' ? img.split(',') : []
     })
-    console.log(img)
   },
   // 图片上传（对接完成）
   upimg: function(e) {
@@ -870,7 +894,6 @@ Page({
                       var r = res.data
                       var jj = JSON.parse(r);
                       var sj = api.viewUrl + jj.message
-                      console.log(res)
                       that.setData({
                         picIurl: sj,
                         picIurl1:jj.message
@@ -879,7 +902,6 @@ Page({
                  })
                },
                fail: (err) => {
-                //  console.error(err)
                }
              }, this)
            }, 500);
