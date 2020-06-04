@@ -153,6 +153,7 @@ Page({
                 icon:'success',
                 duration:2000
               })
+              that.SelectjiedanList()
             }else{
               wx.showToast({
                 title: res.message,
