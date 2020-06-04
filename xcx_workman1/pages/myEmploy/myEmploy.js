@@ -30,34 +30,7 @@ Page({
     predict:'',
     array: ['天/元', '月/元', '季/元', '年/元'],
     tian: ['天', '月', '季', '年'],
-    messageList: [{
-        id: 1,
-        workername: '陈俊明',
-        date: '2019-10-26 10-23',
-        employeename: '张立',
-        cost: '600',
-        day: '2',
-        tips: '来工地进行水电安装，大约13个平方差不多做2天就可以了，日结工资'
-      },
-      {
-        id: 2,
-        workername: '陈俊',
-        date: '2019-10-26 10-23',
-        employeename: '张飞',
-        cost: '600',
-        day: '2',
-        tips: '来工地进行水电安装，大约13个平方差不多做2天就可以了，月结工资'
-      },
-      {
-        id: 3,
-        workername: '陈明',
-        date: '2019-10-26 10-23',
-        employeename: '张立里',
-        cost: '600',
-        day: '2',
-        tips: '来工地进行水电安装，大约13个平方差不多做2天就可以了，日结工资'
-      },
-    ]
+    messageList: []
   },
 
   /**
