@@ -536,3 +536,8 @@ page {
   width: 110rpx;
   height: 164rpx;
 }
+::-webkit-scrollbar {
+  width:0;
+  height:0;
+  color:transparent;
+}
