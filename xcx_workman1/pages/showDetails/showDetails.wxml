@@ -52,7 +52,7 @@
   </view>
   <!-- 评论内容 -->
   <view class="bottom zongxiang">
-    <view class="bottom-list zongxiang" wx:for='{{caseMsgLists}}'>
+    <view class="bottom-list zongxiang" wx:for='{{pinglunList}}'>
       <view class="hengxiang">
         <view class="top-left">
           <image src="{{item.picUrl}}" class="avator-img1"></image>

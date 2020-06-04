@@ -66,6 +66,7 @@ Page({
   onLoad: function(options) {
     this.ssid= options.obj
     this.ssxqbyid()
+    this.pinglun()
   },
    // 晒晒详情
    ssxqbyid(){
@@ -93,6 +94,34 @@ Page({
     } 
   })
   },
+  // 晒晒评论
+  pinglun(){
+    var that =this
+    var data={
+      wxCaseId : that.ssid,
+      pages: 1,
+      size: 10
+    }
+    qingqiu.get("caseMessageVoList", data, function(re) {
+    if (re.success == true) {
+      if (re.result != null) {
+        that.data.pinglunList = re.result.records
+        for(var i=0;i<re.result.records.length;i++){
+          that.data.pinglunList[i].createTime=that.data.pinglunList[i].createTime.substring(0,16)
+        }
+        that.setData ({
+          pinglunList:that.data.pinglunList
+        })
+      } else {
+        wx.showToast({
+          title: '暂无评论！',
+          icon: 'none',
+          duration: 3000
+        })
+      }
+    } 
+  })
+  },
   // 晒晒点击事件
   imgYu:function(event){
     var that =this
@@ -114,7 +143,7 @@ Page({
   //跳转到添加评论页面
   comment: function() {
     wx.redirectTo({
-      url: '../comment/comment?id=' + this.data.id,
+      url: '../comment/comment?id=' + this.caseMsgList.id,
     })
   },
   lianxita: function(e) {
