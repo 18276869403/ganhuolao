@@ -71,7 +71,7 @@ Page({
     if(this.data.yijiid != "" && this.data.yijiid != "undefined" && this.data.yijiid != null){
       obj.oneClassId = this.data.yijiid
     }
-    if(this.data.flerjiid != ""&& this.data.flerjiid != "undefined" && this.data.yijiid != null){
+    if(this.data.flerjiid != "" && this.data.flerjiid != "undefined" && this.data.yijiid != null){
       obj.twoClassId = this.data.flerjiid
     }
     this.xqneedlist(obj)
