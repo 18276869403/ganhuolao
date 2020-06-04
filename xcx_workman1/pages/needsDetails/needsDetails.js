@@ -76,10 +76,13 @@ Page({
     qingqiu.get("needSignPage", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
+          console.log(re)
           that.jiedanList = re.result.records
           for(let obj of re.result.records){
             obj.picIurl = api.viewUrl + obj.picIurl
-            obj.signTime = obj.signTime.substring(0,16)
+            if(obj.signTime != null && obj.signTime != undefined && obj.signTime != ""){
+              obj.signTime = obj.signTime.subString(0,16)
+            }
           } 
           that.setData ({
             jiedanList : re.result.records
@@ -133,7 +136,7 @@ Page({
     var data = {
       needId:that.id,
       wxUserId:app.globalData.wxid,
-      // signTime:utils.formatTime(new Date()).substring(0,15)
+      signTime:utils.formatTime(new Date())
     }
     wx.showModal({
       title:'提示',
@@ -144,7 +147,6 @@ Page({
         if(res.confirm){
           console.log(data)
           qingqiu.get("insertNeedSign",data,function(res){
-            console.log(res)
             if(res.success == true){
               wx.showToast({
                 title: '报名成功',
